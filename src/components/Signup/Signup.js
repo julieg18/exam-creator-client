@@ -1,8 +1,10 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './Signup.css';
+import { authSignup } from '../../store/actions/index';
 
 class Signup extends React.Component {
   render() {
@@ -32,4 +34,21 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+function mapStateToProps(state) {
+  const { isUserLoggedIn, userId, loading, errors } = state.auth;
+  return {
+    isUserLoggedIn,
+    userId,
+    loading,
+    errors,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onSignup: (username, email, password) =>
+      dispatch(authSignup(username, email, password)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
