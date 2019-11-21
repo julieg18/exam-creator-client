@@ -1,0 +1,11 @@
+.Login {
+  border: 3px solid #f1f1f1;
+  border-radius: 10px;
+  width: 500px;
+  margin: 20px auto;
+  padding: 15px;
+}
+
+.Login .form-label {
+  display: flex;
+}

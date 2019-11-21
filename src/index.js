@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const appWrapper = (
+  <BrowserRouter basename="/">
+    <App />
+  </BrowserRouter>
+);
+
+ReactDOM.render(appWrapper, document.getElementById('root'));

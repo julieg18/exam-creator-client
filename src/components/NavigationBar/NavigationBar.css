@@ -1,0 +1,23 @@
+.NavigationBar {
+  border-bottom: 5px solid #17a2b8;
+}
+
+.NavigationBar button {
+  margin: 0 10px;
+}
+
+.NavigationBar .dropdown-menu {
+  width: 300px;
+}
+
+.navbar-light .navbar-brand {
+  color: #17a2b8;
+  font-weight: bold;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  color: #fff;
+  text-decoration: none;
+  background-color: #17a2b8;
+}
