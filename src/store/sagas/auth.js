@@ -1,10 +1,8 @@
 import { put } from 'redux-saga/effects';
 import {
-  authSignup,
   authSignupStart,
   authSignupSuccess,
   authSignupFail,
-  authLogin,
   authLoginStart,
   authLoginSuccess,
   authLoginFail,
@@ -22,19 +20,20 @@ function* authSignupSaga(action) {
   };
   try {
     const res = yield fetch('/api/v1/users/signup', {
-      type: 'POST',
+      method: 'POST',
       body: JSON.stringify(user),
       headers: { 'Content-Type': 'application/json' },
     });
+    const parsedRes = yield res.json();
+    if (!res.ok) {
+      throw Error(parsedRes.error);
+    }
     const {
-      body: {
-        newUser: { _id },
-      },
-    } = res;
+      newUser: { _id },
+    } = parsedRes;
     yield put(authSignupSuccess(_id));
   } catch (err) {
-    console.log(err);
-    yield put(authSignupFail('error here'));
+    yield put(authSignupFail(err.message));
   }
 }
 
@@ -47,19 +46,20 @@ function* authLoginSaga(action) {
   };
   try {
     const res = yield fetch('/api/v1/users/login', {
-      type: 'POST',
+      method: 'POST',
       body: JSON.stringify(user),
       headers: { 'Content-Type': 'application/json' },
     });
+    const parsedRes = yield res.json();
+    if (!res.ok) {
+      throw Error(parsedRes.error);
+    }
     const {
-      body: {
-        newUser: { _id },
-      },
-    } = res;
+      newUser: { _id },
+    } = parsedRes;
     yield put(authLoginSuccess(_id));
   } catch (err) {
-    console.log(err);
-    yield put(authLoginFail('error here'));
+    yield put(authLoginFail(err.message));
   }
 }
 
