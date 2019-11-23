@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { Link, withRouter } from 'react-router-dom';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { connect } from 'react-redux';
 import './NavigationBar.css';
 
 class NavigationBar extends React.Component {
@@ -78,4 +79,18 @@ class NavigationBar extends React.Component {
   }
 }
 
-export default withRouter(NavigationBar);
+function mapStateToProps(state) {
+  const { isUserLoggedIn } = state.auth;
+  return {
+    isUserLoggedIn,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withRouter(NavigationBar));

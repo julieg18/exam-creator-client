@@ -1,25 +1,40 @@
 import {
-  AUTH_SIGNUP,
+  AUTH_LOGIN_EXISTING_USER_SUCCESS,
+  AUTH_LOGIN_EXISTING_USER_FAIL,
   AUTH_SIGNUP_START,
   AUTH_SIGNUP_SUCCESS,
   AUTH_SIGNUP_FAIL,
-  AUTH_LOGIN,
   AUTH_LOGIN_START,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_FAIL,
-  AUTH_GET_USER,
-  AUTH_LOGOUT,
+  AUTH_GET_USER_START,
+  AUTH_GET_USER_SUCCESS,
+  AUTH_GET_USER_FAIL,
+  AUTH_GET_USER_EXAMS_START,
+  AUTH_GET_USER_EXAMS_SUCCESS,
+  AUTH_GET_USER_EXAMS_FAIL,
+  AUTH_LOGOUT_START,
+  AUTH_LOGOUT_SUCCESS,
+  AUTH_LOGOUT_FAIL,
 } from '../actions/actionTypes';
 
 const initialState = {
   isUserLoggedIn: false,
   userId: '',
   loading: false,
-  errors: [],
+  error: '',
+  user: {},
 };
 
 function authReducer(state = initialState, action) {
   switch (action.type) {
+    case AUTH_LOGIN_EXISTING_USER_SUCCESS:
+      return {
+        isUserLoggedIn: true,
+        userId: action.userId,
+      };
+    case AUTH_LOGIN_EXISTING_USER_FAIL:
+      return state;
     case AUTH_SIGNUP_START:
       return { ...state, loading: true };
     case AUTH_SIGNUP_SUCCESS:
@@ -33,7 +48,7 @@ function authReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        errors: [...state.errors, action.error],
+        error: action.error,
       };
     case AUTH_LOGIN_START:
       return { ...state, loading: true };
@@ -48,12 +63,61 @@ function authReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        errors: [...state.errors, action.error],
+        error: action.error,
       };
-    case AUTH_GET_USER:
-      break;
-    case AUTH_LOGOUT:
-      break;
+    case AUTH_GET_USER_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case AUTH_GET_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        user: action.user,
+      };
+    case AUTH_GET_USER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case AUTH_GET_USER_EXAMS_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case AUTH_GET_USER_EXAMS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        exams: action.exams,
+      };
+    case AUTH_GET_USER_EXAMS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case AUTH_LOGOUT_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case AUTH_LOGOUT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isUserLoggedIn: false,
+        userId: '',
+        user: {},
+      };
+    case AUTH_LOGOUT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
     default:
       return state;
   }

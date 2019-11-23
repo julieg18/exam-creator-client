@@ -1,4 +1,7 @@
 import {
+  AUTH_LOGIN_EXISTING_USER,
+  AUTH_LOGIN_EXISTING_USER_SUCCESS,
+  AUTH_LOGIN_EXISTING_USER_FAIL,
   AUTH_SIGNUP,
   AUTH_SIGNUP_START,
   AUTH_SIGNUP_SUCCESS,
@@ -20,6 +23,23 @@ import {
   AUTH_LOGOUT_SUCCESS,
   AUTH_LOGOUT_FAIL,
 } from '../actions/actionTypes';
+
+function authLoginExistingUser() {
+  return {
+    type: AUTH_LOGIN_EXISTING_USER,
+  };
+}
+
+function authLoginExistingUserSuccess(userId) {
+  return {
+    type: AUTH_LOGIN_EXISTING_USER_SUCCESS,
+    userId,
+  };
+}
+
+function authLoginExistingUserFail() {
+  return { type: AUTH_LOGIN_EXISTING_USER_FAIL };
+}
 
 function authSignup(username, email, password) {
   return {
@@ -90,15 +110,17 @@ function authGetUserStart() {
   };
 }
 
-function authGetUserSuccess() {
+function authGetUserSuccess(user) {
   return {
     type: AUTH_GET_USER_SUCCESS,
+    user,
   };
 }
 
-function authGetUserFail() {
+function authGetUserFail(error) {
   return {
     type: AUTH_GET_USER_FAIL,
+    error,
   };
 }
 
@@ -114,15 +136,17 @@ function authGetUserExamsStart() {
   };
 }
 
-function authGetUserExamsSuccess() {
+function authGetUserExamsSuccess(exams) {
   return {
     type: AUTH_GET_USER_EXAMS_SUCCESS,
+    exams,
   };
 }
 
-function authGetUserExamsFail() {
+function authGetUserExamsFail(error) {
   return {
     type: AUTH_GET_USER_EXAMS_FAIL,
+    error,
   };
 }
 
@@ -144,13 +168,17 @@ function authLogoutSuccess() {
   };
 }
 
-function authLogoutFail() {
+function authLogoutFail(error) {
   return {
     type: AUTH_LOGOUT_FAIL,
+    error,
   };
 }
 
 export {
+  authLoginExistingUser,
+  authLoginExistingUserFail,
+  authLoginExistingUserSuccess,
   authSignup,
   authSignupStart,
   authSignupSuccess,

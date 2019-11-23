@@ -3,10 +3,16 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import './Signup.css';
 import { authSignup } from '../../store/actions/index';
+import './Signup.css';
 
 class Signup extends React.Component {
+  componentDidMount() {
+    if (this.props.isUserLoggedIn) {
+      this.props.history.push('/create-exam');
+    }
+  }
+
   submitHandler = (e) => {
     e.preventDefault();
     const user = {
@@ -16,6 +22,12 @@ class Signup extends React.Component {
     };
     this.props.onSignup(user);
   };
+
+  componentDidUpdate() {
+    if (this.props.isUserLoggedIn) {
+      this.props.history.push('/create-exam');
+    }
+  }
 
   render() {
     return (
@@ -45,12 +57,12 @@ class Signup extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { isUserLoggedIn, userId, loading, errors } = state.auth;
+  const { isUserLoggedIn, userId, loading, error } = state.auth;
   return {
     isUserLoggedIn,
     userId,
     loading,
-    errors,
+    error,
   };
 }
 

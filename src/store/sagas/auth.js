@@ -1,14 +1,36 @@
 import { put } from 'redux-saga/effects';
 import {
+  authLoginExistingUserSuccess,
+  authLoginExistingUserFail,
   authSignupStart,
   authSignupSuccess,
   authSignupFail,
   authLoginStart,
   authLoginSuccess,
   authLoginFail,
-  authGetUser,
-  authLogout,
+  authGetUserStart,
+  authGetUserSuccess,
+  authGetUserFail,
+  authGetUserExamsStart,
+  authGetUserExamsSuccess,
+  authGetUserExamsFail,
+  authLogoutStart,
+  authLogoutSuccess,
+  authLogoutFail,
 } from '../actions/index';
+
+function* authLoginExistingUserSaga() {
+  try {
+    const res = yield fetch('/api/v1/users');
+    const parsedRes = yield res.json();
+    if (!res.ok) {
+      throw Error(parsedRes.error);
+    }
+    yield put(authLoginExistingUserSuccess(parsedRes.user._id));
+  } catch (err) {
+    yield put(authLoginExistingUserFail());
+  }
+}
 
 function* authSignupSaga(action) {
   yield put(authSignupStart());
@@ -63,4 +85,56 @@ function* authLoginSaga(action) {
   }
 }
 
-export { authSignupSaga, authLoginSaga };
+function* authGetUserSaga() {
+  yield put(authGetUserStart());
+  try {
+    const res = yield fetch('/api/v1/users');
+    const parsedRes = yield res.json();
+    if (!res.ok) {
+      throw Error(parsedRes.error);
+    }
+    yield put(authGetUserSuccess(parsedRes.user));
+  } catch (err) {
+    yield put(authGetUserFail(err.message));
+  }
+}
+
+function* authGetUserExamsSaga() {
+  yield put(authGetUserExamsStart());
+  try {
+    const res = yield fetch('api/v1/users/exams');
+    const parsedRes = yield res.json();
+    if (!res.ok) {
+      throw Error(parsedRes.error);
+    }
+    yield put(authGetUserExamsSuccess(parsedRes.exams));
+  } catch (err) {
+    yield put(authGetUserExamsFail(err.message));
+  }
+}
+
+function* authLogoutSaga() {
+  yield put(authLogoutStart());
+  try {
+    const res = yield fetch('/api/v1/users/logout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const parsedRes = yield res.json();
+    if (!res.ok) {
+      throw Error(parsedRes.error);
+    }
+    yield put(authLogoutSuccess());
+  } catch (err) {
+    yield put(authLogoutFail(err.message));
+  }
+}
+
+export {
+  authLoginExistingUserSaga,
+  authSignupSaga,
+  authLoginSaga,
+  authGetUserSaga,
+  authGetUserExamsSaga,
+  authLogoutSaga,
+};
