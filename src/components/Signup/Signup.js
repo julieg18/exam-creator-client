@@ -1,16 +1,15 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { authSignup } from '../../store/actions/index';
+import { authSignup, authClearError } from '../../store/actions/index';
 import './Signup.css';
 
 class Signup extends React.Component {
-  componentDidMount() {
-    if (this.props.isUserLoggedIn) {
-      this.props.history.push('/create-exam');
-    }
+  componentWillUnmount() {
+    this.props.onClearError();
   }
 
   submitHandler = (e) => {
@@ -23,15 +22,17 @@ class Signup extends React.Component {
     this.props.onSignup(user);
   };
 
-  componentDidUpdate() {
-    if (this.props.isUserLoggedIn) {
-      this.props.history.push('/create-exam');
-    }
-  }
-
   render() {
     return (
       <div className="Signup">
+        {this.props.error ? (
+          <Alert variant="info">
+            <span>&#9888; </span>
+            {this.props.error}
+          </Alert>
+        ) : (
+          ''
+        )}
         <h1>Signup</h1>
         <Link to="/login">Already have an account?</Link>
         <Form onSubmit={this.submitHandler}>
@@ -70,6 +71,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onSignup: ({ username, email, password }) =>
       dispatch(authSignup(username, email, password)),
+    onClearError: () => dispatch(authClearError()),
   };
 }
 

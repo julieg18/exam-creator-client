@@ -22,6 +22,7 @@ import {
   AUTH_LOGOUT_START,
   AUTH_LOGOUT_SUCCESS,
   AUTH_LOGOUT_FAIL,
+  AUTH_CLEAR_ERROR,
 } from '../actions/actionTypes';
 
 function authLoginExistingUser() {
@@ -175,6 +176,12 @@ function authLogoutFail(error) {
   };
 }
 
+function authClearError() {
+  return {
+    type: AUTH_CLEAR_ERROR,
+  };
+}
+
 export {
   authLoginExistingUser,
   authLoginExistingUserFail,
@@ -199,4 +206,5 @@ export {
   authLogoutStart,
   authLogoutSuccess,
   authLogoutFail,
+  authClearError,
 };

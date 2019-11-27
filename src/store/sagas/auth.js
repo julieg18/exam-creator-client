@@ -77,7 +77,7 @@ function* authLoginSaga(action) {
       throw Error(parsedRes.error);
     }
     const {
-      newUser: { _id },
+      user: { _id },
     } = parsedRes;
     yield put(authLoginSuccess(_id));
   } catch (err) {

@@ -16,6 +16,7 @@ import {
   AUTH_LOGOUT_START,
   AUTH_LOGOUT_SUCCESS,
   AUTH_LOGOUT_FAIL,
+  AUTH_CLEAR_ERROR,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -30,6 +31,7 @@ function authReducer(state = initialState, action) {
   switch (action.type) {
     case AUTH_LOGIN_EXISTING_USER_SUCCESS:
       return {
+        ...state,
         isUserLoggedIn: true,
         userId: action.userId,
       };
@@ -117,6 +119,11 @@ function authReducer(state = initialState, action) {
         ...state,
         loading: false,
         error: action.error,
+      };
+    case AUTH_CLEAR_ERROR:
+      return {
+        ...state,
+        error: '',
       };
     default:
       return state;

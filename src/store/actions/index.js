@@ -22,6 +22,7 @@ import {
   authLogoutStart,
   authLogoutSuccess,
   authLogoutFail,
+  authClearError,
 } from './auth';
 
 export {
@@ -48,4 +49,5 @@ export {
   authLogoutStart,
   authLogoutSuccess,
   authLogoutFail,
+  authClearError,
 };

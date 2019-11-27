@@ -15,6 +15,10 @@
   font-weight: bold;
 }
 
+.navbar-light .navbar-brand:hover {
+  color: #17a2b8;
+}
+
 .dropdown-item.active,
 .dropdown-item:active {
   color: #fff;

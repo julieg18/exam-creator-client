@@ -6,23 +6,21 @@ import { Link, withRouter } from 'react-router-dom';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { connect } from 'react-redux';
+import { authLogout } from '../../store/actions/index';
 import './NavigationBar.css';
 
 class NavigationBar extends React.Component {
+  logoutHandler = () => {
+    this.props.onLogout();
+  };
+
   render() {
     const {
       isUserLoggedIn,
       location: { pathname },
     } = this.props;
 
-    let auth = isUserLoggedIn ? (
-      <Button variant="outline-info">Logout</Button>
-    ) : (
-      <Nav.Link as={Link} to="/auth" active={pathname === '/auth'}>
-        Login/Signup
-      </Nav.Link>
-    );
-    let nav = (
+    let authenticatedNavItems = (
       <Nav className="ml-auto">
         <Nav.Link
           as={Link}
@@ -34,21 +32,29 @@ class NavigationBar extends React.Component {
         <Nav.Link as={Link} to="/exams" active={pathname === '/exams'}>
           Exams
         </Nav.Link>
-        {auth}
+        <Button variant="outline-info" onClick={this.logoutHandler}>
+          Logout
+        </Button>
       </Nav>
     );
-    if (window.innerWidth < 500) {
-      auth = isUserLoggedIn ? (
-        <>
-          <Dropdown.Divider />
-          <Dropdown.Item>Logout</Dropdown.Item>
-        </>
-      ) : (
-        <Dropdown.Item as={Link} to="/auth" active={pathname === '/auth'}>
+
+    let unauthenticatedNavItems = (
+      <Nav className="ml-auto">
+        <Nav.Link
+          as={Link}
+          to="/create-exam"
+          active={pathname === '/create-exam'}
+        >
+          Create A Exam
+        </Nav.Link>
+        <Nav.Link as={Link} to="/auth" active={pathname === '/auth'}>
           Login/Signup
-        </Dropdown.Item>
-      );
-      nav = (
+        </Nav.Link>
+      </Nav>
+    );
+
+    if (window.innerWidth < 500) {
+      authenticatedNavItems = (
         <DropdownButton
           alignRight
           className="ml-auto"
@@ -66,14 +72,36 @@ class NavigationBar extends React.Component {
           <Dropdown.Item as={Link} to="/exams" active={pathname === '/exams'}>
             Exams
           </Dropdown.Item>
-          {auth}
+          <Dropdown.Divider />
+          <Dropdown.Item onClick={this.logoutHandler}>Logout</Dropdown.Item>
+        </DropdownButton>
+      );
+
+      unauthenticatedNavItems = (
+        <DropdownButton
+          alignRight
+          className="ml-auto"
+          id="dropdown-button"
+          title="Menu"
+          variant="info"
+        >
+          <Dropdown.Item
+            as={Link}
+            to="/create-exam"
+            active={pathname === '/create-exam'}
+          >
+            Create A Exam
+          </Dropdown.Item>
+          <Dropdown.Item as={Link} to="/auth" active={pathname === '/auth'}>
+            Login/Signup
+          </Dropdown.Item>
         </DropdownButton>
       );
     }
     return (
       <Navbar variant="light" className="NavigationBar">
         <Navbar.Brand className="NavBarBrand">Exam Creator</Navbar.Brand>
-        {nav}
+        {isUserLoggedIn ? authenticatedNavItems : unauthenticatedNavItems}
       </Navbar>
     );
   }
@@ -87,7 +115,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    onLogout: () => dispatch(authLogout()),
+  };
 }
 
 export default connect(
