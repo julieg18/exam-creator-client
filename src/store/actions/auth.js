@@ -23,7 +23,7 @@ import {
   AUTH_LOGOUT_SUCCESS,
   AUTH_LOGOUT_FAIL,
   AUTH_CLEAR_ERROR,
-} from '../actions/actionTypes';
+} from '../actions/authActionTypes';
 
 function authLoginExistingUser() {
   return {

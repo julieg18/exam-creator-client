@@ -14,7 +14,12 @@ import {
   AUTH_GET_USER,
   AUTH_GET_USER_EXAMS,
   AUTH_LOGOUT,
-} from '../actions/actionTypes';
+} from '../actions/authActionTypes';
+import {
+  CREATE_EXAM,
+  ADD_EXAM_STUDENT,
+  ADD_EXAM_QUESTION,
+} from '../actions/createExamActionTypes';
 
 function* watchAuth() {
   yield takeEvery(AUTH_LOGIN_EXISTING_USER, authLoginExistingUserSaga);
@@ -25,4 +30,10 @@ function* watchAuth() {
   yield takeEvery(AUTH_LOGOUT, authLogoutSaga);
 }
 
-export { watchAuth };
+function* watchCreateExam() {
+  yield takeEvery(CREATE_EXAM);
+  yield takeEvery(ADD_EXAM_STUDENT);
+  yield takeEvery(ADD_EXAM_QUESTION);
+}
+
+export { watchAuth, watchCreateExam };

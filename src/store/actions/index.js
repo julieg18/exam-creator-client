@@ -25,6 +25,21 @@ import {
   authClearError,
 } from './auth';
 
+import {
+  createExam,
+  createExamStart,
+  createExamFail,
+  createExamSuccess,
+  addExamQuestion,
+  addExamQuestionStart,
+  addExamQuestionFail,
+  addExamQuestionSuccess,
+  addExamStudent,
+  addExamStudentStart,
+  addExamStudentFail,
+  addExamStudentSuccess,
+} from './createExam';
+
 export {
   authLoginExistingUser,
   authLoginExistingUserFail,
@@ -50,4 +65,16 @@ export {
   authLogoutSuccess,
   authLogoutFail,
   authClearError,
+  createExam,
+  createExamStart,
+  createExamFail,
+  createExamSuccess,
+  addExamQuestion,
+  addExamQuestionStart,
+  addExamQuestionFail,
+  addExamQuestionSuccess,
+  addExamStudent,
+  addExamStudentStart,
+  addExamStudentFail,
+  addExamStudentSuccess,
 };
