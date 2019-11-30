@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import authReducer from './store/reducers/auth';
+import createExamReducer from './store/reducers/createExam';
 import { watchAuth } from './store/sagas/index';
 import App from './App';
 import './index.css';
@@ -13,6 +14,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  createExam: createExamReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

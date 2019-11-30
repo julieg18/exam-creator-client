@@ -1,21 +1,18 @@
-.Login {
+.CreateAExamStart {
   border: 3px solid #f1f1f1;
   border-radius: 10px;
   width: 500px;
+  height: 275px;
   margin: 20px auto;
-  padding: 15px;
-}
-
-.Login .form-label {
+  padding: 40px;
   display: flex;
-}
-
-.Login span {
-  font-size: 20px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 @media (max-width: 500px) {
-  .Login {
+  .CreateAExamStart {
     width: 300px;
   }
 }

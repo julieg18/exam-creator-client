@@ -2,11 +2,20 @@ import React from 'react';
 
 class CreateAExam extends React.Component {
   render() {
-    return (
-      <div className="CreateAExam">
-        <h1>I'm where you can create a exam!</h1>
-      </div>
-    );
+    // const part = 'start';
+    // switch (part) {
+    //   case 'start':
+    //     return <h1>Start</h1>;
+    //   default:
+    //     return <h1>Start</h1>;
+    // }
+
+    // const parts = {
+    //   start: <h1>Name</h1>,
+    // };
+    // return parts['start'];
+
+    return 'test';
   }
 }
 
