@@ -1,0 +1,12 @@
+.CreateExamQuestionsMain {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: stretch;
+}
+
+.CreateExamQuestions .Next {
+  display: flex;
+  justify-content: flex-end;
+  width: 50vw;
+  margin: auto;
+}

@@ -7,7 +7,7 @@ class CreateAExamStart extends React.Component {
     return (
       <div className="CreateAExamStart">
         <h1>Create A Exam</h1>
-        <Button size="lg" variant="info" block>
+        <Button size="lg" variant="info" onClick={this.props.createExamStart}>
           Start
         </Button>
       </div>

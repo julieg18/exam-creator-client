@@ -1,18 +1,7 @@
-.CreateAExamStart {
-  border: 3px solid #f1f1f1;
-  border-radius: 10px;
-  width: 500px;
-  height: 275px;
-  margin: 20px auto;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+.CreateAExamStart h1 {
+  margin: 30px 0px 50px 0px;
 }
 
-@media (max-width: 500px) {
-  .CreateAExamStart {
-    width: 300px;
-  }
+.CreateAExamStart button {
+  width: 33vw;
 }

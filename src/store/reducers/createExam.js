@@ -13,14 +13,7 @@ import {
 
 const initialState = {
   isExamBeingMade: false,
-  exam: {
-    title: '',
-    id: '',
-    numberOfQuestions: 0,
-    numberOfStudents: 0,
-    questions: [],
-    students: [],
-  },
+  currentExamId: '',
   loading: false,
   error: '',
 };
@@ -40,18 +33,12 @@ function createExamReducer(state = initialState, action) {
       newState.error = action.error;
       return newState;
     case CREATE_EXAM_SUCCESS:
-      newState.exam.id = action.examId;
-      newState.exam.title = action.examTitle;
       newState.loading = true;
       return newState;
     case ADD_EXAM_STUDENT_SUCCESS:
-      newState.exam.numberOfStudents++;
-      newState.exam.students.push(action.student);
       newState.loading = false;
       return newState;
     case ADD_EXAM_QUESTION_SUCCESS:
-      newState.exam.numberOfQuestions++;
-      newState.exam.questions.push(action.question);
       newState.loading = false;
       return newState;
     default:

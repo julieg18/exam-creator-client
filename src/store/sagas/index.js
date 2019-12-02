@@ -7,6 +7,7 @@ import {
   authGetUserExamsSaga,
   authLogoutSaga,
 } from './auth';
+import { createExamSaga } from './createExam';
 import {
   AUTH_LOGIN_EXISTING_USER,
   AUTH_SIGNUP,
@@ -31,9 +32,7 @@ function* watchAuth() {
 }
 
 function* watchCreateExam() {
-  yield takeEvery(CREATE_EXAM);
-  yield takeEvery(ADD_EXAM_STUDENT);
-  yield takeEvery(ADD_EXAM_QUESTION);
+  yield takeEvery(CREATE_EXAM, createExamSaga);
 }
 
 export { watchAuth, watchCreateExam };
