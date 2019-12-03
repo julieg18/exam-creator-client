@@ -1,33 +1,84 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import CreateQuestionRadioForm from '../CreateQuestionRadioForm/CreateQuestionRadioForm';
+import CreateQuestionCheckboxForm from '../CreateQuestionCheckboxForm/CreateQuestionCheckboxForm';
+import CreateQuestionTrueOrFalseForm from '../CreateQuestionTrueOrFalseForm/CreateQuestionTrueOrFalseForm';
 
 class CreateQuestion extends React.Component {
-  onSubmitHandler = (e) => {
-    this.props.addQuestionHandler();
+  state = {
+    questionType: 'radio',
+    questionName: '',
+  };
+
+  handleQuestionTypeChange = (e) => {
+    this.setState({ questionType: e.target.value });
+  };
+
+  handleQuestionNameChange = (e) => {
+    this.setState({ questionName: e.target.value });
+  };
+
+  onCreateQuestionHandler = (options, answer) => {
+    const question = {
+      name: this.state.questionName,
+      type: this.state.questionType,
+      options,
+      answer,
+    };
+    this.props.addQuestionHandler(question);
+  };
+
+  renderFormType = () => {
+    const radioForm = (
+      <CreateQuestionRadioForm
+        onCreateQuestion={this.onCreateQuestionHandler}
+      />
+    );
+    const checkboxForm = (
+      <CreateQuestionCheckboxForm
+        onCreateQuestion={this.onCreateQuestionHandler}
+      />
+    );
+    const trueOrFalseForm = (
+      <CreateQuestionTrueOrFalseForm
+        onCreateQuestion={this.onCreateQuestionHandler}
+      />
+    );
+    switch (this.state.questionType) {
+      case 'radio':
+        return radioForm;
+      case 'checkbox':
+        return checkboxForm;
+      default:
+        return trueOrFalseForm;
+    }
   };
 
   render() {
     return (
       <div className="CreateQuestion">
         <h2>Add Question:</h2>
-        <Form className="AddQuestionForm">
-          <Form.Group>
-            <Form.Label>Name:</Form.Label>
-            <Form.Control placeholder="Name" type="text"></Form.Control>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>What kind of question is it?</Form.Label>
-            <Form.Control as="select">
-              <option>Radio</option>
-              <option>Checkbox</option>
-              <option>True Or False</option>
-            </Form.Control>
-          </Form.Group>
-        </Form>
-        <Button variant="info" onSubmit={this.onSubmitHandler}>
-          Add Question
-        </Button>
+        <Form.Group>
+          <Form.Label>Name:</Form.Label>
+          <Form.Control
+            onChange={this.handleQuestionNameChange}
+            placeholder="Name"
+            type="text"
+          ></Form.Control>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>What kind of question is it?</Form.Label>
+          <Form.Control
+            value={this.state.questionType}
+            onChange={this.handleQuestionTypeChange}
+            as="select"
+          >
+            <option value="radio">Radio</option>
+            <option value="checkbox">Checkbox</option>
+            <option value="trueOrFalse">True Or False</option>
+          </Form.Control>
+        </Form.Group>
+        {this.renderFormType()}
       </div>
     );
   }
