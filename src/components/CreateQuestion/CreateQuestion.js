@@ -20,30 +20,56 @@ class CreateQuestion extends React.Component {
     this.setState({ questionName: e.target.value });
   };
 
-  onCreateQuestionHandler = (options, answer) => {
+  onCreateMultiOptionQuestionHandler = (type, options, answer) => {
     const question = {
       name: this.state.questionName,
       type: this.state.questionType,
       options,
       answer,
     };
+
+    const isNameEmpty = /^\s*$/.test(question.name);
+    const isAOptionEmpty = question.options.every((opt) =>
+      /^\s*$/.test(opt.name),
+    );
+    const doesQuestionHaveAnswer = answer.length !== 0;
+
+    if (isNameEmpty) {
+      this.setState({
+        error: 'Your exam question must have a name.',
+      });
+    } else if (isAOptionEmpty) {
+      this.setState({
+        error: 'Your question options must not be empty.',
+      });
+    } else if (!doesQuestionHaveAnswer) {
+      this.setState({
+        error: `Your question must have ${
+          type === 'checkbox' ? 'some options' : 'an option'
+        } checked as correct.`,
+      });
+    } else {
+      console.log('PERF');
+    }
     //this.props.addQuestionHandler(question);
   };
+
+  onCreateTrueOrFalseQuestionHandler = (answer) => {};
 
   renderFormType = () => {
     const radioForm = (
       <CreateQuestionRadioForm
-        onCreateQuestion={this.onCreateQuestionHandler}
+        onCreateQuestion={this.onCreateMultiOptionQuestionHandler}
       />
     );
     const checkboxForm = (
       <CreateQuestionCheckboxForm
-        onCreateQuestion={this.onCreateQuestionHandler}
+        onCreateQuestion={this.onCreateMultiOptionQuestionHandler}
       />
     );
     const trueOrFalseForm = (
       <CreateQuestionTrueOrFalseForm
-        onCreateQuestion={this.onCreateQuestionHandler}
+        onCreateQuestion={this.onCreateTrueOrFalseQuestionHandler}
       />
     );
     switch (this.state.questionType) {
@@ -59,15 +85,15 @@ class CreateQuestion extends React.Component {
   render() {
     return (
       <div className="CreateQuestion">
-        {this.props.error ? (
+        <h2>Add Question:</h2>
+        {this.state.error ? (
           <Alert variant="info">
             <span>&#9888; </span>
-            {this.props.error}
+            {this.state.error}
           </Alert>
         ) : (
           ''
         )}
-        <h2>Add Question:</h2>
         <Form.Group>
           <Form.Label>Name:</Form.Label>
           <Form.Control

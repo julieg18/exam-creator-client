@@ -83,7 +83,7 @@ class CreateQuestionCheckboxForm extends React.Component {
   createQuestionInfoHandler = (e) => {
     e.preventDefault();
     const answer = this.state.questionOptions.filter((option) => option.answer);
-    this.props.onCreateQuestion(this.state.questionOptions, answer);
+    this.props.onCreateQuestion('checkbox', this.state.questionOptions, answer);
   };
 
   render() {
