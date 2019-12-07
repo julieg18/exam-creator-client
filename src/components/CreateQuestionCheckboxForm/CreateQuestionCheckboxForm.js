@@ -54,12 +54,36 @@ class CreateQuestionCheckboxForm extends React.Component {
 
   handleOptionDelete = (e) => {
     const newQuestionOptions = clonedeep(this.state.questionOptions);
+    const editedOptions = newQuestionOptions.filter(
+      (option) => option.id !== e.target.getAttribute('data-id'),
+    );
+    if (this.state.questionOptions.length > 2) {
+      this.setState({
+        questionOptions: editedOptions,
+      });
+    }
   };
 
-  handleOptionAdd = (e) => {};
+  handleOptionAdd = (e) => {
+    const newQuestionOptions = clonedeep(this.state.questionOptions);
+    const newQuestionOption = {
+      id: shortid.generate(),
+      name: '',
+      answer: false,
+    };
+    const optionIndex = newQuestionOptions.findIndex(
+      (question) => question.id === e.target.getAttribute('data-id'),
+    );
+    newQuestionOptions.splice(optionIndex + 1, 0, newQuestionOption);
+    this.setState({
+      questionOptions: newQuestionOptions,
+    });
+  };
 
   createQuestionInfoHandler = (e) => {
     e.preventDefault();
+    const answer = this.state.questionOptions.filter((option) => option.answer);
+    this.props.onCreateQuestion(this.state.questionOptions, answer);
   };
 
   render() {

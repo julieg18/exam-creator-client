@@ -1,5 +1,6 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
 import CreateQuestionRadioForm from '../CreateQuestionRadioForm/CreateQuestionRadioForm';
 import CreateQuestionCheckboxForm from '../CreateQuestionCheckboxForm/CreateQuestionCheckboxForm';
 import CreateQuestionTrueOrFalseForm from '../CreateQuestionTrueOrFalseForm/CreateQuestionTrueOrFalseForm';
@@ -8,6 +9,7 @@ class CreateQuestion extends React.Component {
   state = {
     questionType: 'radio',
     questionName: '',
+    error: '',
   };
 
   handleQuestionTypeChange = (e) => {
@@ -25,7 +27,7 @@ class CreateQuestion extends React.Component {
       options,
       answer,
     };
-    this.props.addQuestionHandler(question);
+    //this.props.addQuestionHandler(question);
   };
 
   renderFormType = () => {
@@ -57,6 +59,14 @@ class CreateQuestion extends React.Component {
   render() {
     return (
       <div className="CreateQuestion">
+        {this.props.error ? (
+          <Alert variant="info">
+            <span>&#9888; </span>
+            {this.props.error}
+          </Alert>
+        ) : (
+          ''
+        )}
         <h2>Add Question:</h2>
         <Form.Group>
           <Form.Label>Name:</Form.Label>
