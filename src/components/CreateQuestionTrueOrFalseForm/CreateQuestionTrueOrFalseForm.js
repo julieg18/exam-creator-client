@@ -5,9 +5,19 @@ import Button from 'react-bootstrap/Button';
 class CreateQuestionTrueOrFalseForm extends React.Component {
   createQuestionInfo = (e) => {
     e.preventDefault();
-    const answer = e.target.elements.trueOrFalse.value;
-    const options = [];
-    this.props.onCreateQuestion(options, answer);
+    const value = e.target.elements.trueOrFalse.value;
+    let answer = undefined;
+    switch (value) {
+      case 'true':
+        answer = true;
+        break;
+      case 'false':
+        answer = false;
+        break;
+      default:
+        answer = undefined;
+    }
+    this.props.onCreateQuestion(answer);
   };
 
   render() {

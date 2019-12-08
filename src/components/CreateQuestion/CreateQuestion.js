@@ -49,12 +49,34 @@ class CreateQuestion extends React.Component {
         } checked as correct.`,
       });
     } else {
-      console.log('PERF');
+      console.log(question);
     }
     //this.props.addQuestionHandler(question);
   };
 
-  onCreateTrueOrFalseQuestionHandler = (answer) => {};
+  onCreateTrueOrFalseQuestionHandler = (answer) => {
+    const question = {
+      name: this.state.questionName,
+      type: this.state.questionType,
+      options: [],
+      answer,
+    };
+
+    const isNameEmpty = /^\s*$/.test(question.name);
+    const isAnswerBoolean = typeof question.answer === 'boolean';
+
+    if (isNameEmpty) {
+      this.setState({
+        error: 'Your exam question must have a name.',
+      });
+    } else if (!isAnswerBoolean) {
+      this.setState({
+        error: 'You must select true or false for your question.',
+      });
+    } else {
+      console.log(question);
+    }
+  };
 
   renderFormType = () => {
     const radioForm = (

@@ -24,21 +24,18 @@ class CreateAExam extends React.Component {
     this.setState({
       examTitle,
     });
-    console.log('exam is made with title');
   };
 
   createExamQuestionsHandler = (questions) => {
     this.setState({
       examQuestions: ['question 1'],
     });
-    console.log('questions added');
   };
 
   createExamStudentsHandler = (students) => {
     this.setState({
       examStudents: ['student 1'],
     });
-    console.log('students added');
   };
 
   render() {
