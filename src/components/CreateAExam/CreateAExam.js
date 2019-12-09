@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CreateAExamTitle from '../CreateAExamTitle/CreateAExamTitle';
-import CreateAExamStart from '../CreateAExamStart/CreateAExamStart';
-import CreateExamStudents from '../CreateExamStudents/CreateExamStudents';
-import CreateExamQuestions from '../CreateExamQuestions/CreateExamQuestions';
+import CreateAExamTitle from './CreateAExamTitle/CreateAExamTitle';
+import CreateAExamStart from './CreateAExamStart/CreateAExamStart';
+import CreateExamStudents from './CreateExamStudents/CreateExamStudents';
+import CreateExamQuestions from './CreateExamQuestions/CreateExamQuestions';
 import './CreateAExam.css';
 
 class CreateAExam extends React.Component {

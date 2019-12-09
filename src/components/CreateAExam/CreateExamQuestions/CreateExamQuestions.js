@@ -1,8 +1,8 @@
 import React from 'react';
 import clonedeep from 'lodash.clonedeep';
 import Button from 'react-bootstrap/Button';
-import CreateQuestion from '../CreateQuestion/CreateQuestion';
-import QuestionsSoFar from '../QuestionsSoFar/QuestionSoFar';
+import CreateQuestion from './CreateQuestion/CreateQuestion';
+import QuestionsSoFar from './QuestionsSoFar/QuestionsSoFar';
 import './CreateExamQuestions.css';
 
 class CreateExamQuestions extends React.Component {
@@ -27,7 +27,7 @@ class CreateExamQuestions extends React.Component {
       <div className="CreateExamQuestions">
         <h1>Create Questions For Your Exam</h1>
         <div className="CreateExamQuestionsMain">
-          <QuestionsSoFar />
+          <QuestionsSoFar questions={this.state.questions} />
           <CreateQuestion addQuestionHandler={this.addQuestionHandler} />
         </div>
         <div className="Next">

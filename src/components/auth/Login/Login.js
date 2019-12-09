@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { authLogin, authClearError } from '../../store/actions/index';
+import { authLogin, authClearError } from '../../../store/actions/index';
 import './Login.css';
 
 class Login extends React.Component {

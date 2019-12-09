@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { authSignup, authClearError } from '../../store/actions/index';
+import { authSignup, authClearError } from '../../../store/actions/index';
 import './Signup.css';
 
 class Signup extends React.Component {

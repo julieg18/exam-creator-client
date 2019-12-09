@@ -4,6 +4,7 @@ import Alert from 'react-bootstrap/Alert';
 import CreateQuestionRadioForm from '../CreateQuestionRadioForm/CreateQuestionRadioForm';
 import CreateQuestionCheckboxForm from '../CreateQuestionCheckboxForm/CreateQuestionCheckboxForm';
 import CreateQuestionTrueOrFalseForm from '../CreateQuestionTrueOrFalseForm/CreateQuestionTrueOrFalseForm';
+import './CreateQuestion.css';
 
 class CreateQuestion extends React.Component {
   state = {
@@ -49,9 +50,8 @@ class CreateQuestion extends React.Component {
         } checked as correct.`,
       });
     } else {
-      console.log(question);
+      this.props.addQuestionHandler(question);
     }
-    //this.props.addQuestionHandler(question);
   };
 
   onCreateTrueOrFalseQuestionHandler = (answer) => {
@@ -74,7 +74,7 @@ class CreateQuestion extends React.Component {
         error: 'You must select true or false for your question.',
       });
     } else {
-      console.log(question);
+      this.props.addQuestionHandler(question);
     }
   };
 
