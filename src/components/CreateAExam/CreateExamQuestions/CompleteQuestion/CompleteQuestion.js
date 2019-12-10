@@ -5,12 +5,12 @@ import shortid from 'shortid';
 import CompleteQuestionRadioForm from '../CompleteQuestionRadioForm/CompleteQuestionRadioForm';
 import CompleteQuestionCheckboxForm from '../CompleteQuestionCheckboxForm/CompleteQuestionCheckboxForm';
 import CompleteQuestionTrueOrFalseForm from '../CompleteQuestionTrueOrFalseForm/CompleteQuestionTrueOrFalseForm';
-import './CreateQuestion.css';
+import './CompleteQuestion.css';
 
-class CreateQuestion extends React.Component {
+class CompleteQuestion extends React.Component {
   state = {
-    questionType: 'radio',
-    questionName: '',
+    questionType: this.props.questionToBeEdited.type || 'radio',
+    questionName: this.props.questionToBeEdited.name || '',
     error: '',
   };
 
@@ -22,19 +22,19 @@ class CreateQuestion extends React.Component {
     this.setState({ questionName: e.target.value });
   };
 
-  onCreateMultiOptionQuestionHandler = (type, options, answer) => {
+  onCompleteMultiOptionQuestionHandler = (type, options, answer) => {
     const question = {
+      id: this.props.questionToBeEdited.id || shortid.generate(),
       name: this.state.questionName,
       type: this.state.questionType,
       options,
       answer,
-      id: shortid.generate(),
     };
 
     const isNameEmpty = /^\s*$/.test(question.name);
-    const isAOptionEmpty = question.options.every((opt) =>
-      /^\s*$/.test(opt.name),
-    );
+    const isAOptionEmpty = question.options.some((opt) => {
+      return /^\s*$/.test(opt.name);
+    });
     const doesQuestionHaveAnswer = answer.length !== 0;
 
     if (isNameEmpty) {
@@ -52,17 +52,22 @@ class CreateQuestion extends React.Component {
         } checked as correct.`,
       });
     } else {
-      this.props.addQuestionHandler(question);
+      this.props.completeQuestion(question);
+      this.setState({
+        questionType: 'radio',
+        questionName: '',
+        error: '',
+      });
     }
   };
 
-  onCreateTrueOrFalseQuestionHandler = (answer) => {
+  onCompleteTrueOrFalseQuestionHandler = (answer) => {
     const question = {
+      id: this.props.questionToBeEdited.id || shortid.generate(),
       name: this.state.questionName,
       type: this.state.questionType,
       options: [],
       answer,
-      id: shortid.generate(),
     };
 
     const isNameEmpty = /^\s*$/.test(question.name);
@@ -77,24 +82,33 @@ class CreateQuestion extends React.Component {
         error: 'You must select true or false for your question.',
       });
     } else {
-      this.props.addQuestionHandler(question);
+      this.props.completeQuestion(question);
+      this.setState({
+        questionType: 'radio',
+        questionName: '',
+        error: '',
+      });
     }
   };
 
   renderFormType = () => {
     const radioForm = (
       <CompleteQuestionRadioForm
-        onCompleteQuestion={this.onCreateMultiOptionQuestionHandler}
+        questionToBeEdited={this.props.questionToBeEdited}
+        onCompleteQuestion={this.onCompleteMultiOptionQuestionHandler}
       />
     );
     const checkboxForm = (
       <CompleteQuestionCheckboxForm
-        onCompleteQuestion={this.onCreateMultiOptionQuestionHandler}
+        error={this.state.error}
+        questionToBeEdited={this.props.questionToBeEdited}
+        onCompleteQuestion={this.onCompleteMultiOptionQuestionHandler}
       />
     );
     const trueOrFalseForm = (
       <CompleteQuestionTrueOrFalseForm
-        onCompleteQuestion={this.onCreateTrueOrFalseQuestionHandler}
+        questionToBeEdited={this.props.questionToBeEdited}
+        onCompleteQuestion={this.onCompleteTrueOrFalseQuestionHandler}
       />
     );
     switch (this.state.questionType) {
@@ -109,7 +123,7 @@ class CreateQuestion extends React.Component {
 
   render() {
     return (
-      <div className="CreateQuestion">
+      <div className="CompleteQuestion">
         <h2>Add Question:</h2>
         {this.state.error ? (
           <Alert variant="info">
@@ -125,6 +139,7 @@ class CreateQuestion extends React.Component {
             onChange={this.handleQuestionNameChange}
             placeholder="Name"
             type="text"
+            value={this.state.questionName}
           ></Form.Control>
         </Form.Group>
         <Form.Group>
@@ -145,4 +160,4 @@ class CreateQuestion extends React.Component {
   }
 }
 
-export default CreateQuestion;
+export default CompleteQuestion;

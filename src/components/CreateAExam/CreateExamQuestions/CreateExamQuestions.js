@@ -3,11 +3,37 @@ import clonedeep from 'lodash.clonedeep';
 import Button from 'react-bootstrap/Button';
 import CreateQuestion from './CreateQuestion/CreateQuestion';
 import QuestionsSoFar from './QuestionsSoFar/QuestionsSoFar';
+import CompleteQuestion from './CompleteQuestion/CompleteQuestion';
 import './CreateExamQuestions.css';
 
 class CreateExamQuestions extends React.Component {
   state = {
     questions: [],
+    questionToBeEdited: {},
+  };
+
+  completeQuestionHandler = (question) => {
+    if (!this.state.questionToBeEdited.id) {
+      const questions = clonedeep(this.state.questions);
+      questions.push(question);
+      this.setState({
+        questions,
+      });
+    } else {
+      const questions = clonedeep(this.state.questions);
+      const editedQuestion = clonedeep(question);
+      const editedQuestions = questions.map((question) => {
+        if (question.id === editedQuestion.id) {
+          return editedQuestion;
+        } else {
+          return question;
+        }
+      });
+      this.setState({
+        questions: editedQuestions,
+        questionToBeEdited: {},
+      });
+    }
   };
 
   addQuestionHandler = (question) => {
@@ -15,6 +41,12 @@ class CreateExamQuestions extends React.Component {
     questions.push(question);
     this.setState({
       questions,
+    });
+  };
+
+  editQuestionStartHandler = (questionToBeEdited) => {
+    this.setState({
+      questionToBeEdited,
     });
   };
 
@@ -27,8 +59,14 @@ class CreateExamQuestions extends React.Component {
       <div className="CreateExamQuestions">
         <h1>Create Questions For Your Exam</h1>
         <div className="CreateExamQuestionsMain">
-          <QuestionsSoFar questions={this.state.questions} />
-          <CreateQuestion addQuestionHandler={this.addQuestionHandler} />
+          <QuestionsSoFar
+            editQuestionStartHandler={this.editQuestionStartHandler}
+            questions={this.state.questions}
+          />
+          <CompleteQuestion
+            questionToBeEdited={this.state.questionToBeEdited}
+            completeQuestion={this.completeQuestionHandler}
+          />
         </div>
         <div className="Next">
           <Button

@@ -2,7 +2,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-class CreateQuestionTrueOrFalseForm extends React.Component {
+class CompleteQuestionTrueOrFalseForm extends React.Component {
   createQuestionInfo = (e) => {
     e.preventDefault();
     const value = e.target.elements.trueOrFalse.value;
@@ -17,12 +17,12 @@ class CreateQuestionTrueOrFalseForm extends React.Component {
       default:
         answer = undefined;
     }
-    this.props.onCreateQuestion(answer);
+    this.props.onCompleteQuestion(answer);
   };
 
   render() {
     return (
-      <div className="CreateQuestionTrueOrFalseForm">
+      <div className="CompleteQuestionTrueOrFalseForm">
         <Form onSubmit={this.createQuestionInfo}>
           <Form.Group>
             <Form.Label>What's the correct answer?</Form.Label>
@@ -44,7 +44,9 @@ class CreateQuestionTrueOrFalseForm extends React.Component {
             </div>
           </Form.Group>
           <Button variant="info" type="submit">
-            Add Question
+            {this.props.questionToBeEdited.id
+              ? 'Edit Question'
+              : 'Add Question'}
           </Button>
         </Form>
       </div>
@@ -52,4 +54,4 @@ class CreateQuestionTrueOrFalseForm extends React.Component {
   }
 }
 
-export default CreateQuestionTrueOrFalseForm;
+export default CompleteQuestionTrueOrFalseForm;

@@ -6,7 +6,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import shortid from 'shortid';
 
-class CreateQuestionCheckboxForm extends React.Component {
+class CompleteQuestionCheckboxForm extends React.Component {
   state = {
     questionOptions: [
       {
@@ -81,16 +81,16 @@ class CreateQuestionCheckboxForm extends React.Component {
     });
   };
 
-  createQuestionInfoHandler = (e) => {
+  completeQuestionInfoHandler = (e) => {
     e.preventDefault();
     const answer = this.state.questionOptions.filter((option) => option.answer);
-    this.props.onCreateQuestion('radio', this.state.questionOptions, answer);
+    this.props.onCompleteQuestion('radio', this.state.questionOptions, answer);
   };
 
   render() {
     return (
-      <div className="CreateQuestionCheckboxForm">
-        <Form onSubmit={this.createQuestionInfoHandler}>
+      <div className="CompleteQuestionCheckboxForm">
+        <Form onSubmit={this.completeQuestionInfoHandler}>
           <Form.Label>Create Your Options:</Form.Label>
           <p>
             Add or delete as many question options as you would like. Check the
@@ -130,7 +130,9 @@ class CreateQuestionCheckboxForm extends React.Component {
             </InputGroup>
           ))}
           <Button variant="info" type="submit">
-            Add Question
+            {this.props.questionToBeEdited.id
+              ? 'Edit Question'
+              : 'Add Question'}
           </Button>
         </Form>
       </div>
@@ -138,4 +140,4 @@ class CreateQuestionCheckboxForm extends React.Component {
   }
 }
 
-export default CreateQuestionCheckboxForm;
+export default CompleteQuestionCheckboxForm;

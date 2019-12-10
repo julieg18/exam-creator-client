@@ -22,17 +22,23 @@ class MultiChoiceCard extends React.Component {
             <Card.Body>
               <div className="question">
                 <Form.Label>{name}</Form.Label>
-                {options.map((opt) => (
-                  <Form.Check
-                    readOnly
-                    checked={opt.answer === true}
-                    key={opt.id}
-                    type={type}
-                    label={opt.name}
-                  />
-                ))}
+                <div className="questionOptions">
+                  {options.map((opt) => (
+                    <Form.Check
+                      readOnly
+                      checked={opt.answer === true}
+                      key={opt.id}
+                      type={type}
+                      label={opt.name}
+                    />
+                  ))}
+                </div>
               </div>
-              <Button variant="info" block>
+              <Button
+                onClick={this.props.editQuestionHandler}
+                variant="info"
+                block
+              >
                 Edit Question
               </Button>
               <Button variant="danger" block>

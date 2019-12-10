@@ -12,7 +12,7 @@ class TrueOrFalseCard extends React.Component {
       question: { name, answer },
     } = this.props;
     return (
-      <div className="CheckboxCard">
+      <div className="TrueOrFalseCard">
         <Card>
           <Accordion.Toggle as={Card.Header} eventKey={eventKey}>
             {eventKey + 1}. {name}
@@ -38,7 +38,11 @@ class TrueOrFalseCard extends React.Component {
                   />
                 </div>
               </div>
-              <Button variant="info" block>
+              <Button
+                onClick={this.props.editQuestionHandler}
+                variant="info"
+                block
+              >
                 Edit Question
               </Button>
               <Button variant="danger" block>
