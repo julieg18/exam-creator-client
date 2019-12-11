@@ -1,19 +1,19 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
 import shortid from 'shortid';
 import clonedeep from 'lodash.clonedeep';
 import MultipleQuestionOptionsForm from '../MultipleQuestionOptionsForm/MultipleQuestionOptionsForm';
 import TrueOrFalseQuestionForm from '../TrueOrFalseQuestionForm/TrueOrFalseQuestionForm';
-import Button from 'react-bootstrap/Button';
-import './CreateQuestion.css';
+import './EditQuestion.css';
 
-class CreateQuestion extends React.Component {
+class CompleteQuestion extends React.Component {
   state = {
-    questionType: 'radio',
-    questionName: '',
+    questionType: this.props.questionToBeEdited.type || 'radio',
+    questionName: this.props.questionToBeEdited.name || '',
     error: '',
-    questionOptions: [
+    questionOptions: this.props.questionToBeEdited.options || [
       {
         id: shortid.generate(),
         name: '',
@@ -25,28 +25,10 @@ class CreateQuestion extends React.Component {
         answer: false,
       },
     ],
-    questionAnswer: [],
   };
 
   handleQuestionTypeChange = (e) => {
-    const questionType = e.target.value;
-    const questionOptions =
-      questionType === 'trueOrFalse'
-        ? []
-        : [
-            {
-              id: shortid.generate(),
-              name: '',
-              answer: false,
-            },
-            {
-              id: shortid.generate(),
-              name: '',
-              answer: false,
-            },
-          ];
-    const questionAnswer = questionType === 'trueOrFalse' ? true : [];
-    this.setState({ questionType, questionOptions, questionAnswer });
+    this.setState({ questionType: e.target.value });
   };
 
   handleQuestionNameChange = (e) => {
@@ -61,46 +43,8 @@ class CreateQuestion extends React.Component {
       }
       return option;
     });
-    const editedAnswer = editedOptions.filter((opt) => opt.answer === true);
     this.setState({
       questionOptions: editedOptions,
-      questionAnswer: editedAnswer,
-    });
-  };
-
-  handleTrueOrFalseAnswerChange = () => {
-    this.setState({ questionAnswer: !this.state.questionAnswer });
-  };
-
-  handleCheckboxAnswerChange = (optionId) => {
-    const newQuestionOptions = clonedeep(this.state.questionOptions);
-    const editedOptions = newQuestionOptions.map((opt) => {
-      if (optionId === opt.id) {
-        opt.answer = !opt.answer;
-      }
-      return opt;
-    });
-    const editedAnswer = editedOptions.filter((opt) => opt.answer === true);
-    this.setState({
-      questionOptions: editedOptions,
-      questionAnswer: editedAnswer,
-    });
-  };
-
-  handleRadioAnswerChange = (optionId) => {
-    const newQuestionOptions = clonedeep(this.state.questionOptions);
-    const editedOptions = newQuestionOptions.map((opt) => {
-      if (opt.id === optionId) {
-        opt.answer = true;
-      } else {
-        opt.answer = false;
-      }
-      return opt;
-    });
-    const editedAnswer = editedOptions.filter((opt) => opt.answer === true);
-    this.setState({
-      questionOptions: editedOptions,
-      questionAnswer: editedAnswer,
     });
   };
 
@@ -126,29 +70,26 @@ class CreateQuestion extends React.Component {
       (option) => option.id !== optionId,
     );
     if (this.state.questionOptions.length > 2) {
-      const editedAnswer = editedOptions.filter((opt) => opt.answer === true);
       this.setState({
         questionOptions: editedOptions,
-        questionAnswer: editedAnswer,
       });
     }
   };
 
-  onCreateMultiOptionQuestionHandler = (e) => {
-    e.preventDefault();
+  onCompleteMultiOptionQuestionHandler = (type, options, answer) => {
     const question = {
+      id: this.props.questionToBeEdited.id || shortid.generate(),
       name: this.state.questionName,
       type: this.state.questionType,
-      options: this.state.questionOptions,
-      answer: this.state.questionAnswer,
-      id: shortid.generate(),
+      options,
+      answer,
     };
 
     const isNameEmpty = /^\s*$/.test(question.name);
-    const isAOptionEmpty = question.options.every((opt) =>
-      /^\s*$/.test(opt.name),
-    );
-    const doesQuestionHaveAnswer = this.state.questionAnswer.length !== 0;
+    const isAOptionEmpty = question.options.some((opt) => {
+      return /^\s*$/.test(opt.name);
+    });
+    const doesQuestionHaveAnswer = answer.length !== 0;
 
     if (isNameEmpty) {
       this.setState({
@@ -161,22 +102,26 @@ class CreateQuestion extends React.Component {
     } else if (!doesQuestionHaveAnswer) {
       this.setState({
         error: `Your question must have ${
-          this.state.questionType === 'checkbox' ? 'some options' : 'an option'
+          type === 'checkbox' ? 'some options' : 'an option'
         } checked as correct.`,
       });
     } else {
-      this.props.onCreateQuestion(question);
+      this.props.completeQuestion(question);
+      this.setState({
+        questionType: 'radio',
+        questionName: '',
+        error: '',
+      });
     }
   };
 
-  onCreateTrueOrFalseQuestionHandler = (e) => {
-    e.preventDefault();
+  onCompleteTrueOrFalseQuestionHandler = (answer) => {
     const question = {
+      id: this.props.questionToBeEdited.id || shortid.generate(),
       name: this.state.questionName,
       type: this.state.questionType,
-      options: this.state.questionOptions,
-      answer: this.state.questionAnswer,
-      id: shortid.generate(),
+      options: [],
+      answer,
     };
 
     const isNameEmpty = /^\s*$/.test(question.name);
@@ -191,50 +136,48 @@ class CreateQuestion extends React.Component {
         error: 'You must select true or false for your question.',
       });
     } else {
-      this.props.onCreateQuestion(question);
+      this.props.completeQuestion(question);
+      this.setState({
+        questionType: 'radio',
+        questionName: '',
+        error: '',
+      });
     }
   };
 
   renderFormType = () => {
-    const radioForm = (
-      <MultipleQuestionOptionsForm
-        onChangeOptionAnswer={this.handleRadioAnswerChange}
-        onAddOption={this.handleQuestionOptionAdd}
-        onDeleteOption={this.handleQuestionOptionDelete}
-        questionType={this.state.questionType}
-        questionOptions={this.state.questionOptions}
-        onChangeOptionName={this.handleQuestionOptionNameChange}
-      />
-    );
-    const checkboxForm = (
-      <MultipleQuestionOptionsForm
-        onChangeOptionAnswer={this.handleCheckboxAnswerChange}
-        onAddOption={this.handleQuestionOptionAdd}
-        onDeleteOption={this.handleQuestionOptionDelete}
-        onChangeOptionName={this.handleQuestionOptionNameChange}
-        questionOptions={this.state.questionOptions}
-        questionType={this.state.questionType}
-      />
-    );
-    const trueOrFalseForm = (
-      <TrueOrFalseQuestionForm
-        questionAnswer={this.state.questionAnswer}
-        onChangeAnswer={this.handleTrueOrFalseAnswerChange}
-      />
-    );
-    switch (this.state.questionType) {
-      case 'radio':
-        return radioForm;
-      case 'checkbox':
-        return checkboxForm;
-      default:
-        return trueOrFalseForm;
-    }
+    // const radioForm = (
+    //   // <QuestionRadioForm
+    //   //   questionToBeEdited={this.props.questionToBeEdited}
+    //   //   onCompleteQuestion={this.onCompleteMultiOptionQuestionHandler}
+    //   // />
+    // );
+    // const checkboxForm = (
+    //   // <QuestionCheckboxForm
+    //   //   error={this.state.error}
+    //   //   questionToBeEdited={this.props.questionToBeEdited}
+    //   //   onCompleteQuestion={this.onCompleteMultiOptionQuestionHandler}
+    //   // />
+    // );
+    // const trueOrFalseForm = (
+    //   // <CompleteQuestionTrueOrFalseForm
+    //   //   questionToBeEdited={this.props.questionToBeEdited}
+    //   //   onCompleteQuestion={this.onCompleteTrueOrFalseQuestionHandler}
+    //   // />
+    // );
+    // switch (this.state.questionType) {
+    //   case 'radio':
+    //     return radioForm;
+    //   case 'checkbox':
+    //     return checkboxForm;
+    //   default:
+    //     return trueOrFalseForm;
+    // }
   };
 
   render() {
     return (
-      <div className="CreateQuestion">
+      <div className="CompleteQuestion">
         <h2>Add Question:</h2>
         {this.state.error ? (
           <Alert variant="info">
@@ -247,8 +190,8 @@ class CreateQuestion extends React.Component {
         <Form
           onSubmit={
             this.state.questionType === 'trueOrFalse'
-              ? this.onCreateTrueOrFalseQuestionHandler
-              : this.onCreateMultiOptionQuestionHandler
+              ? this.onCompleteTrueOrFalseQuestionHandler
+              : this.onCompleteMultiOptionQuestionHandler
           }
         >
           <Form.Group>
@@ -257,6 +200,7 @@ class CreateQuestion extends React.Component {
               onChange={this.handleQuestionNameChange}
               placeholder="Name"
               type="text"
+              value={this.state.questionName}
             ></Form.Control>
           </Form.Group>
           <Form.Group>
@@ -273,7 +217,9 @@ class CreateQuestion extends React.Component {
           </Form.Group>
           {this.renderFormType()}
           <Button variant="info" type="submit">
-            Add Question
+            {this.props.questionToBeEdited.id
+              ? 'Edit Question'
+              : 'Add Question'}
           </Button>
         </Form>
       </div>
@@ -281,4 +227,4 @@ class CreateQuestion extends React.Component {
   }
 }
 
-export default CreateQuestion;
+export default CompleteQuestion;
