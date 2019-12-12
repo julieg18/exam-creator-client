@@ -10,7 +10,7 @@ class MultiChoiceCard extends React.Component {
     const {
       type,
       eventKey,
-      question: { name, answer, options },
+      question: { name, options },
     } = this.props;
     return (
       <div className="MultiChoiceCard">
@@ -34,14 +34,14 @@ class MultiChoiceCard extends React.Component {
                   ))}
                 </div>
               </div>
-              <Button
-                onClick={this.props.editQuestionHandler}
-                variant="info"
-                block
-              >
+              <Button onClick={this.props.editQuestion} variant="info" block>
                 Edit Question
               </Button>
-              <Button variant="danger" block>
+              <Button
+                onClick={this.props.deleteQuestion}
+                variant="danger"
+                block
+              >
                 Delete Question
               </Button>
             </Card.Body>

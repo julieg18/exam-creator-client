@@ -38,14 +38,14 @@ class TrueOrFalseCard extends React.Component {
                   />
                 </div>
               </div>
-              <Button
-                onClick={this.props.editQuestionHandler}
-                variant="info"
-                block
-              >
+              <Button onClick={this.props.editQuestion} variant="info" block>
                 Edit Question
               </Button>
-              <Button variant="danger" block>
+              <Button
+                onClick={this.props.deleteQuestion}
+                variant="danger"
+                block
+              >
                 Delete Question
               </Button>
             </Card.Body>

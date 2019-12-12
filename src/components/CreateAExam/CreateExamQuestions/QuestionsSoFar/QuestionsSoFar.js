@@ -18,9 +18,10 @@ class QuestionsSoFar extends React.Component {
                   key={shortid.generate()}
                   eventKey={index}
                   question={question}
-                  editQuestionHandler={() =>
-                    this.props.editQuestionStartHandler(question)
-                  }
+                  editQuestion={() => this.props.editQuestionStart(question)}
+                  deleteQuestion={() => {
+                    this.props.deleteQuestion(question.id);
+                  }}
                 />
               );
             } else {
@@ -30,9 +31,10 @@ class QuestionsSoFar extends React.Component {
                   eventKey={index}
                   question={question}
                   type={question.type}
-                  editQuestionHandler={() =>
-                    this.props.editQuestionStartHandler(question)
-                  }
+                  editQuestion={() => this.props.editQuestionStart(question)}
+                  deleteQuestion={() => {
+                    this.props.deleteQuestion(question.id);
+                  }}
                 />
               );
             }

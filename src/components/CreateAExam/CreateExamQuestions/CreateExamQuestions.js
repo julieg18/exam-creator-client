@@ -36,6 +36,16 @@ class CreateExamQuestions extends React.Component {
     });
   };
 
+  deleteQuestionHandler = (questionId) => {
+    const questions = clonedeep(this.state.questions);
+    const editedQuestions = questions.filter(
+      (question) => question.id !== questionId,
+    );
+    this.setState({
+      questions: editedQuestions,
+    });
+  };
+
   editQuestionStartHandler = (questionToBeEdited) => {
     this.setState({
       questionToBeEdited,
@@ -54,6 +64,7 @@ class CreateExamQuestions extends React.Component {
           <QuestionsSoFar
             editQuestionStart={this.editQuestionStartHandler}
             questions={this.state.questions}
+            deleteQuestion={this.deleteQuestionHandler}
           />
           {this.state.questionToBeEdited.id ? (
             <EditQuestion

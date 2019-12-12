@@ -166,6 +166,23 @@ class CreateQuestion extends React.Component {
       });
     } else {
       this.props.onCreateQuestion(question);
+      this.setState({
+        questionName: '',
+        questionType: question.type,
+        questionOptions: [
+          {
+            id: shortid.generate(),
+            name: '',
+            answer: false,
+          },
+          {
+            id: shortid.generate(),
+            name: '',
+            answer: false,
+          },
+        ],
+        questionAnswer: [],
+      });
     }
   };
 
@@ -192,6 +209,12 @@ class CreateQuestion extends React.Component {
       });
     } else {
       this.props.onCreateQuestion(question);
+      this.setState({
+        questionName: '',
+        questionType: 'trueOrFalse',
+        questionOptions: [],
+        questionAnswer: true,
+      });
     }
   };
 
@@ -204,6 +227,7 @@ class CreateQuestion extends React.Component {
         questionType={this.state.questionType}
         questionOptions={this.state.questionOptions}
         onChangeOptionName={this.handleQuestionOptionNameChange}
+        areOptionsBeingEdited={false}
       />
     );
     const checkboxForm = (
@@ -214,6 +238,7 @@ class CreateQuestion extends React.Component {
         onChangeOptionName={this.handleQuestionOptionNameChange}
         questionOptions={this.state.questionOptions}
         questionType={this.state.questionType}
+        areOptionsBeingEdited={false}
       />
     );
     const trueOrFalseForm = (
@@ -256,6 +281,7 @@ class CreateQuestion extends React.Component {
             <Form.Control
               onChange={this.handleQuestionNameChange}
               placeholder="Name"
+              value={this.state.questionName}
               type="text"
             ></Form.Control>
           </Form.Group>

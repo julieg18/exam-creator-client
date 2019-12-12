@@ -7,7 +7,13 @@ import './MultipleQuestionOptionsForm.css';
 
 class MultipleQuestionOptionsForm extends React.Component {
   handleOptionAnswerChange = (e) => {
-    this.props.onChangeOptionAnswer(e.target.getAttribute('data-id'));
+    const inputId = e.target.getAttribute('data-id');
+    const childInput = e.target.querySelector('input');
+    if (inputId) {
+      this.props.onChangeOptionAnswer(inputId);
+    } else {
+      this.props.onChangeOptionAnswer(childInput.getAttribute('data-id'));
+    }
   };
 
   handleOptionNameChange = (e) => {
@@ -28,27 +34,29 @@ class MultipleQuestionOptionsForm extends React.Component {
   render() {
     return (
       <div className="MultipleQuestionOptionsForm">
-        <Form.Label>Create Your Options:</Form.Label>
+        <Form.Label>
+          {this.props.areOptionsBeingEdited ? 'Edit' : 'Create'} Your Options:
+        </Form.Label>
         <p>
           Add or delete as many question options as you would like. Check the
           correct options.
         </p>
         {this.props.questionOptions.map((opt) => (
           <InputGroup key={`option-${opt.id}`}>
-            <InputGroup.Prepend>
+            <InputGroup.Prepend onClick={this.handleOptionAnswerChange}>
               {this.props.questionType === 'checkbox' ? (
                 <InputGroup.Checkbox
-                  data-id={opt.id}
-                  onClick={this.handleOptionAnswerChange}
                   checked={opt.answer === true}
                   name="answer"
+                  data-id={opt.id}
+                  onClick={this.handleOptionAnswerChange}
                 />
               ) : (
                 <InputGroup.Radio
                   data-id={opt.id}
-                  onClick={this.handleOptionAnswerChange}
                   checked={opt.answer === true}
                   name="answer"
+                  onClick={this.handleOptionAnswerChange}
                 />
               )}
             </InputGroup.Prepend>

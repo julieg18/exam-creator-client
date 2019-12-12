@@ -1,3 +1,8 @@
 .MultipleQuestionOptionsForm .input-group {
   padding: 2px;
 }
+
+.MultipleQuestionOptionsForm .input-group-prepend:hover,
+.MultipleQuestionOptionsForm .input-group-prepend input {
+  cursor: pointer;
+}

@@ -1,16 +1,7 @@
 .CreateExamQuestionsMain {
   display: flex;
   align-items: stretch;
-  justify-content: center;
-  margin: 15px;
-}
-
-.QuestionsSoFar {
-  width: 50vw;
-}
-
-.CreateQuestion {
-  width: 50vw;
+  justify-content: space-evenly;
 }
 
 .CreateExamQuestions .Next {

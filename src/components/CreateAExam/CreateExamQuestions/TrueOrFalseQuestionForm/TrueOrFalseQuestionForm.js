@@ -1,7 +1,8 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
+import './TrueOrFalseQuestionForm.css';
 
-class CompleteQuestionTrueOrFalseForm extends React.Component {
+class TrueOrFalseQuestionForm extends React.Component {
   changeAnswerHandler = (e) => {
     const value = e.target.value;
     let answer = value === 'true' ? true : false;
@@ -10,7 +11,7 @@ class CompleteQuestionTrueOrFalseForm extends React.Component {
 
   render() {
     return (
-      <div className="CompleteQuestionTrueOrFalseForm">
+      <div className="TrueOrFalseQuestionForm">
         <Form.Group>
           <Form.Label>What's the correct answer?</Form.Label>
           <div className="radio">
@@ -39,4 +40,4 @@ class CompleteQuestionTrueOrFalseForm extends React.Component {
   }
 }
 
-export default CompleteQuestionTrueOrFalseForm;
+export default TrueOrFalseQuestionForm;
