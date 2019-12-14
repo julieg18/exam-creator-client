@@ -8,9 +8,13 @@ import './CreateExamQuestions.css';
 
 class CreateExamQuestions extends React.Component {
   state = {
-    questions: [],
+    questions: this.props.examQuestions,
     questionToBeEdited: {},
   };
+
+  componentWillUnmount() {
+    this.props.createExamQuestions(this.state.questions);
+  }
 
   editQuestionHandler = (question) => {
     const questions = clonedeep(this.state.questions);
@@ -52,10 +56,6 @@ class CreateExamQuestions extends React.Component {
     });
   };
 
-  onNextHandler = () => {
-    this.props.createExamQuestions(this.state.questions);
-  };
-
   render() {
     return (
       <div className="CreateExamQuestions">
@@ -76,11 +76,7 @@ class CreateExamQuestions extends React.Component {
           )}
         </div>
         <div className="Next">
-          <Button
-            variant="info"
-            size="lg"
-            onClick={this.props.createExamQuestions}
-          >
+          <Button variant="info" size="lg" onClick={this.props.changeComponent}>
             Next
           </Button>
         </div>

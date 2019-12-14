@@ -26,18 +26,12 @@ import {
 } from './auth';
 
 import {
-  createExam,
+  createExamTitle,
+  createExamQuestions,
+  createExamStudents,
   createExamStart,
   createExamFail,
   createExamSuccess,
-  addExamQuestion,
-  addExamQuestionStart,
-  addExamQuestionFail,
-  addExamQuestionSuccess,
-  addExamStudent,
-  addExamStudentStart,
-  addExamStudentFail,
-  addExamStudentSuccess,
 } from './createExam';
 
 export {
@@ -65,16 +59,10 @@ export {
   authLogoutSuccess,
   authLogoutFail,
   authClearError,
-  createExam,
+  createExamTitle,
+  createExamQuestions,
+  createExamStudents,
   createExamStart,
   createExamFail,
   createExamSuccess,
-  addExamQuestion,
-  addExamQuestionStart,
-  addExamQuestionFail,
-  addExamQuestionSuccess,
-  addExamStudent,
-  addExamStudentStart,
-  addExamStudentFail,
-  addExamStudentSuccess,
 };

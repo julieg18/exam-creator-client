@@ -16,11 +16,7 @@ import {
   AUTH_GET_USER_EXAMS,
   AUTH_LOGOUT,
 } from '../actions/authActionTypes';
-import {
-  CREATE_EXAM,
-  ADD_EXAM_STUDENT,
-  ADD_EXAM_QUESTION,
-} from '../actions/createExamActionTypes';
+import { CREATE_EXAM } from '../actions/createExamActionTypes';
 
 function* watchAuth() {
   yield takeEvery(AUTH_LOGIN_EXISTING_USER, authLoginExistingUserSaga);

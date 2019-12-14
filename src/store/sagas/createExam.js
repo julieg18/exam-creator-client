@@ -3,20 +3,14 @@ import {
   createExamStart,
   createExamFail,
   createExamSuccess,
-  addExamQuestionStart,
-  addExamQuestionFail,
-  addExamQuestionSuccess,
-  addExamStudentStart,
-  addExamStudentFail,
-  addExamStudentSuccess,
 } from '../actions/index';
 
 function* createExamSaga(action) {
   try {
-    const exam = { title: action.examTitle };
+    yield put(createExamStart());
     const res = yield fetch('/api/v1/users/signup', {
       method: 'POST',
-      body: JSON.stringify(exam),
+      body: JSON.stringify(action.exam),
       headers: { 'Content-Type': 'application/json' },
     });
     const parsedRes = yield res.json();

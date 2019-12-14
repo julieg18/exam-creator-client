@@ -4,10 +4,24 @@ import Button from 'react-bootstrap/Button';
 import './CreateAExamTitle.css';
 
 class CreateAExamTitle extends React.Component {
+  state = {
+    title: this.props.title,
+  };
+
   submitHandler = (e) => {
     e.preventDefault();
-    this.props.createExamTitle(e.target[0].value);
+    this.props.changeComponent();
   };
+
+  changeTitleHandler = (e) => {
+    this.setState({
+      title: e.target.value,
+    });
+  };
+
+  componentWillUnmount() {
+    this.props.createExamTitle(this.state.title);
+  }
 
   render() {
     return (
@@ -15,13 +29,14 @@ class CreateAExamTitle extends React.Component {
         <h1>What is your exam's title?</h1>
         <Form onSubmit={this.submitHandler}>
           <Form.Group controlId="title">
-            <Form.Control type="text" placeholder="Title" />
+            <Form.Control
+              value={this.state.title}
+              onChange={this.changeTitleHandler}
+              type="text"
+              placeholder="Title"
+            />
           </Form.Group>
-          <Button
-            variant="info"
-            type="submit"
-            onSubmit={this.props.createExamTitle}
-          >
+          <Button variant="info" type="submit">
             Next
           </Button>
         </Form>
