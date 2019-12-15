@@ -76,7 +76,10 @@ class CreateExamQuestions extends React.Component {
           )}
         </div>
         <div className="Next">
-          <Button variant="info" size="lg" onClick={this.props.changeComponent}>
+          <Button variant="info" size="lg" onClick={this.props.backExamPart}>
+            Back
+          </Button>
+          <Button variant="info" size="lg" onClick={this.props.nextExamPart}>
             Next
           </Button>
         </div>

@@ -16,7 +16,7 @@ class CreateAExam extends React.Component {
     examPart: 'start',
   };
 
-  changeComponentHandler = () => {
+  nextExamPartHandler = () => {
     switch (this.state.examPart) {
       case 'start':
         this.setState({
@@ -44,10 +44,35 @@ class CreateAExam extends React.Component {
     }
   };
 
+  backExamPartHandler = () => {
+    switch (this.state.examPart) {
+      case 'questions':
+        this.setState({
+          examPart: 'title',
+        });
+        break;
+      case 'students':
+        this.setState({
+          examPart: 'questions',
+        });
+        break;
+      case 'finish':
+        this.setState({
+          examPart: 'students',
+        });
+        break;
+      default:
+    }
+  };
+
+  resetCreateExamHandler = () => {
+    console.log('reset');
+  };
+
   render() {
     const { title, questions, students } = this.props.exam;
     let examPartComponent = (
-      <CreateAExamStart changeComponent={this.changeComponentHandler} />
+      <CreateAExamStart nextExamPart={this.nextExamPartHandler} />
     );
     switch (this.state.examPart) {
       case 'title':
@@ -55,7 +80,8 @@ class CreateAExam extends React.Component {
           <CreateAExamTitle
             examTitle={title}
             createExamTitle={(title) => this.props.createExamTitle(title)}
-            changeComponent={this.changeComponentHandler}
+            nextExamPart={this.nextExamPartHandler}
+            resetCreateExam={this.resetCreateExamHandler}
           />
         );
         break;
@@ -66,7 +92,9 @@ class CreateAExam extends React.Component {
             createExamQuestions={(questions) =>
               this.props.createExamQuestions(questions)
             }
-            changeComponent={this.changeComponentHandler}
+            nextExamPart={this.nextExamPartHandler}
+            backExamPart={this.backExamPartHandler}
+            resetCreateExam={this.resetCreateExamHandler}
           />
         );
         break;
@@ -77,7 +105,9 @@ class CreateAExam extends React.Component {
             createExamStudents={(students) =>
               this.props.createExamStudents(students)
             }
-            changeComponent={this.changeComponentHandler}
+            nextExamPart={this.nextExamPartHandler}
+            backExamPart={this.backExamPartHandler}
+            resetCreateExam={this.resetCreateExamHandler}
           />
         );
         break;
@@ -86,7 +116,7 @@ class CreateAExam extends React.Component {
         break;
       default:
         examPartComponent = (
-          <CreateAExamStart changeComponent={this.changeComponentHandler} />
+          <CreateAExamStart nextExamPart={this.nextExamPartHandler} />
         );
     }
     return <div className="CreateAExam">{examPartComponent}</div>;

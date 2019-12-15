@@ -1,16 +1,18 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import './CreateAExamTitle.css';
 
 class CreateAExamTitle extends React.Component {
   state = {
-    title: this.props.title,
+    title: this.props.examTitle,
   };
 
   submitHandler = (e) => {
     e.preventDefault();
-    this.props.changeComponent();
+    this.props.nextExamPart();
   };
 
   changeTitleHandler = (e) => {
@@ -37,7 +39,10 @@ class CreateAExamTitle extends React.Component {
             />
           </Form.Group>
           <Button variant="info" type="submit">
-            Next
+            {/* <FontAwesomeIcon icon={faRefresh} /> */}
+          </Button>
+          <Button variant="info" type="submit">
+            <FontAwesomeIcon icon={faArrowRight} />
           </Button>
         </Form>
       </div>
