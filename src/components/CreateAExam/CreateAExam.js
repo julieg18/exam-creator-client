@@ -10,6 +10,7 @@ import {
   createExamStudents,
 } from '../../store/actions/index';
 import './CreateAExam.css';
+import CreateExamControls from './CreateExamControls/CreateExamControls';
 
 class CreateAExam extends React.Component {
   state = {
@@ -119,7 +120,21 @@ class CreateAExam extends React.Component {
           <CreateAExamStart nextExamPart={this.nextExamPartHandler} />
         );
     }
-    return <div className="CreateAExam">{examPartComponent}</div>;
+    return (
+      <div className="CreateAExam">
+        {examPartComponent}
+        {this.state.examPart !== 'start' ? (
+          <CreateExamControls
+            examPart={this.state.examPart}
+            forwardFunction={this.nextExamPartHandler}
+            backwardFunction={this.backExamPartHandler}
+            resetFunction={this.resetCreateExamHandler}
+          />
+        ) : (
+          ''
+        )}
+      </div>
+    );
   }
 }
 

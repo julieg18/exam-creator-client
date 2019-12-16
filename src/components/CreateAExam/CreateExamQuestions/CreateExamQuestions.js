@@ -1,6 +1,5 @@
 import React from 'react';
 import clonedeep from 'lodash.clonedeep';
-import Button from 'react-bootstrap/Button';
 import CreateQuestion from './CreateQuestion/CreateQuestion';
 import EditQuestion from './EditQuestion/EditQuestion';
 import QuestionsSoFar from './QuestionsSoFar/QuestionsSoFar';
@@ -74,14 +73,6 @@ class CreateExamQuestions extends React.Component {
           ) : (
             <CreateQuestion onCreateQuestion={this.addQuestionHandler} />
           )}
-        </div>
-        <div className="Next">
-          <Button variant="info" size="lg" onClick={this.props.backExamPart}>
-            Back
-          </Button>
-          <Button variant="info" size="lg" onClick={this.props.nextExamPart}>
-            Next
-          </Button>
         </div>
       </div>
     );
