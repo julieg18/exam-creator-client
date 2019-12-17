@@ -1,4 +1,28 @@
-.CreateExamControls {
+.CreateExamTitleControls {
   display: flex;
-  justify-content: space-around;
+}
+
+.CreateExamTitleControls .resetBtn {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.CreateExamTitleControls .forwardBtn {
+  width: 50%;
+}
+
+.CreateExamGeneralControls {
+  display: flex;
+  margin: 10px;
+}
+
+.CreateExamGeneralControls .forwardBtn,
+.CreateExamGeneralControls .resetBtn,
+.CreateExamGeneralControls .backwardBtn {
+  width: 33.33%;
+}
+
+.CreateExamFinishControls {
+  background-color: crimson;
 }

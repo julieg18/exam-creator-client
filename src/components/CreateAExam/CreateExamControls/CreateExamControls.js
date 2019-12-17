@@ -11,7 +11,7 @@ import './CreateExamControls.css';
 const CreateExamControls = (props) => {
   let forwardButton = (
     <Button
-      className="forwardBtn"
+      //className="forwardBtn"
       size="lg"
       variant="info"
       onClick={props.forwardFunction}
@@ -43,16 +43,13 @@ const CreateExamControls = (props) => {
   }
   return (
     <div className={`CreateExamControls ${createExamControlsClass}`}>
-      {backwardButton}
-      <Button
-        className="resetBtn"
-        size="lg"
-        onClick={props.resetFunction}
-        variant="info"
-      >
-        <FontAwesomeIcon icon={faUndo} />
-      </Button>
-      {forwardButton}
+      <div className="backwardBtn">{backwardButton}</div>
+      <div className="resetBtn">
+        <Button size="lg" onClick={props.resetFunction} variant="info">
+          <FontAwesomeIcon icon={faUndo} />
+        </Button>
+      </div>
+      <div className="forwardBtn">{forwardButton}</div>
     </div>
   );
 };
