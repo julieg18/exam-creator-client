@@ -26,6 +26,7 @@ import {
 } from './auth';
 
 import {
+  createExamReset,
   createExamTitle,
   createExamQuestions,
   createExamStudents,
@@ -59,6 +60,7 @@ export {
   authLogoutSuccess,
   authLogoutFail,
   authClearError,
+  createExamReset,
   createExamTitle,
   createExamQuestions,
   createExamStudents,

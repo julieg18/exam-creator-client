@@ -1,4 +1,5 @@
 import {
+  CREATE_EXAM_RESET,
   CREATE_EXAM_TITLE,
   CREATE_EXAM_QUESTIONS,
   CREATE_EXAM_STUDENTS,
@@ -6,6 +7,12 @@ import {
   CREATE_EXAM_FAIL,
   CREATE_EXAM_SUCCESS,
 } from './createExamActionTypes';
+
+function createExamReset() {
+  return {
+    type: CREATE_EXAM_RESET,
+  };
+}
 
 function createExamTitle(title) {
   return {
@@ -41,6 +48,7 @@ function createExamSuccess() {
 }
 
 export {
+  createExamReset,
   createExamTitle,
   createExamQuestions,
   createExamStudents,

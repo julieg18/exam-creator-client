@@ -5,6 +5,7 @@ import CreateAExamStart from './CreateAExamStart/CreateAExamStart';
 import CreateExamStudents from './CreateExamStudents/CreateExamStudents';
 import CreateExamQuestions from './CreateExamQuestions/CreateExamQuestions';
 import {
+  createExamReset,
   createExamTitle,
   createExamQuestions,
   createExamStudents,
@@ -67,7 +68,10 @@ class CreateAExam extends React.Component {
   };
 
   resetCreateExamHandler = () => {
-    console.log('reset');
+    this.setState({
+      examPart: 'start',
+    });
+    this.props.createExamReset();
   };
 
   render() {
@@ -149,6 +153,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    createExamReset: () => dispatch(createExamReset()),
     createExamTitle: (title) => dispatch(createExamTitle(title)),
     createExamQuestions: (questions) =>
       dispatch(createExamQuestions(questions)),

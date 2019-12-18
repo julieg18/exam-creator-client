@@ -10,24 +10,18 @@ import './CreateExamControls.css';
 
 const CreateExamControls = (props) => {
   let forwardButton = (
-    <Button
-      //className="forwardBtn"
-      size="lg"
-      variant="info"
-      onClick={props.forwardFunction}
-    >
-      Next <FontAwesomeIcon icon={faArrowRight} />
-    </Button>
+    <div className="forwardBtn">
+      <Button size="lg" variant="info" onClick={props.forwardFunction}>
+        Next <FontAwesomeIcon icon={faArrowRight} />
+      </Button>
+    </div>
   );
   let backwardButton = (
-    <Button
-      className="backwardBtn"
-      size="lg"
-      onClick={props.backwardFunction}
-      variant="info"
-    >
-      <FontAwesomeIcon icon={faArrowLeft} /> Back
-    </Button>
+    <div className="backwardBtn">
+      <Button size="lg" onClick={props.backwardFunction} variant="info">
+        <FontAwesomeIcon icon={faArrowLeft} /> Back
+      </Button>
+    </div>
   );
   let createExamControlsClass = 'CreateExamGeneralControls';
   switch (props.examPart) {
@@ -43,13 +37,13 @@ const CreateExamControls = (props) => {
   }
   return (
     <div className={`CreateExamControls ${createExamControlsClass}`}>
-      <div className="backwardBtn">{backwardButton}</div>
+      {backwardButton}
       <div className="resetBtn">
         <Button size="lg" onClick={props.resetFunction} variant="info">
           <FontAwesomeIcon icon={faUndo} />
         </Button>
       </div>
-      <div className="forwardBtn">{forwardButton}</div>
+      {forwardButton}
     </div>
   );
 };
