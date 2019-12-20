@@ -106,7 +106,7 @@ class CreateAExam extends React.Component {
       case 'students':
         examPartComponent = (
           <CreateExamStudents
-            students={students}
+            examStudents={students}
             createExamStudents={(students) =>
               this.props.createExamStudents(students)
             }
