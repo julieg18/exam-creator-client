@@ -3,6 +3,7 @@ import clonedeep from 'lodash.clonedeep';
 import CreateStudent from './CreateStudent/CreateStudent';
 import EditStudent from './EditStudent/EditStudent';
 import StudentsSoFar from './StudentsSoFar/StudentsSoFar';
+import './CreateExamStudents.css';
 
 class CreateExamStudents extends React.Component {
   state = {

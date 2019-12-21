@@ -39,3 +39,13 @@
 .CreateExamFinishControls .backwardBtn {
   width: 50%;
 }
+
+@media (max-width: 500px) {
+  .CreateExamTitleControls .forwardBtn button {
+    float: right;
+  }
+
+  .CreateExamTitleControls .resetBtn button {
+    float: left;
+  }
+}
