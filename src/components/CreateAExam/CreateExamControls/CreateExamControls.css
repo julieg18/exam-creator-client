@@ -1,51 +1,19 @@
 .CreateExamControls {
   margin: 10px;
-}
-
-.CreateExamTitleControls {
   display: flex;
+  justify-content: space-evenly;
 }
 
-.CreateExamTitleControls .resetBtn {
-  width: 50%;
-  display: flex;
-  justify-content: flex-end;
+.CreateExamTitleControls .backBtn {
+  visibility: hidden;
 }
 
-.CreateExamTitleControls .forwardBtn {
-  width: 50%;
-}
-
-.CreateExamGeneralControls {
-  display: flex;
-}
-
-.CreateExamGeneralControls .forwardBtn,
-.CreateExamGeneralControls .resetBtn,
-.CreateExamGeneralControls .backwardBtn {
-  width: 33.33%;
-}
-
-.CreateExamFinishControls {
-  display: flex;
-}
-
-.CreateExamFinishControls .resetBtn {
-  width: 50%;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.CreateExamFinishControls .backwardBtn {
-  width: 50%;
+.CreateExamFinishControls .nextBtn {
+  visibility: hidden;
 }
 
 @media (max-width: 500px) {
-  .CreateExamTitleControls .forwardBtn button {
-    float: right;
-  }
-
-  .CreateExamTitleControls .resetBtn button {
-    float: left;
+  .CreateExamControls {
+    justify-content: space-between;
   }
 }

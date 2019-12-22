@@ -1,5 +1,7 @@
 import React from 'react';
 import clonedeep from 'lodash.clonedeep';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
 import CreateQuestion from './CreateQuestion/CreateQuestion';
 import EditQuestion from './EditQuestion/EditQuestion';
 import QuestionsSoFar from './QuestionsSoFar/QuestionsSoFar';
@@ -74,6 +76,25 @@ class CreateExamQuestions extends React.Component {
             <CreateQuestion onCreateQuestion={this.addQuestionHandler} />
           )}
         </div>
+        {/* <Tabs activeDefaultKey="workOnQuestion">
+          <Tab eventKey="workOnQuestion" title="Create Question">
+            {this.state.questionToBeEdited.id ? (
+              <EditQuestion
+                question={this.state.questionToBeEdited}
+                editQuestion={this.editQuestionHandler}
+              />
+            ) : (
+              <CreateQuestion onCreateQuestion={this.addQuestionHandler} />
+            )}
+          </Tab>
+          <Tab eventKey="questions" title="Questions So Far">
+            <QuestionsSoFar
+              editQuestionStart={this.editQuestionStartHandler}
+              questions={this.state.questions}
+              deleteQuestion={this.deleteQuestionHandler}
+            />
+          </Tab>
+        </Tabs> */}
       </div>
     );
   }
