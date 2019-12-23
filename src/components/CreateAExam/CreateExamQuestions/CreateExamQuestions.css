@@ -1,1 +1,9 @@
+.CreateExamQuestionsMain {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-evenly;
+}
 
+.CreateExamQuestions a {
+  color: #17a2b8;
+}

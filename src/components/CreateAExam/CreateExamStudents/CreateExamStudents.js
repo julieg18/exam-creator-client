@@ -1,5 +1,7 @@
 import React from 'react';
 import clonedeep from 'lodash.clonedeep';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 import CreateStudent from './CreateStudent/CreateStudent';
 import EditStudent from './EditStudent/EditStudent';
 import StudentsSoFar from './StudentsSoFar/StudentsSoFar';
@@ -54,6 +56,46 @@ class CreateExamStudents extends React.Component {
   };
 
   render() {
+    let createExamStudentsMain = (
+      <div className="CreateExamStudentsMain">
+        <StudentsSoFar
+          editStudentStart={this.editStudentStartHandler}
+          students={this.state.students}
+          deleteStudent={this.deleteStudentHandler}
+        />
+        {this.state.studentToBeEdited.id ? (
+          <EditStudent
+            student={this.state.studentToBeEdited}
+            editStudent={this.editStudentHandler}
+          />
+        ) : (
+          <CreateStudent onCreateStudent={this.addStudentHandler} />
+        )}
+      </div>
+    );
+    if (window.innerWidth <= 500) {
+      createExamStudentsMain = (
+        <Tabs activeDefaultKey="workOnStudent">
+          <Tab eventKey="workOnStudent" title="Create Student">
+            {this.state.studentToBeEdited.id ? (
+              <EditStudent
+                student={this.state.studentToBeEdited}
+                editStudent={this.editStudentHandler}
+              />
+            ) : (
+              <CreateStudent onCreateStudent={this.addStudentHandler} />
+            )}
+          </Tab>
+          <Tab eventKey="students" title="Students So Far">
+            <StudentsSoFar
+              editStudentStart={this.editStudentStartHandler}
+              students={this.state.students}
+              deleteStudent={this.deleteStudentHandler}
+            />
+          </Tab>
+        </Tabs>
+      );
+    }
     return (
       <div className="CreateExamStudents">
         <h1>Add Students To Your Exam</h1>
@@ -61,21 +103,7 @@ class CreateExamStudents extends React.Component {
           Each person that is given the link to your exam will need to choose
           his or her name from your student list.
         </p>
-        <div className="CreateExamStudentsMain">
-          <StudentsSoFar
-            editStudentStart={this.editStudentStartHandler}
-            students={this.state.students}
-            deleteStudent={this.deleteStudentHandler}
-          />
-          {this.state.studentToBeEdited.id ? (
-            <EditStudent
-              student={this.state.studentToBeEdited}
-              editStudent={this.editStudentHandler}
-            />
-          ) : (
-            <CreateStudent onCreateStudent={this.addStudentHandler} />
-          )}
-        </div>
+        {createExamStudentsMain}
       </div>
     );
   }

@@ -27,6 +27,7 @@ class CreateStudent extends React.Component {
       this.props.onCreateStudent(student);
       this.setState({
         studentName: '',
+        error: '',
       });
     }
   };

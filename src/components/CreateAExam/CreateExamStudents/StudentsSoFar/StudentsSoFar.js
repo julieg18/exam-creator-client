@@ -19,7 +19,7 @@ class StudentsSoFar extends React.Component {
                 <Accordion.Collapse eventKey={index}>
                   <Card.Body>
                     <Button
-                      onClick={this.props.editStudent}
+                      onClick={this.props.editStudentStart}
                       variant="info"
                       block
                     >

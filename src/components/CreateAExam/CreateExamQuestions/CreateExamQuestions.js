@@ -58,25 +58,26 @@ class CreateExamQuestions extends React.Component {
   };
 
   render() {
-    return (
-      <div className="CreateExamQuestions">
-        <h1>Create Questions For Your Exam</h1>
-        <div className="CreateExamQuestionsMain">
-          <QuestionsSoFar
-            editQuestionStart={this.editQuestionStartHandler}
-            questions={this.state.questions}
-            deleteQuestion={this.deleteQuestionHandler}
+    let createExamQuestionsMain = (
+      <div className="CreateExamQuestionsMain">
+        <QuestionsSoFar
+          editQuestionStart={this.editQuestionStartHandler}
+          questions={this.state.questions}
+          deleteQuestion={this.deleteQuestionHandler}
+        />
+        {this.state.questionToBeEdited.id ? (
+          <EditQuestion
+            question={this.state.questionToBeEdited}
+            editQuestion={this.editQuestionHandler}
           />
-          {this.state.questionToBeEdited.id ? (
-            <EditQuestion
-              question={this.state.questionToBeEdited}
-              editQuestion={this.editQuestionHandler}
-            />
-          ) : (
-            <CreateQuestion onCreateQuestion={this.addQuestionHandler} />
-          )}
-        </div>
-        {/* <Tabs activeDefaultKey="workOnQuestion">
+        ) : (
+          <CreateQuestion onCreateQuestion={this.addQuestionHandler} />
+        )}
+      </div>
+    );
+    if (window.innerWidth <= 500) {
+      createExamQuestionsMain = (
+        <Tabs activeDefaultKey="workOnQuestion">
           <Tab eventKey="workOnQuestion" title="Create Question">
             {this.state.questionToBeEdited.id ? (
               <EditQuestion
@@ -94,7 +95,13 @@ class CreateExamQuestions extends React.Component {
               deleteQuestion={this.deleteQuestionHandler}
             />
           </Tab>
-        </Tabs> */}
+        </Tabs>
+      );
+    }
+    return (
+      <div className="CreateExamQuestions">
+        <h1>Create Questions For Your Exam</h1>
+        {createExamQuestionsMain}
       </div>
     );
   }

@@ -1,5 +1,9 @@
-.CreateExamQuestionsMain {
+.CreateExamStudentsMain {
   display: flex;
   align-items: stretch;
   justify-content: space-evenly;
+}
+
+.CreateExamStudents a {
+  color: #17a2b8;
 }

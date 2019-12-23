@@ -1,4 +1,4 @@
-.QuestionsSoFar {
+.EditStudent {
   border: 3px solid #f1f1f1;
   border-radius: 10px;
   padding: 10px;
@@ -6,14 +6,10 @@
   overflow-y: scroll;
 }
 
-.QuestionsSoFar .card-header:hover {
-  cursor: pointer;
-}
-
 @media (max-width: 500px) {
-  .QuestionsSoFar {
+  .EditStudent {
     width: 100%;
-    height: 450px;
+    height: 190px;
     border: none;
   }
 }

@@ -182,6 +182,7 @@ class CreateQuestion extends React.Component {
           },
         ],
         questionAnswer: [],
+        error: '',
       });
     }
   };
@@ -214,6 +215,7 @@ class CreateQuestion extends React.Component {
         questionType: 'trueOrFalse',
         questionOptions: [],
         questionAnswer: true,
+        error: '',
       });
     }
   };
