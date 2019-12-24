@@ -27,6 +27,8 @@ class CreateExamStudents extends React.Component {
         return student;
       }
     });
+    console.log(editedStudent);
+    console.log({ editedStudents });
     this.setState({
       students: editedStudents,
       studentToBeEdited: {},

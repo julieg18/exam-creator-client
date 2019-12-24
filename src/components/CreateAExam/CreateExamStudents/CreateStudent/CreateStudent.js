@@ -1,4 +1,5 @@
 import React from 'react';
+import shortid from 'shortid';
 import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -17,6 +18,7 @@ class CreateStudent extends React.Component {
   onCreateStudentHandler = () => {
     const student = {
       name: this.state.studentName,
+      id: shortid.generate(),
     };
     const isNameEmpty = /^\s*$/.test(student.name);
     if (isNameEmpty) {

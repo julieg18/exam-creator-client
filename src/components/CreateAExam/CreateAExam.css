@@ -1,3 +1,38 @@
+.NavigationBar {
+  height: 10vh;
+}
+
 .CreateAExam {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+}
+
+.CreateExamQuestions {
+  flex-grow: 1;
+}
+
+.CreateExamStudents {
+  flex-grow: 1;
+}
+
+@media (max-height: 500px) {
+  .NavigationBar {
+    height: 15vh;
+  }
+
+  .CreateAExam {
+    height: 85vh;
+  }
+}
+
+@media (min-height: 1000px) {
+  .NavigationBar {
+    height: 8vh;
+  }
+
+  .CreateAExam {
+    height: 92vh;
+  }
 }

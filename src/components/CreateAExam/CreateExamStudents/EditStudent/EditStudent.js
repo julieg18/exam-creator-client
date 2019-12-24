@@ -2,10 +2,11 @@ import React from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import './EditStudent.css';
 
 class EditStudent extends React.Component {
   state = {
-    studentName: '',
+    studentName: this.props.student.name,
     error: '',
   };
 
@@ -16,6 +17,7 @@ class EditStudent extends React.Component {
   onEditStudentHandler = () => {
     const student = {
       name: this.state.studentName,
+      id: this.props.student.id,
     };
     const isNameEmpty = /^\s*$/.test(student.name);
     if (isNameEmpty) {
