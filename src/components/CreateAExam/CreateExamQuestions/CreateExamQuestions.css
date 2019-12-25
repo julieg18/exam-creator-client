@@ -1,4 +1,10 @@
+.CreateExamQuestions {
+  display: flex;
+  flex-direction: column;
+}
+
 .CreateExamQuestionsMain {
+  flex-grow: 1;
   display: flex;
   align-items: stretch;
   justify-content: space-evenly;
