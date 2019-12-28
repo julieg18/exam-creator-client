@@ -262,48 +262,50 @@ class CreateQuestion extends React.Component {
   render() {
     return (
       <div className="CreateQuestion">
-        <h2>Add Question:</h2>
-        {this.state.error ? (
-          <Alert variant="info">
-            <span>&#9888; </span>
-            {this.state.error}
-          </Alert>
-        ) : (
-          ''
-        )}
-        <Form
-          onSubmit={
-            this.state.questionType === 'trueOrFalse'
-              ? this.onCreateTrueOrFalseQuestionHandler
-              : this.onCreateMultiOptionQuestionHandler
-          }
-        >
-          <Form.Group>
-            <Form.Label>Name:</Form.Label>
-            <Form.Control
-              onChange={this.handleQuestionNameChange}
-              placeholder="Name"
-              value={this.state.questionName}
-              type="text"
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>What kind of question is it?</Form.Label>
-            <Form.Control
-              value={this.state.questionType}
-              onChange={this.handleQuestionTypeChange}
-              as="select"
-            >
-              <option value="radio">Radio</option>
-              <option value="checkbox">Checkbox</option>
-              <option value="trueOrFalse">True Or False</option>
-            </Form.Control>
-          </Form.Group>
-          {this.renderFormType()}
-          <Button variant="info" type="submit">
-            Add Question
-          </Button>
-        </Form>
+        <div className="scrollOnOverflow">
+          <h2>Add Question:</h2>
+          {this.state.error ? (
+            <Alert variant="info">
+              <span>&#9888; </span>
+              {this.state.error}
+            </Alert>
+          ) : (
+            ''
+          )}
+          <Form
+            onSubmit={
+              this.state.questionType === 'trueOrFalse'
+                ? this.onCreateTrueOrFalseQuestionHandler
+                : this.onCreateMultiOptionQuestionHandler
+            }
+          >
+            <Form.Group>
+              <Form.Label>Name:</Form.Label>
+              <Form.Control
+                onChange={this.handleQuestionNameChange}
+                placeholder="Name"
+                value={this.state.questionName}
+                type="text"
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>What kind of question is it?</Form.Label>
+              <Form.Control
+                value={this.state.questionType}
+                onChange={this.handleQuestionTypeChange}
+                as="select"
+              >
+                <option value="radio">Radio</option>
+                <option value="checkbox">Checkbox</option>
+                <option value="trueOrFalse">True Or False</option>
+              </Form.Control>
+            </Form.Group>
+            {this.renderFormType()}
+            <Button variant="info" type="submit">
+              Add Question
+            </Button>
+          </Form>
+        </div>
       </div>
     );
   }

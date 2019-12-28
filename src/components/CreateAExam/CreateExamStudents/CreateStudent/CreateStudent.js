@@ -37,27 +37,29 @@ class CreateStudent extends React.Component {
   render() {
     return (
       <div className="CreateStudent">
-        <h2>Create Student</h2>
-        {this.state.error ? (
-          <Alert variant="info">
-            <span>&#9888; </span>
-            {this.state.error}
-          </Alert>
-        ) : (
-          ''
-        )}
-        <Form.Group>
-          <Form.Label>Name:</Form.Label>
-          <Form.Control
-            onChange={this.handleStudentNameChange}
-            placeholder="Name"
-            value={this.state.studentName}
-            type="text"
-          ></Form.Control>
-        </Form.Group>
-        <Button onClick={this.onCreateStudentHandler} variant="info">
-          Create Student
-        </Button>
+        <div className="scrollOnOverflow">
+          <h2>Create Student</h2>
+          {this.state.error ? (
+            <Alert variant="info">
+              <span>&#9888; </span>
+              {this.state.error}
+            </Alert>
+          ) : (
+            ''
+          )}
+          <Form.Group>
+            <Form.Label>Name:</Form.Label>
+            <Form.Control
+              onChange={this.handleStudentNameChange}
+              placeholder="Name"
+              value={this.state.studentName}
+              type="text"
+            ></Form.Control>
+          </Form.Group>
+          <Button onClick={this.onCreateStudentHandler} variant="info">
+            Create Student
+          </Button>
+        </div>
       </div>
     );
   }

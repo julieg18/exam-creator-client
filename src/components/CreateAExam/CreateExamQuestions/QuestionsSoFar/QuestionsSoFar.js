@@ -9,37 +9,39 @@ class QuestionsSoFar extends React.Component {
   render() {
     return (
       <div className="QuestionsSoFar">
-        <h2>Questions So Far</h2>
-        <Accordion>
-          {this.props.questions.map((question, index) => {
-            if (question.type === 'trueOrFalse') {
-              return (
-                <TrueOrFalseCard
-                  key={shortid.generate()}
-                  eventKey={index}
-                  question={question}
-                  editQuestion={() => this.props.editQuestionStart(question)}
-                  deleteQuestion={() => {
-                    this.props.deleteQuestion(question.id);
-                  }}
-                />
-              );
-            } else {
-              return (
-                <MultiChoiceCard
-                  key={shortid.generate()}
-                  eventKey={index}
-                  question={question}
-                  type={question.type}
-                  editQuestion={() => this.props.editQuestionStart(question)}
-                  deleteQuestion={() => {
-                    this.props.deleteQuestion(question.id);
-                  }}
-                />
-              );
-            }
-          })}
-        </Accordion>
+        <div className="scrollOnOverflow">
+          <h2>Questions So Far</h2>
+          <Accordion>
+            {this.props.questions.map((question, index) => {
+              if (question.type === 'trueOrFalse') {
+                return (
+                  <TrueOrFalseCard
+                    key={shortid.generate()}
+                    eventKey={index}
+                    question={question}
+                    editQuestion={() => this.props.editQuestionStart(question)}
+                    deleteQuestion={() => {
+                      this.props.deleteQuestion(question.id);
+                    }}
+                  />
+                );
+              } else {
+                return (
+                  <MultiChoiceCard
+                    key={shortid.generate()}
+                    eventKey={index}
+                    question={question}
+                    type={question.type}
+                    editQuestion={() => this.props.editQuestionStart(question)}
+                    deleteQuestion={() => {
+                      this.props.deleteQuestion(question.id);
+                    }}
+                  />
+                );
+              }
+            })}
+          </Accordion>
+        </div>
       </div>
     );
   }

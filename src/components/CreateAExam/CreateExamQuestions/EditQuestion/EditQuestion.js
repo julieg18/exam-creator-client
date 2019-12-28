@@ -205,48 +205,50 @@ class EditQuestion extends React.Component {
   render() {
     return (
       <div className="EditQuestion">
-        <h2>Edit Question:</h2>
-        {this.state.error ? (
-          <Alert variant="info">
-            <span>&#9888; </span>
-            {this.state.error}
-          </Alert>
-        ) : (
-          ''
-        )}
-        <Form
-          onSubmit={
-            this.state.questionType === 'trueOrFalse'
-              ? this.onCompleteTrueOrFalseQuestionHandler
-              : this.onCompleteMultiOptionQuestionHandler
-          }
-        >
-          <Form.Group>
-            <Form.Label>Name:</Form.Label>
-            <Form.Control
-              onChange={this.handleQuestionNameChange}
-              placeholder="Name"
-              type="text"
-              value={this.state.questionName}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>What kind of question is it?</Form.Label>
-            <Form.Control
-              value={this.state.questionType}
-              onChange={this.handleQuestionTypeChange}
-              as="select"
-            >
-              <option value="radio">Radio</option>
-              <option value="checkbox">Checkbox</option>
-              <option value="trueOrFalse">True Or False</option>
-            </Form.Control>
-          </Form.Group>
-          {this.renderFormType()}
-          <Button variant="info" type="submit">
-            Edit Question
-          </Button>
-        </Form>
+        <div className="scrollOnOverflow">
+          <h2>Edit Question:</h2>
+          {this.state.error ? (
+            <Alert variant="info">
+              <span>&#9888; </span>
+              {this.state.error}
+            </Alert>
+          ) : (
+            ''
+          )}
+          <Form
+            onSubmit={
+              this.state.questionType === 'trueOrFalse'
+                ? this.onCompleteTrueOrFalseQuestionHandler
+                : this.onCompleteMultiOptionQuestionHandler
+            }
+          >
+            <Form.Group>
+              <Form.Label>Name:</Form.Label>
+              <Form.Control
+                onChange={this.handleQuestionNameChange}
+                placeholder="Name"
+                type="text"
+                value={this.state.questionName}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>What kind of question is it?</Form.Label>
+              <Form.Control
+                value={this.state.questionType}
+                onChange={this.handleQuestionTypeChange}
+                as="select"
+              >
+                <option value="radio">Radio</option>
+                <option value="checkbox">Checkbox</option>
+                <option value="trueOrFalse">True Or False</option>
+              </Form.Control>
+            </Form.Group>
+            {this.renderFormType()}
+            <Button variant="info" type="submit">
+              Edit Question
+            </Button>
+          </Form>
+        </div>
       </div>
     );
   }

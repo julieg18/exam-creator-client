@@ -32,27 +32,29 @@ class EditStudent extends React.Component {
   render() {
     return (
       <div className="EditStudent">
-        <h2>Edit Student</h2>
-        {this.state.error ? (
-          <Alert variant="info">
-            <span>&#9888; </span>
-            {this.state.error}
-          </Alert>
-        ) : (
-          ''
-        )}
-        <Form.Group>
-          <Form.Label>Name:</Form.Label>
-          <Form.Control
-            onChange={this.handleStudentNameChange}
-            placeholder="Name"
-            value={this.state.studentName}
-            type="text"
-          ></Form.Control>
-        </Form.Group>
-        <Button onClick={this.onEditStudentHandler} variant="info">
-          Edit Student
-        </Button>
+        <div className="scrollOnOverflow">
+          <h2>Edit Student</h2>
+          {this.state.error ? (
+            <Alert variant="info">
+              <span>&#9888; </span>
+              {this.state.error}
+            </Alert>
+          ) : (
+            ''
+          )}
+          <Form.Group>
+            <Form.Label>Name:</Form.Label>
+            <Form.Control
+              onChange={this.handleStudentNameChange}
+              placeholder="Name"
+              value={this.state.studentName}
+              type="text"
+            ></Form.Control>
+          </Form.Group>
+          <Button onClick={this.onEditStudentHandler} variant="info">
+            Edit Student
+          </Button>
+        </div>
       </div>
     );
   }
