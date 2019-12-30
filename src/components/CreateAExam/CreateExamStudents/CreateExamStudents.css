@@ -6,10 +6,24 @@
 .CreateExamStudentsMain {
   display: flex;
   flex-grow: 1;
-  align-items: stretch;
   justify-content: space-evenly;
+  width: 100vw;
+  align-items: stretch;
 }
 
 .CreateExamStudents a {
   color: #17a2b8;
+}
+
+.MobileCreateExamStudentsMain {
+  margin: 10px;
+  padding: 10px;
+  border: 3px solid #f1f1f1;
+  border-radius: 10px;
+}
+
+@media (min-width: 1000px) {
+  .CreateExamStudentsMain {
+    width: 1000px;
+  }
 }

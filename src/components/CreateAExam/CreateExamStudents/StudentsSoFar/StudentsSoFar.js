@@ -5,6 +5,12 @@ import Button from 'react-bootstrap/Button';
 import './StudentsSoFar.css';
 
 class StudentsSoFar extends React.Component {
+  changeTabHandler = () => {
+    if (window.innerWidth <= 500) {
+      this.props.changeTab('workOnStudent');
+    }
+  };
+
   render() {
     return (
       <div className="StudentsSoFar">
@@ -20,7 +26,10 @@ class StudentsSoFar extends React.Component {
                   <Accordion.Collapse eventKey={index}>
                     <Card.Body>
                       <Button
-                        onClick={() => this.props.editStudentStart(student)}
+                        onClick={() => {
+                          this.props.changeTab();
+                          this.props.editStudentStart(student);
+                        }}
                         variant="info"
                         block
                       >
