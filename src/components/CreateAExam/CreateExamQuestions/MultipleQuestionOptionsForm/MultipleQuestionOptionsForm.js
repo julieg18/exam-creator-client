@@ -49,14 +49,14 @@ class MultipleQuestionOptionsForm extends React.Component {
                   checked={opt.answer === true}
                   name="answer"
                   data-id={opt.id}
-                  onClick={this.handleOptionAnswerChange}
+                  onChange={this.handleOptionAnswerChange}
                 />
               ) : (
                 <InputGroup.Radio
                   data-id={opt.id}
                   checked={opt.answer === true}
                   name="answer"
-                  onClick={this.handleOptionAnswerChange}
+                  onChange={this.handleOptionAnswerChange}
                 />
               )}
             </InputGroup.Prepend>

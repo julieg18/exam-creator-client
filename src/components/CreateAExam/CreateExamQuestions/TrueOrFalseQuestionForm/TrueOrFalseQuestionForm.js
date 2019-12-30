@@ -22,7 +22,7 @@ class TrueOrFalseQuestionForm extends React.Component {
               inline
               label="true"
               checked={this.props.questionAnswer === true}
-              onClick={this.changeAnswerHandler}
+              onChange={this.changeAnswerHandler}
             />
             <Form.Check
               value="false"
@@ -31,7 +31,7 @@ class TrueOrFalseQuestionForm extends React.Component {
               inline
               label="false"
               checked={this.props.questionAnswer === false}
-              onClick={this.changeAnswerHandler}
+              onChange={this.changeAnswerHandler}
             />
           </div>
         </Form.Group>

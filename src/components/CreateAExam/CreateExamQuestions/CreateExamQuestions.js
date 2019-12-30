@@ -11,11 +11,30 @@ class CreateExamQuestions extends React.Component {
   state = {
     questions: this.props.examQuestions,
     questionToBeEdited: {},
+    isWindowMobileSize: false,
+    currentActiveTab: 'workOnQuestion',
   };
+
+  componentDidMount() {
+    window.addEventListener('resize', this.updateIsWindowMobileSize.bind(this));
+    this.updateIsWindowMobileSize();
+  }
 
   componentWillUnmount() {
     this.props.createExamQuestions(this.state.questions);
+    window.removeEventListener('resize', this.updateIsWindowMobileSize);
   }
+
+  updateIsWindowMobileSize = () => {
+    let isCurrentWindowMobileSize = window.innerWidth <= 500;
+    if (isCurrentWindowMobileSize !== this.state.isWindowMobileSize) {
+      this.setState({ isWindowMobileSize: window.innerWidth <= 500 });
+    }
+  };
+
+  changeTabHandler = (tab) => {
+    this.setState({ currentActiveTab: tab });
+  };
 
   editQuestionHandler = (question) => {
     const questions = clonedeep(this.state.questions);
@@ -46,9 +65,16 @@ class CreateExamQuestions extends React.Component {
     const editedQuestions = questions.filter(
       (question) => question.id !== questionId,
     );
-    this.setState({
-      questions: editedQuestions,
-    });
+    if (this.state.questionToBeEdited.id === questionId) {
+      this.setState({
+        questions: editedQuestions,
+        questionToBeEdited: {},
+      });
+    } else {
+      this.setState({
+        questions: editedQuestions,
+      });
+    }
   };
 
   editQuestionStartHandler = (questionToBeEdited) => {
@@ -75,27 +101,40 @@ class CreateExamQuestions extends React.Component {
         )}
       </div>
     );
-    if (window.innerWidth <= 500) {
+    if (this.state.isWindowMobileSize) {
       createExamQuestionsMain = (
-        <Tabs activeDefaultKey="workOnQuestion">
-          <Tab eventKey="workOnQuestion" title="Create Question">
-            {this.state.questionToBeEdited.id ? (
-              <EditQuestion
-                question={this.state.questionToBeEdited}
-                editQuestion={this.editQuestionHandler}
+        <div className="MobileCreateExamQuestionsMain">
+          <Tabs
+            activeKey={this.state.currentActiveTab}
+            onSelect={this.changeTabHandler}
+          >
+            <Tab
+              eventKey="workOnQuestion"
+              title={
+                this.state.questionToBeEdited.id
+                  ? 'Edit Question'
+                  : 'Create Question'
+              }
+            >
+              {this.state.questionToBeEdited.id ? (
+                <EditQuestion
+                  question={this.state.questionToBeEdited}
+                  editQuestion={this.editQuestionHandler}
+                />
+              ) : (
+                <CreateQuestion onCreateQuestion={this.addQuestionHandler} />
+              )}
+            </Tab>
+            <Tab eventKey="questions" title="Questions So Far">
+              <QuestionsSoFar
+                editQuestionStart={this.editQuestionStartHandler}
+                questions={this.state.questions}
+                deleteQuestion={this.deleteQuestionHandler}
+                changeTab={this.changeTabHandler}
               />
-            ) : (
-              <CreateQuestion onCreateQuestion={this.addQuestionHandler} />
-            )}
-          </Tab>
-          <Tab eventKey="questions" title="Questions So Far">
-            <QuestionsSoFar
-              editQuestionStart={this.editQuestionStartHandler}
-              questions={this.state.questions}
-              deleteQuestion={this.deleteQuestionHandler}
-            />
-          </Tab>
-        </Tabs>
+            </Tab>
+          </Tabs>
+        </div>
       );
     }
     return (

@@ -263,7 +263,7 @@ class CreateQuestion extends React.Component {
     return (
       <div className="CreateQuestion">
         <div className="scrollOnOverflow">
-          <h2>Add Question:</h2>
+          <h2>Create Question:</h2>
           {this.state.error ? (
             <Alert variant="info">
               <span>&#9888; </span>
@@ -302,7 +302,7 @@ class CreateQuestion extends React.Component {
             </Form.Group>
             {this.renderFormType()}
             <Button variant="info" type="submit">
-              Add Question
+              Create Question
             </Button>
           </Form>
         </div>

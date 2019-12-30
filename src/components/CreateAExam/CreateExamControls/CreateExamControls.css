@@ -15,6 +15,6 @@
 
 @media (max-width: 500px) {
   .CreateExamControls {
-    justify-content: space-between;
+    justify-content: space-around;
   }
 }

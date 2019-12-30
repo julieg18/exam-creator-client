@@ -6,6 +6,13 @@ import TrueOrFalseCard from '../TrueOrFalseCard/TrueOrFalseCard';
 import './QuestionsSoFar.css';
 
 class QuestionsSoFar extends React.Component {
+  changeTabHandler = () => {
+    console.log('changeTabHandler');
+    if (window.innerWidth <= 500) {
+      this.props.changeTab('workOnQuestion');
+    }
+  };
+
   render() {
     return (
       <div className="QuestionsSoFar">
@@ -19,7 +26,10 @@ class QuestionsSoFar extends React.Component {
                     key={shortid.generate()}
                     eventKey={index}
                     question={question}
-                    editQuestion={() => this.props.editQuestionStart(question)}
+                    editQuestion={() => {
+                      this.changeTabHandler();
+                      this.props.editQuestionStart(question);
+                    }}
                     deleteQuestion={() => {
                       this.props.deleteQuestion(question.id);
                     }}
@@ -32,7 +42,10 @@ class QuestionsSoFar extends React.Component {
                     eventKey={index}
                     question={question}
                     type={question.type}
-                    editQuestion={() => this.props.editQuestionStart(question)}
+                    editQuestion={() => {
+                      this.changeTabHandler();
+                      this.props.editQuestionStart(question);
+                    }}
                     deleteQuestion={() => {
                       this.props.deleteQuestion(question.id);
                     }}
