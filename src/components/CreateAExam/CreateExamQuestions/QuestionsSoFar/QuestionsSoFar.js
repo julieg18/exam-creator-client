@@ -7,7 +7,6 @@ import './QuestionsSoFar.css';
 
 class QuestionsSoFar extends React.Component {
   changeTabHandler = () => {
-    console.log('changeTabHandler');
     if (window.innerWidth <= 500) {
       this.props.changeTab('workOnQuestion');
     }

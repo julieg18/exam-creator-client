@@ -31,7 +31,6 @@ class CreateAExam extends React.Component {
         });
         break;
       case 'questions':
-        console.log('questions');
         this.setState({
           examPart: 'students',
         });
