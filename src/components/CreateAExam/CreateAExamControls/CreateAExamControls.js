@@ -6,21 +6,21 @@ import {
   faArrowRight,
   faUndo,
 } from '@fortawesome/free-solid-svg-icons';
-import './CreateExamControls.css';
+import './CreateAExamControls.css';
 
-const CreateExamControls = (props) => {
-  let createExamControlsClass = 'CreateExamGeneralControls';
+const CreateAExamControls = (props) => {
+  let createAExamControlsClass = 'CreateExamGeneralControls';
   switch (props.examPart) {
     case 'title':
-      createExamControlsClass = 'CreateExamTitleControls';
+      createAExamControlsClass = 'CreateExamTitleControls';
       break;
     case 'finish':
-      createExamControlsClass = 'CreateExamFinishControls';
+      createAExamControlsClass = 'CreateExamFinishControls';
       break;
     default:
   }
   return (
-    <div className={`CreateExamControls ${createExamControlsClass}`}>
+    <div className={`CreateAExamControls ${createAExamControlsClass}`}>
       <Button
         className="backBtn"
         size="lg"
@@ -49,4 +49,4 @@ const CreateExamControls = (props) => {
   );
 };
 
-export default CreateExamControls;
+export default CreateAExamControls;

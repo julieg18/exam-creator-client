@@ -1,21 +1,21 @@
-.CreateExamQuestions {
+.CreateAExamStudents {
   display: flex;
   flex-direction: column;
 }
 
-.CreateExamQuestionsMain {
-  flex-grow: 1;
+.CreateExamStudentsMain {
   display: flex;
-  align-items: stretch;
+  flex-grow: 1;
   justify-content: space-evenly;
   width: 100vw;
+  align-items: stretch;
 }
 
-.CreateExamQuestions a {
+.CreateAExamStudents a {
   color: #17a2b8;
 }
 
-.MobileCreateExamQuestionsMain {
+.MobileCreateExamStudentsMain {
   margin: 10px;
   padding: 10px;
   border: 3px solid #f1f1f1;
@@ -23,7 +23,7 @@
 }
 
 @media (min-width: 1000px) {
-  .CreateExamQuestionsMain {
+  .CreateExamStudentsMain {
     width: 1000px;
   }
 }

@@ -5,9 +5,9 @@ import Tabs from 'react-bootstrap/Tabs';
 import CreateStudent from './CreateStudent/CreateStudent';
 import EditStudent from './EditStudent/EditStudent';
 import StudentsSoFar from './StudentsSoFar/StudentsSoFar';
-import './CreateExamStudents.css';
+import './CreateAExamStudents.css';
 
-class CreateExamStudents extends React.Component {
+class CreateAExamStudents extends React.Component {
   state = {
     students: this.props.examStudents,
     studentToBeEdited: {},
@@ -136,7 +136,7 @@ class CreateExamStudents extends React.Component {
       );
     }
     return (
-      <div className="CreateExamStudents">
+      <div className="CreateAExamStudents">
         <h1>Add Students To Your Exam</h1>
         <p>
           Each person that is given the link to your exam will need to choose
@@ -148,4 +148,4 @@ class CreateExamStudents extends React.Component {
   }
 }
 
-export default CreateExamStudents;
+export default CreateAExamStudents;

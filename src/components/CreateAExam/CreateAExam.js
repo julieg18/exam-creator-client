@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CreateAExamTitle from './CreateAExamTitle/CreateAExamTitle';
 import CreateAExamStart from './CreateAExamStart/CreateAExamStart';
-import CreateExamStudents from './CreateExamStudents/CreateExamStudents';
-import CreateExamQuestions from './CreateExamQuestions/CreateExamQuestions';
+import CreateAExamStudents from './CreateAExamStudents/CreateAExamStudents';
+import CreateAExamQuestions from './CreateAExamQuestions/CreateAExamQuestions';
+import CreateAExamControls from './CreateAExamControls/CreateAExamControls';
 import {
   createExamReset,
   createExamTitle,
@@ -11,7 +12,6 @@ import {
   createExamStudents,
 } from '../../store/actions/index';
 import './CreateAExam.css';
-import CreateExamControls from './CreateExamControls/CreateExamControls';
 
 class CreateAExam extends React.Component {
   state = {
@@ -91,7 +91,7 @@ class CreateAExam extends React.Component {
         break;
       case 'questions':
         examPartComponent = (
-          <CreateExamQuestions
+          <CreateAExamQuestions
             examQuestions={questions}
             createExamQuestions={(questions) =>
               this.props.createExamQuestions(questions)
@@ -104,7 +104,7 @@ class CreateAExam extends React.Component {
         break;
       case 'students':
         examPartComponent = (
-          <CreateExamStudents
+          <CreateAExamStudents
             examStudents={students}
             createExamStudents={(students) =>
               this.props.createExamStudents(students)
@@ -127,7 +127,7 @@ class CreateAExam extends React.Component {
       <div className="CreateAExam">
         {examPartComponent}
         {this.state.examPart !== 'start' ? (
-          <CreateExamControls
+          <CreateAExamControls
             examPart={this.state.examPart}
             forwardFunction={this.nextExamPartHandler}
             backwardFunction={this.backExamPartHandler}

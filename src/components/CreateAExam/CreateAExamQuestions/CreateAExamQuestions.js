@@ -5,9 +5,9 @@ import Tab from 'react-bootstrap/Tab';
 import CreateQuestion from './CreateQuestion/CreateQuestion';
 import EditQuestion from './EditQuestion/EditQuestion';
 import QuestionsSoFar from './QuestionsSoFar/QuestionsSoFar';
-import './CreateExamQuestions.css';
+import './CreateAExamQuestions.css';
 
-class CreateExamQuestions extends React.Component {
+class CreateAExamQuestions extends React.Component {
   state = {
     questions: this.props.examQuestions,
     questionToBeEdited: {},
@@ -138,7 +138,7 @@ class CreateExamQuestions extends React.Component {
       );
     }
     return (
-      <div className="CreateExamQuestions">
+      <div className="CreateAExamQuestions">
         <h1>Create Questions For Your Exam</h1>
         {createExamQuestionsMain}
       </div>
@@ -146,4 +146,4 @@ class CreateExamQuestions extends React.Component {
   }
 }
 
-export default CreateExamQuestions;
+export default CreateAExamQuestions;

@@ -10,11 +10,11 @@
   align-items: center;
 }
 
-.CreateExamQuestions {
+.CreateAExamQuestions {
   flex-grow: 1;
 }
 
-.CreateExamStudents {
+.CreateAExamStudents {
   flex-grow: 1;
 }
 
