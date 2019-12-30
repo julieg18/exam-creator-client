@@ -10,6 +10,26 @@ import { authLogout } from '../../store/actions/index';
 import './NavigationBar.css';
 
 class NavigationBar extends React.Component {
+  state = {
+    isWindowMobileSize: false,
+  };
+
+  componentDidMount() {
+    window.addEventListener('resize', this.updateIsWindowMobileSize.bind(this));
+    this.updateIsWindowMobileSize();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateIsWindowMobileSize);
+  }
+
+  updateIsWindowMobileSize = () => {
+    let isCurrentWindowMobileSize = window.innerWidth <= 500;
+    if (isCurrentWindowMobileSize !== this.state.isWindowMobileSize) {
+      this.setState({ isWindowMobileSize: window.innerWidth <= 500 });
+    }
+  };
+
   logoutHandler = () => {
     this.props.onLogout();
   };
@@ -53,7 +73,7 @@ class NavigationBar extends React.Component {
       </Nav>
     );
 
-    if (window.innerWidth < 500) {
+    if (this.state.isWindowMobileSize) {
       authenticatedNavItems = (
         <DropdownButton
           alignRight
