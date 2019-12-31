@@ -1,0 +1,11 @@
+.QuestionCard .trueOrFalseQuestion {
+  padding: 10px;
+  border: 3px solid #fafafa;
+  margin-bottom: 20px;
+}
+
+.QuestionCard .multiChoiceQuestion {
+  padding: 10px;
+  border: 3px solid #fafafa;
+  margin-bottom: 20px;
+}

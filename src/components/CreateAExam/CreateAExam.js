@@ -5,6 +5,7 @@ import CreateAExamStart from './CreateAExamStart/CreateAExamStart';
 import CreateAExamStudents from './CreateAExamStudents/CreateAExamStudents';
 import CreateAExamQuestions from './CreateAExamQuestions/CreateAExamQuestions';
 import CreateAExamControls from './CreateAExamControls/CreateAExamControls';
+import CreateAExamFinish from './CreateAExamFinish/CreateAExamFinish';
 import {
   createExamReset,
   createExamTitle,
@@ -116,7 +117,7 @@ class CreateAExam extends React.Component {
         );
         break;
       case 'finish':
-        examPartComponent = <h1>FINISH</h1>;
+        examPartComponent = <CreateAExamFinish exam={this.props.exam} />;
         break;
       default:
         examPartComponent = (

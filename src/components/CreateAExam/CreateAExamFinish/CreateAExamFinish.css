@@ -1,0 +1,54 @@
+.CreateAExamFinish {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.examExample {
+  flex-grow: 1;
+  position: relative;
+  border: 3px solid #f1f1f1;
+  border-radius: 10px;
+}
+.CreateAExamFinish .scrollOnOverflow {
+  padding: 20px;
+}
+
+.CreateAExamFinish .ReadOnlyQuestion {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.CreateAExamFinish .questionOptions,
+.CreateAExamFinish .trueOrFalseOptions {
+  padding-left: 20px;
+}
+
+.CreateAExamFinish .studentListTitle {
+  font-weight: bold;
+}
+
+.CreateAExamFinish .studentList {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.CreateAExamFinish .noStudentsList {
+  align-items: center;
+  padding-left: 0;
+}
+
+@media (max-width: 1000px) {
+  .CreateAExamFinish {
+    width: 75%;
+  }
+}
+
+@media (max-width: 500px) {
+  .CreateAExamFinish {
+    width: 90%;
+  }
+}

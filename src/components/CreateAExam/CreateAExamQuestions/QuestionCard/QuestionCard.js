@@ -2,42 +2,24 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
-import Form from 'react-bootstrap/Form';
-import './TrueOrFalseCard.css';
+import ReadOnlyQuestion from '../ReadOnlyQuestion/ReadOnlyQuestion';
+import './QuestionCard.css';
 
-class TrueOrFalseCard extends React.Component {
+class QuestionCard extends React.Component {
   render() {
     const {
       eventKey,
-      question: { name, answer },
+      question: { name },
     } = this.props;
     return (
-      <div className="TrueOrFalseCard">
+      <div className="QuestionCard">
         <Card>
           <Accordion.Toggle as={Card.Header} eventKey={eventKey}>
             {eventKey + 1}. {name}
           </Accordion.Toggle>
           <Accordion.Collapse eventKey={eventKey}>
             <Card.Body>
-              <div className="question">
-                <Form.Label>{name}</Form.Label>
-                <div className="radio">
-                  <Form.Check
-                    readOnly
-                    checked={answer === true}
-                    inline
-                    type="radio"
-                    label="true"
-                  />
-                  <Form.Check
-                    readOnly
-                    inline
-                    checked={answer === false}
-                    type="radio"
-                    label="false"
-                  />
-                </div>
-              </div>
+              <ReadOnlyQuestion question={this.props.question} />
               <Button onClick={this.props.editQuestion} variant="info" block>
                 Edit Question
               </Button>
@@ -56,4 +38,4 @@ class TrueOrFalseCard extends React.Component {
   }
 }
 
-export default TrueOrFalseCard;
+export default QuestionCard;

@@ -1,0 +1,11 @@
+.multiChoiceQuestion .questionOptions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.multiChoiceQuestion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
