@@ -19,7 +19,7 @@ class StudentsSoFar extends React.Component {
           <Accordion>
             {this.props.students.map((student, index) => {
               return (
-                <Card>
+                <Card key={student.id}>
                   <Accordion.Toggle as={Card.Header} eventKey={index}>
                     {index + 1}. {student.name}
                   </Accordion.Toggle>
