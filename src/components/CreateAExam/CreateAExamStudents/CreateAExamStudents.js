@@ -93,6 +93,7 @@ class CreateAExamStudents extends React.Component {
           <EditStudent
             student={this.state.studentToBeEdited}
             editStudent={this.editStudentHandler}
+            key={this.state.studentToBeEdited.id}
           />
         ) : (
           <CreateStudent onCreateStudent={this.addStudentHandler} />
@@ -118,6 +119,7 @@ class CreateAExamStudents extends React.Component {
                 <EditStudent
                   student={this.state.studentToBeEdited}
                   editStudent={this.editStudentHandler}
+                  key={this.state.studentToBeEdited.id}
                 />
               ) : (
                 <CreateStudent onCreateStudent={this.addStudentHandler} />

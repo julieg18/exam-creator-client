@@ -27,7 +27,7 @@ class StudentsSoFar extends React.Component {
                     <Card.Body>
                       <Button
                         onClick={() => {
-                          this.props.changeTab();
+                          this.changeTabHandler();
                           this.props.editStudentStart(student);
                         }}
                         variant="info"

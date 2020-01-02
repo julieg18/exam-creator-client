@@ -95,6 +95,7 @@ class CreateAExamQuestions extends React.Component {
           <EditQuestion
             question={this.state.questionToBeEdited}
             editQuestion={this.editQuestionHandler}
+            key={this.state.questionToBeEdited.id}
           />
         ) : (
           <CreateQuestion onCreateQuestion={this.addQuestionHandler} />
@@ -120,6 +121,7 @@ class CreateAExamQuestions extends React.Component {
                 <EditQuestion
                   question={this.state.questionToBeEdited}
                   editQuestion={this.editQuestionHandler}
+                  key={this.state.questionToBeEdited.id}
                 />
               ) : (
                 <CreateQuestion onCreateQuestion={this.addQuestionHandler} />
