@@ -9,10 +9,6 @@
   visibility: hidden;
 }
 
-.CreateExamFinishControls .nextBtn {
-  visibility: hidden;
-}
-
 @media (max-width: 500px) {
   .CreateAExamControls {
     justify-content: space-around;

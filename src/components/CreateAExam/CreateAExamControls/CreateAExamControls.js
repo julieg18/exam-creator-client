@@ -5,17 +5,38 @@ import {
   faArrowLeft,
   faArrowRight,
   faUndo,
+  faSave,
 } from '@fortawesome/free-solid-svg-icons';
 import './CreateAExamControls.css';
 
 const CreateAExamControls = (props) => {
   let createAExamControlsClass = 'CreateExamGeneralControls';
+  let leftButton = (
+    <Button
+      className="nextBtn"
+      size="lg"
+      variant="info"
+      onClick={props.forwardFunction}
+    >
+      Next <FontAwesomeIcon icon={faArrowRight} />
+    </Button>
+  );
   switch (props.examPart) {
     case 'title':
       createAExamControlsClass = 'CreateExamTitleControls';
       break;
     case 'finish':
       createAExamControlsClass = 'CreateExamFinishControls';
+      leftButton = (
+        <Button
+          className="finishBtn"
+          size="lg"
+          variant="info"
+          onClick={props.finishFunction}
+        >
+          Save <FontAwesomeIcon icon={faSave} />
+        </Button>
+      );
       break;
     default:
   }
@@ -37,14 +58,7 @@ const CreateAExamControls = (props) => {
       >
         <FontAwesomeIcon icon={faUndo} />
       </Button>
-      <Button
-        className="nextBtn"
-        size="lg"
-        variant="info"
-        onClick={props.forwardFunction}
-      >
-        Next <FontAwesomeIcon icon={faArrowRight} />
-      </Button>
+      {leftButton}
     </div>
   );
 };
