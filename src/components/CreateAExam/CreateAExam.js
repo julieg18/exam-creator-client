@@ -17,6 +17,11 @@ import './CreateAExam.css';
 class CreateAExam extends React.Component {
   state = {
     examPart: 'start',
+    disableNextBtn: true,
+  };
+
+  nextBtnHandler = (disableNextBtn) => {
+    this.setState({ disableNextBtn });
   };
 
   nextExamPartHandler = () => {
@@ -85,8 +90,7 @@ class CreateAExam extends React.Component {
           <CreateAExamTitle
             examTitle={title}
             createExamTitle={(title) => this.props.createExamTitle(title)}
-            nextExamPart={this.nextExamPartHandler}
-            resetCreateExam={this.resetCreateExamHandler}
+            changeNextBtn={this.nextBtnHandler}
           />
         );
         break;
@@ -97,9 +101,6 @@ class CreateAExam extends React.Component {
             createExamQuestions={(questions) =>
               this.props.createExamQuestions(questions)
             }
-            nextExamPart={this.nextExamPartHandler}
-            backExamPart={this.backExamPartHandler}
-            resetCreateExam={this.resetCreateExamHandler}
           />
         );
         break;
@@ -110,9 +111,6 @@ class CreateAExam extends React.Component {
             createExamStudents={(students) =>
               this.props.createExamStudents(students)
             }
-            nextExamPart={this.nextExamPartHandler}
-            backExamPart={this.backExamPartHandler}
-            resetCreateExam={this.resetCreateExamHandler}
           />
         );
         break;
@@ -133,6 +131,8 @@ class CreateAExam extends React.Component {
             forwardFunction={this.nextExamPartHandler}
             backwardFunction={this.backExamPartHandler}
             resetFunction={this.resetCreateExamHandler}
+            disableNextBtn={this.state.disableNextBtn}
+            finishFuntion={() => console.log('save exam')}
           />
         ) : (
           ''

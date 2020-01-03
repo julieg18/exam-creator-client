@@ -11,6 +11,7 @@ class CreateAExamTitle extends React.Component {
     this.setState({
       title: e.target.value,
     });
+    this.props.changeNextBtn(/^\s*$/.test(e.target.value));
   };
 
   componentWillUnmount() {

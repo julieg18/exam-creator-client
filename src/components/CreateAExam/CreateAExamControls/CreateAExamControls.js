@@ -17,6 +17,7 @@ const CreateAExamControls = (props) => {
       size="lg"
       variant="info"
       onClick={props.forwardFunction}
+      disabled={props.disableNextBtn}
     >
       Next <FontAwesomeIcon icon={faArrowRight} />
     </Button>
