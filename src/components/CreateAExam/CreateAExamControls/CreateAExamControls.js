@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowLeft,
@@ -28,7 +29,7 @@ const CreateAExamControls = (props) => {
       break;
     case 'finish':
       createAExamControlsClass = 'CreateExamFinishControls';
-      leftButton = (
+      leftButton = props.isUserLoggedIn ? (
         <Button
           className="finishBtn"
           size="lg"
@@ -37,6 +38,12 @@ const CreateAExamControls = (props) => {
         >
           Save <FontAwesomeIcon icon={faSave} />
         </Button>
+      ) : (
+        <Link to="/auth">
+          <Button className="finishBtn" size="lg" variant="info">
+            Save <FontAwesomeIcon icon={faSave} />
+          </Button>
+        </Link>
       );
       break;
     default:

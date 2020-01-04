@@ -1,5 +1,9 @@
-.CreateAExamStart h1 {
-  margin: 30px 0px 50px 0px;
+.CreateAExamStart .title {
+  margin: 30px 0 30px 0;
+}
+
+.CreateAExamStart .titleAndIntroduction {
+  margin-top: 30px;
 }
 
 .CreateAExamStart button {

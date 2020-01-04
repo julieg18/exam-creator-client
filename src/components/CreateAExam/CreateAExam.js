@@ -65,7 +65,10 @@ class CreateAExam extends React.Component {
   render() {
     const { title, questions, students } = this.props.exam;
     let examPartComponent = (
-      <CreateAExamStart nextExamPart={this.nextExamPartHandler} />
+      <CreateAExamStart
+        isUserLoggedIn={this.props.isUserLoggedIn}
+        nextExamPart={this.nextExamPartHandler}
+      />
     );
     switch (this.props.examPart) {
       case 'title':
@@ -102,7 +105,10 @@ class CreateAExam extends React.Component {
         break;
       default:
         examPartComponent = (
-          <CreateAExamStart nextExamPart={this.nextExamPartHandler} />
+          <CreateAExamStart
+            isUserLoggedIn={this.props.isUserLoggedIn}
+            nextExamPart={this.nextExamPartHandler}
+          />
         );
     }
     return (
@@ -116,6 +122,7 @@ class CreateAExam extends React.Component {
             resetFunction={this.resetCreateExamHandler}
             disableNextBtn={this.state.disableNextBtn}
             finishFunction={() => console.log('save exam')}
+            isUserLoggedIn={this.props.isUserLoggedIn}
           />
         ) : (
           ''
@@ -127,9 +134,11 @@ class CreateAExam extends React.Component {
 
 function mapStateToProps(state) {
   const {
+    auth: { isUserLoggedIn },
     createExam: { exam, currentExamPart },
   } = state;
   return {
+    isUserLoggedIn,
     examPart: currentExamPart,
     exam,
   };
