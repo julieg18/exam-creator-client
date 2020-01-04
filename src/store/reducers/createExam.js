@@ -1,5 +1,6 @@
 import clonedeep from 'lodash.clonedeep';
 import {
+  CREATE_EXAM_CHANGE_PART,
   CREATE_EXAM_RESET,
   CREATE_EXAM_TITLE,
   CREATE_EXAM_QUESTIONS,
@@ -15,9 +16,15 @@ const initialState = {
     questions: [],
     students: [],
   },
+  currentExamPart: 'start',
   loading: false,
   error: '',
 };
+
+function createExamChangePart(newState, action) {
+  newState.currentExamPart = action.examPart;
+  return newState;
+}
 
 function createExamReset() {
   return initialState;
@@ -43,9 +50,8 @@ function createExamStart(newState) {
   return newState;
 }
 
-function createExamSuccess(newState) {
-  newState.loading = false;
-  return newState;
+function createExamSuccess() {
+  return initialState;
 }
 
 function createExamFail(newState, action) {
@@ -57,6 +63,8 @@ function createExamFail(newState, action) {
 function createExamReducer(state = initialState, action) {
   const newState = clonedeep(state);
   switch (action.type) {
+    case CREATE_EXAM_CHANGE_PART:
+      return createExamChangePart(newState, action);
     case CREATE_EXAM_RESET:
       return createExamReset();
     case CREATE_EXAM_TITLE:

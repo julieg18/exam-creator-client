@@ -1,4 +1,5 @@
 import {
+  CREATE_EXAM_CHANGE_PART,
   CREATE_EXAM_RESET,
   CREATE_EXAM_TITLE,
   CREATE_EXAM_QUESTIONS,
@@ -7,6 +8,13 @@ import {
   CREATE_EXAM_FAIL,
   CREATE_EXAM_SUCCESS,
 } from './createExamActionTypes';
+
+function createExamChangePart(examPart) {
+  return {
+    type: CREATE_EXAM_CHANGE_PART,
+    examPart,
+  };
+}
 
 function createExamReset() {
   return {
@@ -48,6 +56,7 @@ function createExamSuccess() {
 }
 
 export {
+  createExamChangePart,
   createExamReset,
   createExamTitle,
   createExamQuestions,

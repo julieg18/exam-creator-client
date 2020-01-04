@@ -7,6 +7,7 @@ import CreateAExamQuestions from './CreateAExamQuestions/CreateAExamQuestions';
 import CreateAExamControls from './CreateAExamControls/CreateAExamControls';
 import CreateAExamFinish from './CreateAExamFinish/CreateAExamFinish';
 import {
+  createExamChangePart,
   createExamReset,
   createExamTitle,
   createExamQuestions,
@@ -16,8 +17,7 @@ import './CreateAExam.css';
 
 class CreateAExam extends React.Component {
   state = {
-    examPart: 'start',
-    disableNextBtn: true,
+    disableNextBtn: /^\s*$/.test(this.props.exam.title),
   };
 
   nextBtnHandler = (disableNextBtn) => {
@@ -25,26 +25,18 @@ class CreateAExam extends React.Component {
   };
 
   nextExamPartHandler = () => {
-    switch (this.state.examPart) {
+    switch (this.props.examPart) {
       case 'start':
-        this.setState({
-          examPart: 'title',
-        });
+        this.props.createExamChangePart('title');
         break;
       case 'title':
-        this.setState({
-          examPart: 'questions',
-        });
+        this.props.createExamChangePart('questions');
         break;
       case 'questions':
-        this.setState({
-          examPart: 'students',
-        });
+        this.props.createExamChangePart('students');
         break;
       case 'students':
-        this.setState({
-          examPart: 'finish',
-        });
+        this.props.createExamChangePart('finish');
         break;
       default:
         return;
@@ -52,30 +44,21 @@ class CreateAExam extends React.Component {
   };
 
   backExamPartHandler = () => {
-    switch (this.state.examPart) {
+    switch (this.props.examPart) {
       case 'questions':
-        this.setState({
-          examPart: 'title',
-        });
+        this.props.createExamChangePart('title');
         break;
       case 'students':
-        this.setState({
-          examPart: 'questions',
-        });
+        this.props.createExamChangePart('questions');
         break;
       case 'finish':
-        this.setState({
-          examPart: 'students',
-        });
+        this.props.createExamChangePart('students');
         break;
       default:
     }
   };
 
   resetCreateExamHandler = () => {
-    this.setState({
-      examPart: 'start',
-    });
     this.props.createExamReset();
   };
 
@@ -84,7 +67,7 @@ class CreateAExam extends React.Component {
     let examPartComponent = (
       <CreateAExamStart nextExamPart={this.nextExamPartHandler} />
     );
-    switch (this.state.examPart) {
+    switch (this.props.examPart) {
       case 'title':
         examPartComponent = (
           <CreateAExamTitle
@@ -125,14 +108,14 @@ class CreateAExam extends React.Component {
     return (
       <div className="CreateAExam">
         {examPartComponent}
-        {this.state.examPart !== 'start' ? (
+        {this.props.examPart !== 'start' ? (
           <CreateAExamControls
-            examPart={this.state.examPart}
+            examPart={this.props.examPart}
             forwardFunction={this.nextExamPartHandler}
             backwardFunction={this.backExamPartHandler}
             resetFunction={this.resetCreateExamHandler}
             disableNextBtn={this.state.disableNextBtn}
-            finishFuntion={() => console.log('save exam')}
+            finishFunction={() => console.log('save exam')}
           />
         ) : (
           ''
@@ -144,15 +127,17 @@ class CreateAExam extends React.Component {
 
 function mapStateToProps(state) {
   const {
-    createExam: { exam },
+    createExam: { exam, currentExamPart },
   } = state;
   return {
+    examPart: currentExamPart,
     exam,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    createExamChangePart: (part) => dispatch(createExamChangePart(part)),
     createExamReset: () => dispatch(createExamReset()),
     createExamTitle: (title) => dispatch(createExamTitle(title)),
     createExamQuestions: (questions) =>
