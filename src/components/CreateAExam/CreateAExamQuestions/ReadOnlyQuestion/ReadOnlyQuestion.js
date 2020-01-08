@@ -39,7 +39,7 @@ const ReadOnlyQuestion = (props) => {
             <Form.Check
               readOnly
               checked={opt.answer === true}
-              key={opt.id}
+              key={opt.optionId}
               type={type}
               label={opt.name}
             />

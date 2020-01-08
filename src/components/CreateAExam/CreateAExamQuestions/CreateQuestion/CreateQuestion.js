@@ -15,12 +15,12 @@ class CreateQuestion extends React.Component {
     error: '',
     questionOptions: [
       {
-        id: shortid.generate(),
+        optionId: shortid.generate(),
         name: '',
         answer: false,
       },
       {
-        id: shortid.generate(),
+        optionId: shortid.generate(),
         name: '',
         answer: false,
       },
@@ -35,12 +35,12 @@ class CreateQuestion extends React.Component {
         ? []
         : [
             {
-              id: shortid.generate(),
+              optionId: shortid.generate(),
               name: '',
               answer: false,
             },
             {
-              id: shortid.generate(),
+              optionId: shortid.generate(),
               name: '',
               answer: false,
             },
@@ -55,11 +55,11 @@ class CreateQuestion extends React.Component {
 
   handleQuestionOptionNameChange = (optionId, newName) => {
     const newQuestionOptions = clonedeep(this.state.questionOptions);
-    const editedOptions = newQuestionOptions.map((option) => {
-      if (option.id === optionId) {
-        option.name = newName;
+    const editedOptions = newQuestionOptions.map((opt) => {
+      if (opt.optionId === optionId) {
+        opt.name = newName;
       }
-      return option;
+      return opt;
     });
     const editedAnswer = editedOptions.filter((opt) => opt.answer === true);
     this.setState({
@@ -75,7 +75,7 @@ class CreateQuestion extends React.Component {
   handleCheckboxAnswerChange = (optionId) => {
     const newQuestionOptions = clonedeep(this.state.questionOptions);
     const editedOptions = newQuestionOptions.map((opt) => {
-      if (optionId === opt.id) {
+      if (optionId === opt.optionId) {
         opt.answer = !opt.answer;
       }
       return opt;
@@ -90,7 +90,7 @@ class CreateQuestion extends React.Component {
   handleRadioAnswerChange = (optionId) => {
     const newQuestionOptions = clonedeep(this.state.questionOptions);
     const editedOptions = newQuestionOptions.map((opt) => {
-      if (opt.id === optionId) {
+      if (opt.optionId === optionId) {
         opt.answer = true;
       } else {
         opt.answer = false;
@@ -107,12 +107,12 @@ class CreateQuestion extends React.Component {
   handleQuestionOptionAdd = (optionId) => {
     const newQuestionOptions = clonedeep(this.state.questionOptions);
     const newQuestionOption = {
-      id: shortid.generate(),
+      optionId: shortid.generate(),
       name: '',
       answer: false,
     };
     const optionIndex = newQuestionOptions.findIndex(
-      (option) => option.id === optionId,
+      (option) => option.optionId === optionId,
     );
     newQuestionOptions.splice(optionIndex + 1, 0, newQuestionOption);
     this.setState({
@@ -123,7 +123,7 @@ class CreateQuestion extends React.Component {
   handleQuestionOptionDelete = (optionId) => {
     const newQuestionOptions = clonedeep(this.state.questionOptions);
     const editedOptions = newQuestionOptions.filter(
-      (option) => option.id !== optionId,
+      (opt) => opt.optionId !== optionId,
     );
     if (this.state.questionOptions.length > 2) {
       const editedAnswer = editedOptions.filter((opt) => opt.answer === true);
@@ -171,12 +171,12 @@ class CreateQuestion extends React.Component {
         questionType: question.type,
         questionOptions: [
           {
-            id: shortid.generate(),
+            optionId: shortid.generate(),
             name: '',
             answer: false,
           },
           {
-            id: shortid.generate(),
+            optionId: shortid.generate(),
             name: '',
             answer: false,
           },
@@ -194,7 +194,7 @@ class CreateQuestion extends React.Component {
       type: this.state.questionType,
       options: this.state.questionOptions,
       answer: this.state.questionAnswer,
-      id: shortid.generate(),
+      optionId: shortid.generate(),
     };
 
     const isNameEmpty = /^\s*$/.test(question.name);

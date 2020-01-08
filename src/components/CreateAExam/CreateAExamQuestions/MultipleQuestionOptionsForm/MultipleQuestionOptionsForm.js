@@ -42,18 +42,18 @@ class MultipleQuestionOptionsForm extends React.Component {
           correct options.
         </p>
         {this.props.questionOptions.map((opt) => (
-          <InputGroup key={`option-${opt.id}`}>
+          <InputGroup key={`option-${opt.optionId}`}>
             <InputGroup.Prepend onClick={this.handleOptionAnswerChange}>
               {this.props.questionType === 'checkbox' ? (
                 <InputGroup.Checkbox
                   checked={opt.answer === true}
                   name="answer"
-                  data-id={opt.id}
+                  data-id={opt.optionId}
                   onChange={this.handleOptionAnswerChange}
                 />
               ) : (
                 <InputGroup.Radio
-                  data-id={opt.id}
+                  data-id={opt.optionId}
                   checked={opt.answer === true}
                   name="answer"
                   onChange={this.handleOptionAnswerChange}
@@ -61,7 +61,7 @@ class MultipleQuestionOptionsForm extends React.Component {
               )}
             </InputGroup.Prepend>
             <FormControl
-              data-id={opt.id}
+              data-id={opt.optionId}
               onChange={this.handleOptionNameChange}
               value={opt.name}
               name="option"
@@ -69,14 +69,14 @@ class MultipleQuestionOptionsForm extends React.Component {
             <InputGroup.Append>
               <Button
                 variant="success"
-                data-id={opt.id}
+                data-id={opt.optionId}
                 onClick={this.handleOptionAdd}
               >
                 +
               </Button>
               <Button
                 variant="danger"
-                data-id={opt.id}
+                data-id={opt.optionId}
                 onClick={this.handleOptionDelete}
               >
                 &times;
