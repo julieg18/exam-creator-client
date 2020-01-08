@@ -61,7 +61,9 @@ class CreateQuestion extends React.Component {
       }
       return opt;
     });
-    const editedAnswer = editedOptions.filter((opt) => opt.answer === true);
+    const editedAnswer = editedOptions
+      .filter((opt) => opt.answer === true)
+      .map((opt) => opt.optionId);
     this.setState({
       questionOptions: editedOptions,
       questionAnswer: editedAnswer,
@@ -80,7 +82,9 @@ class CreateQuestion extends React.Component {
       }
       return opt;
     });
-    const editedAnswer = editedOptions.filter((opt) => opt.answer === true);
+    const editedAnswer = editedOptions
+      .filter((opt) => opt.answer === true)
+      .map((opt) => opt.optionId);
     this.setState({
       questionOptions: editedOptions,
       questionAnswer: editedAnswer,
@@ -97,7 +101,9 @@ class CreateQuestion extends React.Component {
       }
       return opt;
     });
-    const editedAnswer = editedOptions.filter((opt) => opt.answer === true);
+    const editedAnswer = editedOptions
+      .filter((opt) => opt.answer === true)
+      .map((opt) => opt.optionId);
     this.setState({
       questionOptions: editedOptions,
       questionAnswer: editedAnswer,
@@ -126,7 +132,9 @@ class CreateQuestion extends React.Component {
       (opt) => opt.optionId !== optionId,
     );
     if (this.state.questionOptions.length > 2) {
-      const editedAnswer = editedOptions.filter((opt) => opt.answer === true);
+      const editedAnswer = editedOptions
+        .filter((opt) => opt.answer === true)
+        .map((opt) => opt.optionId);
       this.setState({
         questionOptions: editedOptions,
         questionAnswer: editedAnswer,
@@ -193,12 +201,12 @@ class CreateQuestion extends React.Component {
       name: this.state.questionName,
       type: this.state.questionType,
       options: this.state.questionOptions,
-      answer: this.state.questionAnswer,
+      answer: [this.state.questionAnswer.toString()],
       optionId: shortid.generate(),
     };
 
     const isNameEmpty = /^\s*$/.test(question.name);
-    const isAnswerBoolean = typeof question.answer === 'boolean';
+    const isAnswerBoolean = typeof this.state.questionAnswer === 'boolean';
 
     if (isNameEmpty) {
       this.setState({

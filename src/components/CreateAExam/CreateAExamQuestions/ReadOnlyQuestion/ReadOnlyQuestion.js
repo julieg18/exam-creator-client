@@ -14,7 +14,7 @@ const ReadOnlyQuestion = (props) => {
         <div className="trueOrFalseOptions">
           <Form.Check
             readOnly
-            checked={answer === true}
+            checked={answer[0] === 'true'}
             inline
             type="radio"
             label="true"
@@ -22,7 +22,7 @@ const ReadOnlyQuestion = (props) => {
           <Form.Check
             readOnly
             inline
-            checked={answer === false}
+            checked={answer[0] === 'false'}
             type="radio"
             label="false"
           />

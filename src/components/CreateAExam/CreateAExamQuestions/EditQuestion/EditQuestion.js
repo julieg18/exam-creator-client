@@ -78,7 +78,9 @@ class EditQuestion extends React.Component {
       }
       return opt;
     });
-    const editedAnswer = editedOptions.filter((opt) => opt.answer === true);
+    const editedAnswer = editedOptions
+      .filter((opt) => opt.answer === true)
+      .map((opt) => opt.optionId);
     this.setState({
       questionOptions: editedOptions,
       questionAnswer: editedAnswer,
@@ -95,7 +97,9 @@ class EditQuestion extends React.Component {
       }
       return opt;
     });
-    const editedAnswer = editedOptions.filter((opt) => opt.answer === true);
+    const editedAnswer = editedOptions
+      .filter((opt) => opt.answer === true)
+      .map((opt) => opt.optionId);
     this.setState({
       questionOptions: editedOptions,
       questionAnswer: editedAnswer,
@@ -144,11 +148,11 @@ class EditQuestion extends React.Component {
       name: this.state.questionName,
       type: this.state.questionType,
       options: [],
-      answer: this.state.questionAnswer,
+      answer: [this.state.questionAnswer.toString()],
     };
 
     const isNameEmpty = /^\s*$/.test(question.name);
-    const isAnswerBoolean = typeof question.answer === 'boolean';
+    const isAnswerBoolean = typeof this.state.questionAnswer === 'boolean';
 
     if (isNameEmpty) {
       this.setState({
