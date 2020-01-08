@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import clonedeep from 'lodash.clonedeep';
 import CreateAExamTitle from './CreateAExamTitle/CreateAExamTitle';
 import CreateAExamStart from './CreateAExamStart/CreateAExamStart';
 import CreateAExamStudents from './CreateAExamStudents/CreateAExamStudents';
@@ -12,6 +13,7 @@ import {
   createExamTitle,
   createExamQuestions,
   createExamStudents,
+  createExam,
 } from '../../store/actions/index';
 import './CreateAExam.css';
 
@@ -60,6 +62,17 @@ class CreateAExam extends React.Component {
 
   resetCreateExamHandler = () => {
     this.props.createExamReset();
+  };
+
+  createExamHandler = () => {
+    const createdExam = clonedeep(this.props.exam);
+    createdExam.questions.map((question) => {
+      if (question.type === 'trueOrFalse') {
+        question.type = 'true_false';
+      }
+      return question;
+    });
+    this.props.createExam(createdExam);
   };
 
   render() {
@@ -121,7 +134,7 @@ class CreateAExam extends React.Component {
             backwardFunction={this.backExamPartHandler}
             resetFunction={this.resetCreateExamHandler}
             disableNextBtn={this.state.disableNextBtn}
-            finishFunction={() => console.log('save exam')}
+            finishFunction={this.createExamHandler}
             isUserLoggedIn={this.props.isUserLoggedIn}
           />
         ) : (
@@ -152,6 +165,7 @@ function mapDispatchToProps(dispatch) {
     createExamQuestions: (questions) =>
       dispatch(createExamQuestions(questions)),
     createExamStudents: (students) => dispatch(createExamStudents(students)),
+    createExam: (exam) => dispatch(createExam(exam)),
   };
 }
 

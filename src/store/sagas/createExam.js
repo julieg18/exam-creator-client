@@ -1,4 +1,5 @@
 import { put } from 'redux-saga/effects';
+import clonedeep from 'lodash.clonedeep';
 import {
   createExamStart,
   createExamFail,
@@ -8,18 +9,27 @@ import {
 function* createExamSaga(action) {
   try {
     yield put(createExamStart());
-    const res = yield fetch('/api/v1/users/signup', {
+    const createdExam = clonedeep(action.exam);
+
+    const userRes = yield fetch('/api/v1/users');
+    const parsedUserRes = yield userRes.json();
+    if (!userRes.ok) {
+      throw Error(parsedUserRes.error);
+    }
+    createdExam.creator = parsedUserRes.user._id;
+
+    const res = yield fetch('/api/v1/exams', {
       method: 'POST',
-      body: JSON.stringify(action.exam),
+      body: JSON.stringify(createdExam),
       headers: { 'Content-Type': 'application/json' },
     });
     const parsedRes = yield res.json();
     if (!res.ok) {
       throw Error(parsedRes.error);
     }
-    console.log({ parsedRes });
+    yield put(createExamSuccess());
   } catch (err) {
-    console.log({ err });
+    yield put(createExamFail());
   }
 }
 

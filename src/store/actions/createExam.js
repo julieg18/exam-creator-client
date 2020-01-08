@@ -4,6 +4,7 @@ import {
   CREATE_EXAM_TITLE,
   CREATE_EXAM_QUESTIONS,
   CREATE_EXAM_STUDENTS,
+  CREATE_EXAM,
   CREATE_EXAM_START,
   CREATE_EXAM_FAIL,
   CREATE_EXAM_SUCCESS,
@@ -43,6 +44,13 @@ function createExamStudents(students) {
   };
 }
 
+function createExam(exam) {
+  return {
+    type: CREATE_EXAM,
+    exam,
+  };
+}
+
 function createExamStart() {
   return { type: CREATE_EXAM_START };
 }
@@ -61,6 +69,7 @@ export {
   createExamTitle,
   createExamQuestions,
   createExamStudents,
+  createExam,
   createExamStart,
   createExamFail,
   createExamSuccess,
