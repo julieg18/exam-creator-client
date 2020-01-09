@@ -153,7 +153,7 @@ class CreateQuestion extends React.Component {
     };
 
     const isNameEmpty = /^\s*$/.test(question.name);
-    const isAOptionEmpty = question.options.every((opt) =>
+    const isAOptionEmpty = question.options.some((opt) =>
       /^\s*$/.test(opt.name),
     );
     const doesQuestionHaveAnswer = this.state.questionAnswer.length !== 0;
