@@ -1,0 +1,21 @@
+.LoadingButton {
+  position: relative;
+}
+
+.LoadingButton .spinner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 4px;
+  left: 0;
+}
+
+.LoadingButton .invisible {
+  visibility: hidden;
+}
+
+.LoadingButton .spinner span {
+  height: 1.75rem;
+  width: 1.75rem;
+  font-size: 15px;
+}

@@ -6,6 +6,10 @@
   margin: 0 10px;
 }
 
+.NavigationBar .LoadingButton .spinner {
+  top: 6px;
+}
+
 .NavigationBar .dropdown-menu {
   width: 300px;
 }

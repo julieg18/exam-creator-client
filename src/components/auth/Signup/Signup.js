@@ -1,10 +1,10 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { authSignup, authClearError } from '../../../store/actions/index';
+import LoadingButton from '../../common/LoadingButton/LoadingButton';
 import './Signup.css';
 
 class Signup extends React.Component {
@@ -48,9 +48,15 @@ class Signup extends React.Component {
             <Form.Label>Password:</Form.Label>
             <Form.Control type="password" placeholder="Password" />
           </Form.Group>
-          <Button variant="info" type="submit">
+          <LoadingButton
+            variant="info"
+            type="submit"
+            loading={this.props.loading}
+            size="md"
+            classes=""
+          >
             Signup
-          </Button>
+          </LoadingButton>
         </Form>
       </div>
     );

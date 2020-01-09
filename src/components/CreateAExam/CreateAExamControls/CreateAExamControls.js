@@ -9,6 +9,7 @@ import {
   faSave,
 } from '@fortawesome/free-solid-svg-icons';
 import './CreateAExamControls.css';
+import LoadingButton from '../../common/LoadingButton/LoadingButton';
 
 const CreateAExamControls = (props) => {
   let createAExamControlsClass = 'CreateExamGeneralControls';
@@ -30,14 +31,16 @@ const CreateAExamControls = (props) => {
     case 'finish':
       createAExamControlsClass = 'CreateExamFinishControls';
       leftButton = props.isUserLoggedIn ? (
-        <Button
-          className="finishBtn"
+        <LoadingButton
+          classes="finishBtn"
           size="lg"
           variant="info"
-          onClick={props.finishFunction}
+          type="button"
+          onClickFunc={props.finishFunction}
+          loading={props.loading}
         >
           Save <FontAwesomeIcon icon={faSave} />
-        </Button>
+        </LoadingButton>
       ) : (
         <Link to="/auth">
           <Button className="finishBtn" size="lg" variant="info">

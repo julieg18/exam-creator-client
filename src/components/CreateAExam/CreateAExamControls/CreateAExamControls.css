@@ -5,6 +5,10 @@
   width: 100%;
 }
 
+.CreateAExamControls .spinner {
+  top: 10px;
+}
+
 .CreateExamTitleControls .backBtn {
   visibility: hidden;
 }

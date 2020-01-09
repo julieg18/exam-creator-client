@@ -1,12 +1,12 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Button from 'react-bootstrap/Button';
 import { Link, withRouter } from 'react-router-dom';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { connect } from 'react-redux';
 import { authLogout } from '../../store/actions/index';
+import LoadingButton from '../common/LoadingButton/LoadingButton';
 import './NavigationBar.css';
 
 class NavigationBar extends React.Component {
@@ -52,9 +52,16 @@ class NavigationBar extends React.Component {
         <Nav.Link as={Link} to="/exams" active={pathname === '/exams'}>
           Exams
         </Nav.Link>
-        <Button variant="outline-info" onClick={this.logoutHandler}>
+        <LoadingButton
+          variant="outline-info"
+          type="button"
+          onClickFunc={this.logoutHandler}
+          loading={this.props.loading}
+          size="md"
+          classes=""
+        >
           Logout
-        </Button>
+        </LoadingButton>
       </Nav>
     );
 
@@ -128,9 +135,10 @@ class NavigationBar extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { isUserLoggedIn } = state.auth;
+  const { isUserLoggedIn, loading } = state.auth;
   return {
     isUserLoggedIn,
+    loading,
   };
 }
 

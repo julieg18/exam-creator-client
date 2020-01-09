@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import LoadingButton from '../../common/LoadingButton/LoadingButton';
 import { authLogin, authClearError } from '../../../store/actions/index';
 import './Login.css';
 
@@ -43,9 +43,15 @@ class Login extends React.Component {
             <Form.Label>Password:</Form.Label>
             <Form.Control type="password" placeholder="Password" />
           </Form.Group>
-          <Button variant="info" type="submit">
+          <LoadingButton
+            variant="info"
+            type="submit"
+            loading={this.props.loading}
+            size="md"
+            classes=""
+          >
             Login
-          </Button>
+          </LoadingButton>
         </Form>
       </div>
     );
@@ -54,9 +60,9 @@ class Login extends React.Component {
 
 function mapStateToProps(state) {
   const {
-    auth: { isUserLoggedIn, error },
+    auth: { isUserLoggedIn, error, loading },
   } = state;
-  return { isUserLoggedIn, error };
+  return { isUserLoggedIn, error, loading };
 }
 
 function mapDispatchtoProps(dispatch) {

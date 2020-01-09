@@ -136,6 +136,7 @@ class CreateAExam extends React.Component {
             disableNextBtn={this.state.disableNextBtn}
             finishFunction={this.createExamHandler}
             isUserLoggedIn={this.props.isUserLoggedIn}
+            loading={this.props.loading}
           />
         ) : (
           ''
@@ -148,12 +149,13 @@ class CreateAExam extends React.Component {
 function mapStateToProps(state) {
   const {
     auth: { isUserLoggedIn },
-    createExam: { exam, currentExamPart },
+    createExam: { exam, currentExamPart, loading },
   } = state;
   return {
     isUserLoggedIn,
     examPart: currentExamPart,
     exam,
+    loading,
   };
 }
 
