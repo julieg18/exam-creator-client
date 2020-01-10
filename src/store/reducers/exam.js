@@ -8,6 +8,12 @@ import {
   CREATE_EXAM_START,
   CREATE_EXAM_SUCCESS,
   CREATE_EXAM_FAIL,
+  GET_EXAM_START,
+  GET_EXAM_SUCCESS,
+  GET_EXAM_FAIL,
+  GET_USER_EXAMS_START,
+  GET_USER_EXAMS_SUCCESS,
+  GET_USER_EXAMS_FAIL,
 } from '../actions/examActionTypes';
 
 const initialState = {
@@ -19,6 +25,8 @@ const initialState = {
   currentExamPart: 'start',
   loading: false,
   error: '',
+  retrievedExam: {},
+  userExams: [],
 };
 
 function createExamChangePart(newState, action) {
@@ -60,6 +68,38 @@ function createExamFail(newState, action) {
   return newState;
 }
 
+function getExamStart(newState) {
+  newState.loading = true;
+  return newState;
+}
+
+function getExamSuccess(newState, action) {
+  newState.loading = false;
+  newState.retrievedExam = action.exam;
+  return newState;
+}
+
+function getExamFail(newState) {
+  newState.loading = false;
+  return newState;
+}
+
+function getUserExamsStart(newState) {
+  newState.loading = true;
+  return newState;
+}
+
+function getUserExamsSuccess(newState, action) {
+  newState.loading = false;
+  newState.userExams = action.exams;
+  return newState;
+}
+
+function getUserExamsFail(newState) {
+  newState.loading = false;
+  return newState;
+}
+
 function createExamReducer(state = initialState, action) {
   const newState = clonedeep(state);
   switch (action.type) {
@@ -79,6 +119,18 @@ function createExamReducer(state = initialState, action) {
       return createExamSuccess(newState);
     case CREATE_EXAM_FAIL:
       return createExamFail(newState, action);
+    case GET_EXAM_START:
+      return getExamStart(newState);
+    case GET_EXAM_FAIL:
+      return getExamFail(newState);
+    case GET_EXAM_SUCCESS:
+      return getExamSuccess(newState, action);
+    case GET_USER_EXAMS_START:
+      return getUserExamsStart(newState);
+    case GET_USER_EXAMS_FAIL:
+      return getUserExamsFail(newState);
+    case GET_USER_EXAMS_SUCCESS:
+      return getUserExamsSuccess(newState, action);
     default:
       return state;
   }

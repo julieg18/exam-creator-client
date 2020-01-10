@@ -4,6 +4,12 @@ import {
   createExamStart,
   createExamFail,
   createExamSuccess,
+  getExamStart,
+  getExamFail,
+  getExamSuccess,
+  getUserExamsStart,
+  getUserExamsFail,
+  getUserExamsSuccess,
 } from '../actions/index';
 
 function* createExamSaga(action) {
@@ -33,4 +39,32 @@ function* createExamSaga(action) {
   }
 }
 
-export { createExamSaga };
+function* getExamSaga(action) {
+  try {
+    yield put(getExamStart());
+    const res = yield fetch(`/api/v1/exams/${action.examId}`);
+    const parsedRes = yield res.json();
+    if (!res.ok) {
+      throw Error(parsedRes.error);
+    }
+    yield put(getExamSuccess(parsedRes.exam));
+  } catch (err) {
+    yield put(getExamFail());
+  }
+}
+
+function* getUserExamsSaga() {
+  try {
+    yield put(getUserExamsStart());
+    const res = yield fetch('/api/v1/users/exams');
+    const parsedRes = yield res.json();
+    if (!res.ok) {
+      throw Error(parsedRes.error);
+    }
+    yield put(getUserExamsSuccess(parsedRes.exams));
+  } catch (err) {
+    yield put(getUserExamsFail());
+  }
+}
+
+export { createExamSaga, getExamSaga, getUserExamsSaga };

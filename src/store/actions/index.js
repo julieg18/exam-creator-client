@@ -35,6 +35,14 @@ import {
   createExamStart,
   createExamFail,
   createExamSuccess,
+  getExam,
+  getExamStart,
+  getExamSuccess,
+  getExamFail,
+  getUserExams,
+  getUserExamsStart,
+  getUserExamsFail,
+  getUserExamsSuccess,
 } from './exam';
 
 export {
@@ -71,4 +79,12 @@ export {
   createExamStart,
   createExamFail,
   createExamSuccess,
+  getExam,
+  getExamStart,
+  getExamSuccess,
+  getExamFail,
+  getUserExams,
+  getUserExamsStart,
+  getUserExamsFail,
+  getUserExamsSuccess,
 };
