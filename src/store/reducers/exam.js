@@ -8,7 +8,7 @@ import {
   CREATE_EXAM_START,
   CREATE_EXAM_SUCCESS,
   CREATE_EXAM_FAIL,
-} from '../actions/createExamActionTypes';
+} from '../actions/examActionTypes';
 
 const initialState = {
   exam: {

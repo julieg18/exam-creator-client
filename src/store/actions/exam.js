@@ -8,7 +8,7 @@ import {
   CREATE_EXAM_START,
   CREATE_EXAM_FAIL,
   CREATE_EXAM_SUCCESS,
-} from './createExamActionTypes';
+} from './examActionTypes';
 
 function createExamChangePart(examPart) {
   return {

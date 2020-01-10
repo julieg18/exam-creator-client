@@ -7,7 +7,7 @@ import {
   authGetUserExamsSaga,
   authLogoutSaga,
 } from './auth';
-import { createExamSaga } from './createExam';
+import { createExamSaga } from './exam';
 import {
   AUTH_LOGIN_EXISTING_USER,
   AUTH_SIGNUP,
@@ -16,7 +16,7 @@ import {
   AUTH_GET_USER_EXAMS,
   AUTH_LOGOUT,
 } from '../actions/authActionTypes';
-import { CREATE_EXAM } from '../actions/createExamActionTypes';
+import { CREATE_EXAM } from '../actions/examActionTypes';
 
 function* watchAuth() {
   yield takeEvery(AUTH_LOGIN_EXISTING_USER, authLoginExistingUserSaga);
@@ -27,8 +27,8 @@ function* watchAuth() {
   yield takeEvery(AUTH_LOGOUT, authLogoutSaga);
 }
 
-function* watchCreateExam() {
+function* watchExam() {
   yield takeEvery(CREATE_EXAM, createExamSaga);
 }
 
-export { watchAuth, watchCreateExam };
+export { watchAuth, watchExam };

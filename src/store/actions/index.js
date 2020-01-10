@@ -35,7 +35,7 @@ import {
   createExamStart,
   createExamFail,
   createExamSuccess,
-} from './createExam';
+} from './exam';
 
 export {
   authLoginExistingUser,

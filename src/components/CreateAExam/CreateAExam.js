@@ -149,7 +149,7 @@ class CreateAExam extends React.Component {
 function mapStateToProps(state) {
   const {
     auth: { isUserLoggedIn },
-    createExam: { exam, currentExamPart, loading },
+    exam: { exam, currentExamPart, loading },
   } = state;
   return {
     isUserLoggedIn,
