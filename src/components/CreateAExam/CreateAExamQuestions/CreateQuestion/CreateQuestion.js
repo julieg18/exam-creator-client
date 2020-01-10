@@ -202,7 +202,7 @@ class CreateQuestion extends React.Component {
       type: this.state.questionType,
       options: this.state.questionOptions,
       answer: [this.state.questionAnswer.toString()],
-      optionId: shortid.generate(),
+      id: shortid.generate(),
     };
 
     const isNameEmpty = /^\s*$/.test(question.name);

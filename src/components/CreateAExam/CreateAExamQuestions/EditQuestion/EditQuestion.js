@@ -13,7 +13,7 @@ class EditQuestion extends React.Component {
     questionType: this.props.question.type,
     questionName: this.props.question.name,
     questionOptions: this.props.question.options,
-    questionAnswer: this.props.question.answer,
+    questionAnswer: this.props.question.answer[0] === 'true',
     error: '',
   };
 
