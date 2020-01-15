@@ -1,0 +1,57 @@
+.Exams {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  align-items: center;
+}
+
+.Exams .spinner-border {
+  width: 5rem;
+  height: 5rem;
+  margin-top: 50px;
+  font-size: 2rem;
+}
+
+.Exams .dropdown-toggle,
+.Exams .dropdown-menu {
+  width: 500px;
+}
+
+.dropdown-item {
+  white-space: normal;
+}
+
+.Exams .examsMain {
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+}
+
+@media (max-height: 500px) {
+  .NavigationBar {
+    height: 15vh;
+  }
+
+  .Exams {
+    height: 85vh;
+  }
+}
+
+@media (min-height: 1000px) {
+  .NavigationBar {
+    height: 8vh;
+  }
+
+  .Exams {
+    height: 750px;
+  }
+}
+
+@media (max-width: 500px) {
+  .Exams .dropdown-toggle,
+  .Exams .dropdown-menu {
+    width: 75vw;
+  }
+}
