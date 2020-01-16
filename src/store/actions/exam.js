@@ -16,6 +16,10 @@ import {
   GET_USER_EXAMS_START,
   GET_USER_EXAMS_SUCCESS,
   GET_USER_EXAMS_FAIL,
+  DELETE_EXAM,
+  DELETE_EXAM_START,
+  DELETE_EXAM_SUCCESS,
+  DELETE_EXAM_FAIL,
 } from './examActionTypes';
 
 function createExamChangePart(examPart) {
@@ -122,6 +126,25 @@ function getUserExamsFail() {
   };
 }
 
+function deleteExam(examId) {
+  return {
+    type: DELETE_EXAM,
+    examId,
+  };
+}
+
+function deleteExamStart() {
+  return { type: DELETE_EXAM_START };
+}
+
+function deleteExamSuccess(deletedExamId) {
+  return { type: DELETE_EXAM_SUCCESS, deletedExamId };
+}
+
+function deleteExamFail() {
+  return { type: DELETE_EXAM_FAIL };
+}
+
 export {
   createExamChangePart,
   createExamReset,
@@ -140,4 +163,8 @@ export {
   getUserExamsStart,
   getUserExamsFail,
   getUserExamsSuccess,
+  deleteExam,
+  deleteExamStart,
+  deleteExamSuccess,
+  deleteExamFail,
 };

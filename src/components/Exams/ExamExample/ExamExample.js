@@ -39,7 +39,7 @@ const ExamExample = (props) => {
       <div className="container">
         <h1>{props.exam.title}</h1>
         <Button
-          onClick={() => props.editExam(props.exam._id)}
+          onClick={() => props.editExamFunc(props.exam._id)}
           size="sm"
           variant="info"
           className="editExamBtn"
@@ -47,7 +47,7 @@ const ExamExample = (props) => {
           Edit Exam
         </Button>
         <Button
-          onClick={() => props.deleteExam(props.exam._id)}
+          onClick={props.deleteExamFunc}
           size="sm"
           variant="danger"
           className="deleteExamBtn"

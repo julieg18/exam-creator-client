@@ -43,6 +43,10 @@ import {
   getUserExamsStart,
   getUserExamsFail,
   getUserExamsSuccess,
+  deleteExam,
+  deleteExamStart,
+  deleteExamSuccess,
+  deleteExamFail,
 } from './exam';
 
 export {
@@ -87,4 +91,8 @@ export {
   getUserExamsStart,
   getUserExamsFail,
   getUserExamsSuccess,
+  deleteExam,
+  deleteExamStart,
+  deleteExamSuccess,
+  deleteExamFail,
 };

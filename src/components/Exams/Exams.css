@@ -6,6 +6,16 @@
   align-items: center;
 }
 
+.modalBtns {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modalBtns .btn-info {
+  margin-right: 1rem;
+}
+
 .Exams .spinner-border {
   width: 5rem;
   height: 5rem;

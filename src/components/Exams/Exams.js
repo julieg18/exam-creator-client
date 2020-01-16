@@ -4,18 +4,51 @@ import clonedeep from 'lodash.clonedeep';
 import Spinner from 'react-bootstrap/Spinner';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import ExamExample from './ExamExample/ExamExample';
-import { getUserExams } from '../../store/actions/index';
+import { getUserExams, deleteExam } from '../../store/actions/index';
 import './Exams.css';
 
 class Exams extends React.Component {
   state = {
     examSelected: {},
+    showModal: false,
   };
 
   componentDidMount() {
     this.props.getUserExams();
   }
+
+  hideModal = () => {
+    this.setState({
+      showModal: false,
+    });
+  };
+
+  showModal = () => {
+    this.setState({
+      showModal: true,
+    });
+  };
+
+  deleteExam = () => {
+    this.hideModal();
+    const examSelectedId = this.state.examSelected._id
+      ? this.state.examSelected._id
+      : clonedeep(this.props.userExams).sort((examA, examB) =>
+          examA.title > examB.title ? 1 : -1,
+        )[0]._id;
+    this.props.deleteExam(examSelectedId);
+
+    const sortedUserExams = clonedeep(
+      this.props.userExams,
+    ).sort((examA, examB) => (examA.title > examB.title ? 1 : -1));
+    const examSelected = sortedUserExams.filter(
+      (exam) => exam._id !== examSelectedId,
+    )[0];
+    this.setState({ examSelected });
+  };
 
   changeExamSelected = (examId) => {
     const examSelected = this.props.userExams.find(
@@ -31,6 +64,19 @@ class Exams extends React.Component {
 
     return (
       <div className="Exams">
+        <Modal onHide={this.hideModal} show={this.state.showModal}>
+          <Modal.Body>
+            Are you sure you want to delete this exam?
+            <div className="modalBtns">
+              <Button variant="info" onClick={this.hideModal}>
+                Cancel
+              </Button>
+              <Button variant="danger" onClick={this.deleteExam}>
+                Delete Exam
+              </Button>
+            </div>
+          </Modal.Body>
+        </Modal>
         <h1>Your Exams</h1>
         {this.props.loading ? (
           <div className="spinner">
@@ -56,6 +102,7 @@ class Exams extends React.Component {
                   ? this.state.examSelected
                   : sortedUserExams[0]
               }
+              deleteExamFunc={this.showModal}
             />
           </>
         ) : (
@@ -68,6 +115,7 @@ class Exams extends React.Component {
     );
   }
 }
+
 function mapStateToProps(state) {
   const {
     exam: { userExams, loading },
@@ -81,6 +129,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getUserExams: () => dispatch(getUserExams()),
+    deleteExam: (examId) => dispatch(deleteExam(examId)),
   };
 }
 

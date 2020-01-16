@@ -14,6 +14,9 @@ import {
   GET_USER_EXAMS_START,
   GET_USER_EXAMS_SUCCESS,
   GET_USER_EXAMS_FAIL,
+  DELETE_EXAM_START,
+  DELETE_EXAM_FAIL,
+  DELETE_EXAM_SUCCESS,
 } from '../actions/examActionTypes';
 
 const initialState = {
@@ -100,6 +103,25 @@ function getUserExamsFail(newState) {
   return newState;
 }
 
+function deleteExamStart(newState) {
+  newState.loading = true;
+  return newState;
+}
+
+function deleteExamSuccess(newState, action) {
+  newState.loading = false;
+  newState.userExams = newState.userExams.filter(
+    (exam) => exam._id !== action.deletedExamId,
+  );
+  return newState;
+}
+
+function deleteExamFail(newState) {
+  newState.loading = false;
+  newState.error = 'Something went wrong. :(';
+  return newState;
+}
+
 function createExamReducer(state = initialState, action) {
   const newState = clonedeep(state);
   switch (action.type) {
@@ -131,6 +153,12 @@ function createExamReducer(state = initialState, action) {
       return getUserExamsFail(newState);
     case GET_USER_EXAMS_SUCCESS:
       return getUserExamsSuccess(newState, action);
+    case DELETE_EXAM_START:
+      return deleteExamStart(newState);
+    case DELETE_EXAM_FAIL:
+      return deleteExamFail(newState);
+    case DELETE_EXAM_SUCCESS:
+      return deleteExamSuccess(newState, action);
     default:
       return state;
   }

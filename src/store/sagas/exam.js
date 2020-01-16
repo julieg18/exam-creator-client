@@ -10,6 +10,9 @@ import {
   getUserExamsStart,
   getUserExamsFail,
   getUserExamsSuccess,
+  deleteExamStart,
+  deleteExamSuccess,
+  deleteExamFail,
 } from '../actions/index';
 
 function* createExamSaga(action) {
@@ -67,4 +70,21 @@ function* getUserExamsSaga() {
   }
 }
 
-export { createExamSaga, getExamSaga, getUserExamsSaga };
+function* deleteExamSaga(action) {
+  try {
+    yield put(deleteExamStart());
+    const res = yield fetch(`/api/v1/exams/${action.examId}`, {
+      method: 'DELETE',
+    });
+    const parsedRes = yield res.json();
+    if (!res.ok) {
+      throw Error(parsedRes.error);
+    }
+    yield put(deleteExamSuccess(action.examId));
+  } catch (err) {
+    console.log(err);
+    yield put(deleteExamFail());
+  }
+}
+
+export { createExamSaga, getExamSaga, getUserExamsSaga, deleteExamSaga };
