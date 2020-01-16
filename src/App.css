@@ -1,3 +1,9 @@
 .App {
   text-align: center;
 }
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgb(23, 162, 184, 0.25);
+  outline: 0;
+  border-color: #17a2b8;
+}
