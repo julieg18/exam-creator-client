@@ -17,15 +17,31 @@ import {
   DELETE_EXAM_START,
   DELETE_EXAM_FAIL,
   DELETE_EXAM_SUCCESS,
+  EDIT_EXAM_SELECT_EXAM,
+  EDIT_EXAM_RESET,
+  EDIT_EXAM_CHANGE_PART,
+  EDIT_EXAM_TITLE,
+  EDIT_EXAM_QUESTIONS,
+  EDIT_EXAM_STUDENTS,
+  EDIT_EXAM_START,
+  EDIT_EXAM_FAIL,
+  EDIT_EXAM_SUCCESS,
 } from '../actions/examActionTypes';
 
 const initialState = {
-  exam: {
+  examBeingCreated: {
     title: '',
     questions: [],
     students: [],
   },
-  currentExamPart: 'start',
+  examToBeEdited: {},
+  examPartsBeingEdited: {
+    title: '',
+    questions: [],
+    students: [],
+  },
+  currentExamBeingCreatedPart: 'start',
+  currentExamBeingEditedPart: 'start',
   loading: false,
   error: '',
   retrievedExam: {},
@@ -33,26 +49,32 @@ const initialState = {
 };
 
 function createExamChangePart(newState, action) {
-  newState.currentExamPart = action.examPart;
+  newState.currentExamBeingCreatedPart = action.examPart;
   return newState;
 }
 
-function createExamReset() {
-  return initialState;
+function createExamReset(newState) {
+  newState.examBeingCreated = {
+    title: '',
+    questions: [],
+    students: [],
+  };
+  newState.currentExamBeingCreatedPart = 'start';
+  return newState;
 }
 
 function createExamTitle(newState, action) {
-  newState.exam.title = action.title;
+  newState.examBeingCreated.title = action.title;
   return newState;
 }
 
 function createExamQuestions(newState, action) {
-  newState.exam.questions = action.questions;
+  newState.examBeingCreated.questions = action.questions;
   return newState;
 }
 
 function createExamStudents(newState, action) {
-  newState.exam.students = action.students;
+  newState.examBeingCreated.students = action.students;
   return newState;
 }
 
@@ -61,8 +83,15 @@ function createExamStart(newState) {
   return newState;
 }
 
-function createExamSuccess() {
-  return initialState;
+function createExamSuccess(newState) {
+  newState.examBeingCreated = {
+    title: '',
+    questions: [],
+    students: [],
+  };
+  newState.currentExamBeingCreatedPart = 'start';
+  newState.loading = false;
+  return newState;
 }
 
 function createExamFail(newState, action) {
@@ -98,8 +127,9 @@ function getUserExamsSuccess(newState, action) {
   return newState;
 }
 
-function getUserExamsFail(newState) {
+function getUserExamsFail(newState, action) {
   newState.loading = false;
+  newState.error = action.error;
   return newState;
 }
 
@@ -116,9 +146,68 @@ function deleteExamSuccess(newState, action) {
   return newState;
 }
 
-function deleteExamFail(newState) {
+function deleteExamFail(newState, action) {
   newState.loading = false;
-  newState.error = 'Something went wrong. :(';
+  newState.error = action.error;
+  return newState;
+}
+
+function editExamSelectExam(newState, action) {
+  newState.examToBeEdited = action.selectedExam;
+  return newState;
+}
+
+function editExamReset(newState) {
+  newState.examToBeEdited = {};
+  newState.examPartsBeingEdited = {
+    title: '',
+    questions: [],
+    students: [],
+  };
+  newState.currentExamBeingEditedPart = 'start';
+  return newState;
+}
+
+function editExamChangePart(newState, action) {
+  newState.currentExamBeingEditedPart = action.examPart;
+  return newState;
+}
+
+function editExamTitle(newState, action) {
+  newState.examPartsBeingEdited.title = action.title;
+  return newState;
+}
+
+function editExamQuestions(newState, action) {
+  newState.examPartsBeingEdited.questions = action.questions;
+  return newState;
+}
+
+function editExamStudents(newState, action) {
+  newState.examPartsBeingEdited.students = action.students;
+  return newState;
+}
+
+function editExamStart(newState) {
+  newState.loading = true;
+  return newState;
+}
+
+function editExamSuccess(newState) {
+  newState.examToBeEdited = {};
+  newState.examPartsBeingEdited = {
+    title: '',
+    questions: [],
+    students: [],
+  };
+  newState.currentExamBeingEditedPart = 'start';
+  newState.loading = false;
+  return newState;
+}
+
+function editExamFail(newState, action) {
+  newState.loading = false;
+  newState.error = action.error;
   return newState;
 }
 
@@ -128,7 +217,7 @@ function createExamReducer(state = initialState, action) {
     case CREATE_EXAM_CHANGE_PART:
       return createExamChangePart(newState, action);
     case CREATE_EXAM_RESET:
-      return createExamReset();
+      return createExamReset(newState);
     case CREATE_EXAM_TITLE:
       return createExamTitle(newState, action);
     case CREATE_EXAM_QUESTIONS:
@@ -144,21 +233,39 @@ function createExamReducer(state = initialState, action) {
     case GET_EXAM_START:
       return getExamStart(newState);
     case GET_EXAM_FAIL:
-      return getExamFail(newState);
+      return getExamFail(newState, action);
     case GET_EXAM_SUCCESS:
       return getExamSuccess(newState, action);
     case GET_USER_EXAMS_START:
       return getUserExamsStart(newState);
     case GET_USER_EXAMS_FAIL:
-      return getUserExamsFail(newState);
+      return getUserExamsFail(newState, action);
     case GET_USER_EXAMS_SUCCESS:
       return getUserExamsSuccess(newState, action);
     case DELETE_EXAM_START:
       return deleteExamStart(newState);
     case DELETE_EXAM_FAIL:
-      return deleteExamFail(newState);
+      return deleteExamFail(newState, action);
     case DELETE_EXAM_SUCCESS:
       return deleteExamSuccess(newState, action);
+    case EDIT_EXAM_SELECT_EXAM:
+      return editExamSelectExam(newState, action);
+    case EDIT_EXAM_RESET:
+      return editExamReset(newState);
+    case EDIT_EXAM_CHANGE_PART:
+      return editExamChangePart(newState, action);
+    case EDIT_EXAM_TITLE:
+      return editExamTitle(newState, action);
+    case EDIT_EXAM_QUESTIONS:
+      return editExamQuestions(newState, action);
+    case EDIT_EXAM_STUDENTS:
+      return editExamStudents(newState, action);
+    case EDIT_EXAM_START:
+      return editExamStart(newState);
+    case EDIT_EXAM_SUCCESS:
+      return editExamSuccess(newState);
+    case EDIT_EXAM_FAIL:
+      return editExamFail(newState, action);
     default:
       return state;
   }

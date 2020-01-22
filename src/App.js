@@ -5,6 +5,7 @@ import NavigationBar from './components/NavigationBar/NavigationBar';
 import Signup from './components/auth/Signup/Signup';
 import Login from './components/auth/Login/Login';
 import CreateAExam from './components/CreateAExam/CreateAExam';
+import EditAExam from './components/EditAExam/EditAExam';
 import Exams from './components/Exams/Exams';
 import { authLoginExistingUser } from './store/actions';
 import './App.css';
@@ -19,10 +20,7 @@ class App extends React.Component {
       <Switch>
         <Route path="/auth" component={Signup} />
         <Route path="/login" component={Login} />
-        <Route
-          path="/create-exam"
-          render={(props) => <CreateAExam {...props} part="title" />}
-        />
+        <Route path="/create-exam" component={CreateAExam} />
       </Switch>
     );
     if (this.props.isUserLoggedIn) {
@@ -31,10 +29,8 @@ class App extends React.Component {
           <Redirect from="/login" to="create-exam" />
           <Redirect from="/auth" to="create-exam" />
           <Route path="/exams" component={Exams} />
-          <Route
-            path="/create-exam"
-            render={(props) => <CreateAExam {...props} part="title" />}
-          />
+          <Route path="/create-exam" component={CreateAExam} />
+          <Route path="/edit-exam" component={EditAExam} />
         </Switch>
       );
     }

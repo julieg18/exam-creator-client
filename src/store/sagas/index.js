@@ -12,6 +12,7 @@ import {
   getExamSaga,
   getUserExamsSaga,
   deleteExamSaga,
+  editExamSaga,
 } from './exam';
 import {
   AUTH_LOGIN_EXISTING_USER,
@@ -26,6 +27,7 @@ import {
   GET_EXAM,
   GET_USER_EXAMS,
   DELETE_EXAM,
+  EDIT_EXAM,
 } from '../actions/examActionTypes';
 
 function* watchAuth() {
@@ -42,6 +44,7 @@ function* watchExam() {
   yield takeEvery(GET_EXAM, getExamSaga);
   yield takeEvery(GET_USER_EXAMS, getUserExamsSaga);
   yield takeEvery(DELETE_EXAM, deleteExamSaga);
+  yield takeEvery(EDIT_EXAM, editExamSaga);
 }
 
 export { watchAuth, watchExam };

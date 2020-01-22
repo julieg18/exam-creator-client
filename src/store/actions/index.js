@@ -47,6 +47,16 @@ import {
   deleteExamStart,
   deleteExamSuccess,
   deleteExamFail,
+  editExamSelectExam,
+  editExamReset,
+  editExamChangePart,
+  editExamTitle,
+  editExamQuestions,
+  editExamStudents,
+  editExam,
+  editExamStart,
+  editExamFail,
+  editExamSuccess,
 } from './exam';
 
 export {
@@ -95,4 +105,14 @@ export {
   deleteExamStart,
   deleteExamSuccess,
   deleteExamFail,
+  editExamSelectExam,
+  editExamReset,
+  editExamChangePart,
+  editExamTitle,
+  editExamQuestions,
+  editExamStudents,
+  editExam,
+  editExamStart,
+  editExamFail,
+  editExamSuccess,
 };

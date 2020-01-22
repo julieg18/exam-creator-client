@@ -1,0 +1,22 @@
+.EditAExamStart .spinner-border {
+  width: 5rem;
+  height: 5rem;
+  margin-top: 50px;
+  font-size: 2rem;
+}
+
+.EditAExamStart .form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.EditAExamStart .form-control {
+  width: 33%;
+}
+
+@media (max-width: 500px) {
+  .EditAExamStart .form-control {
+    width: 90%;
+  }
+}

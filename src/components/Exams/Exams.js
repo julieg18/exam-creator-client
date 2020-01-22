@@ -7,18 +7,60 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import ExamExample from './ExamExample/ExamExample';
-import { getUserExams, deleteExam } from '../../store/actions/index';
+import {
+  getUserExams,
+  deleteExam,
+  editExamSelectExam,
+  editExamChangePart,
+} from '../../store/actions/index';
 import './Exams.css';
+import { Redirect } from 'react-router-dom';
 
 class Exams extends React.Component {
   state = {
     examSelected: {},
     showModal: false,
+    toEditExam: false,
   };
 
   componentDidMount() {
     this.props.getUserExams();
   }
+
+  editExamStartHandler = () => {
+    const examSelectedId = this.state.examSelected._id
+      ? this.state.examSelected._id
+      : clonedeep(this.props.userExams).sort((examA, examB) =>
+          examA.title > examB.title ? 1 : -1,
+        )[0]._id;
+    const selectedExam = this.props.userExams.find(
+      (exam) => exam._id === examSelectedId,
+    );
+
+    selectedExam.questions = selectedExam.questions.map((question) => {
+      question.id = question._id;
+
+      if (question.type === 'true_false') {
+        question.type = 'trueOrFalse';
+      }
+
+      question.options = question.options.map((opt) => {
+        opt.answer = question.answer.some((optId) => optId === opt.optionId);
+        return opt;
+      });
+
+      return question;
+    });
+
+    selectedExam.students = selectedExam.students.map((student) => {
+      student.id = student._id;
+      return student;
+    });
+
+    this.props.editExamSelectExam(selectedExam);
+    this.props.editExamChangePart('title');
+    this.setState({ toEditExam: true });
+  };
 
   hideModal = () => {
     this.setState({
@@ -58,6 +100,10 @@ class Exams extends React.Component {
   };
 
   render() {
+    if (this.state.toEditExam) {
+      return <Redirect to="/edit-exam" />;
+    }
+
     const sortedUserExams = clonedeep(
       this.props.userExams,
     ).sort((examA, examB) => (examA.title > examB.title ? 1 : -1));
@@ -103,6 +149,7 @@ class Exams extends React.Component {
                   : sortedUserExams[0]
               }
               deleteExamFunc={this.showModal}
+              editExamFunc={this.editExamStartHandler}
             />
           </>
         ) : (
@@ -130,6 +177,8 @@ function mapDispatchToProps(dispatch) {
   return {
     getUserExams: () => dispatch(getUserExams()),
     deleteExam: (examId) => dispatch(deleteExam(examId)),
+    editExamSelectExam: (exam) => dispatch(editExamSelectExam(exam)),
+    editExamChangePart: (part) => dispatch(editExamChangePart(part)),
   };
 }
 

@@ -1,0 +1,20 @@
+.EditAExamControls {
+  margin: 10px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.EditAExamControls .spinner {
+  top: 10px;
+}
+
+.EditAExamTitleControls .backBtn {
+  visibility: hidden;
+}
+
+@media (max-width: 500px) {
+  .EditAExamControls span {
+    display: none;
+  }
+}

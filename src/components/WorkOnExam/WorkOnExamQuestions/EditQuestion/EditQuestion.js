@@ -13,12 +13,32 @@ class EditQuestion extends React.Component {
     questionType: this.props.question.type,
     questionName: this.props.question.name,
     questionOptions: this.props.question.options,
-    questionAnswer: this.props.question.answer[0] === 'true',
+    questionAnswer:
+      this.props.question.type === 'trueOrFalse'
+        ? this.props.question.answer[0] === 'true'
+        : this.props.question.answer,
     error: '',
   };
 
   handleQuestionTypeChange = (e) => {
-    this.setState({ questionType: e.target.value });
+    const questionType = e.target.value;
+    const questionOptions =
+      questionType === 'trueOrFalse'
+        ? []
+        : [
+            {
+              optionId: shortid.generate(),
+              name: '',
+              answer: false,
+            },
+            {
+              optionId: shortid.generate(),
+              name: '',
+              answer: false,
+            },
+          ];
+    const questionAnswer = questionType === 'trueOrFalse' ? true : [];
+    this.setState({ questionType, questionOptions, questionAnswer });
   };
 
   handleQuestionNameChange = (e) => {

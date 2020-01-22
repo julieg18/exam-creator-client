@@ -5,14 +5,15 @@ import Tab from 'react-bootstrap/Tab';
 import CreateQuestion from './CreateQuestion/CreateQuestion';
 import EditQuestion from './EditQuestion/EditQuestion';
 import QuestionsSoFar from './QuestionsSoFar/QuestionsSoFar';
-import './CreateAExamQuestions.css';
+import './WorkOnExamQuestions.css';
 
-class CreateAExamQuestions extends React.Component {
+class WorkOnExamQuestions extends React.Component {
   state = {
     questions: this.props.examQuestions,
     questionToBeEdited: {},
     isWindowMobileSize: false,
     currentActiveTab: 'workOnQuestion',
+    hasQuestionsChanged: false,
   };
 
   componentDidMount() {
@@ -21,7 +22,10 @@ class CreateAExamQuestions extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.createExamQuestions(this.state.questions);
+    this.props.completeExamQuestions(
+      this.state.questions,
+      this.state.hasQuestionsChanged,
+    );
     window.removeEventListener('resize', this.updateIsWindowMobileSize);
   }
 
@@ -34,6 +38,12 @@ class CreateAExamQuestions extends React.Component {
 
   changeTabHandler = (tab) => {
     this.setState({ currentActiveTab: tab });
+  };
+
+  editQuestionStartHandler = (questionToBeEdited) => {
+    this.setState({
+      questionToBeEdited,
+    });
   };
 
   editQuestionHandler = (question) => {
@@ -49,6 +59,7 @@ class CreateAExamQuestions extends React.Component {
     this.setState({
       questions: editedQuestions,
       questionToBeEdited: {},
+      hasQuestionsChanged: true,
     });
   };
 
@@ -57,6 +68,7 @@ class CreateAExamQuestions extends React.Component {
     questions.push(question);
     this.setState({
       questions,
+      hasQuestionsChanged: true,
     });
   };
 
@@ -73,19 +85,14 @@ class CreateAExamQuestions extends React.Component {
     } else {
       this.setState({
         questions: editedQuestions,
+        hasQuestionsChanged: true,
       });
     }
   };
 
-  editQuestionStartHandler = (questionToBeEdited) => {
-    this.setState({
-      questionToBeEdited,
-    });
-  };
-
   render() {
-    let createExamQuestionsMain = (
-      <div className="CreateExamQuestionsMain">
+    let workOnExamQuestionsMain = (
+      <div className="WorkOnExamQuestionsMain">
         <QuestionsSoFar
           editQuestionStart={this.editQuestionStartHandler}
           questions={this.state.questions}
@@ -103,8 +110,8 @@ class CreateAExamQuestions extends React.Component {
       </div>
     );
     if (this.state.isWindowMobileSize) {
-      createExamQuestionsMain = (
-        <div className="MobileCreateExamQuestionsMain">
+      workOnExamQuestionsMain = (
+        <div className="MobileWorkOnExamQuestionsMain">
           <Tabs
             activeKey={this.state.currentActiveTab}
             onSelect={this.changeTabHandler}
@@ -140,12 +147,12 @@ class CreateAExamQuestions extends React.Component {
       );
     }
     return (
-      <div className="CreateAExamQuestions">
-        <h1>Create Questions For Your Exam</h1>
-        {createExamQuestionsMain}
+      <div className="WorkOnExamQuestions">
+        <h1>{this.props.heading}</h1>
+        {workOnExamQuestionsMain}
       </div>
     );
   }
 }
 
-export default CreateAExamQuestions;
+export default WorkOnExamQuestions;

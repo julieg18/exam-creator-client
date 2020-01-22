@@ -1,0 +1,19 @@
+.EditAExam {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  align-items: center;
+}
+
+@media (max-height: 500px) {
+  .EditAExam {
+    height: 85vh;
+  }
+}
+
+@media (min-height: 1000px) {
+  .EditAExam {
+    height: 750px;
+  }
+}

@@ -1,13 +1,13 @@
-.CreateAExamTitle {
+.WorkOnExamTitle {
   width: 50vw;
 }
 
-.CreateAExamTitle h1 {
+.WorkOnExamTitle h1 {
   padding: 20px 0;
 }
 
 @media (max-width: 500px) {
-  .CreateAExamTitle {
+  .WorkOnExamTitle {
     width: 75vw;
   }
 }

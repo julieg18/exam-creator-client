@@ -20,6 +20,16 @@ import {
   DELETE_EXAM_START,
   DELETE_EXAM_SUCCESS,
   DELETE_EXAM_FAIL,
+  EDIT_EXAM_SELECT_EXAM,
+  EDIT_EXAM_RESET,
+  EDIT_EXAM_CHANGE_PART,
+  EDIT_EXAM_TITLE,
+  EDIT_EXAM_QUESTIONS,
+  EDIT_EXAM_STUDENTS,
+  EDIT_EXAM,
+  EDIT_EXAM_START,
+  EDIT_EXAM_FAIL,
+  EDIT_EXAM_SUCCESS,
 } from './examActionTypes';
 
 function createExamChangePart(examPart) {
@@ -67,8 +77,8 @@ function createExamStart() {
   return { type: CREATE_EXAM_START };
 }
 
-function createExamFail() {
-  return { type: CREATE_EXAM_FAIL };
+function createExamFail(error) {
+  return { type: CREATE_EXAM_FAIL, error };
 }
 
 function createExamSuccess() {
@@ -95,9 +105,10 @@ function getExamSuccess(exam) {
   };
 }
 
-function getExamFail() {
+function getExamFail(error) {
   return {
     type: GET_EXAM_FAIL,
+    error,
   };
 }
 
@@ -120,9 +131,10 @@ function getUserExamsSuccess(exams) {
   };
 }
 
-function getUserExamsFail() {
+function getUserExamsFail(error) {
   return {
     type: GET_USER_EXAMS_FAIL,
+    error,
   };
 }
 
@@ -141,8 +153,64 @@ function deleteExamSuccess(deletedExamId) {
   return { type: DELETE_EXAM_SUCCESS, deletedExamId };
 }
 
-function deleteExamFail() {
-  return { type: DELETE_EXAM_FAIL };
+function deleteExamFail(error) {
+  return { type: DELETE_EXAM_FAIL, error };
+}
+
+function editExamSelectExam(selectedExam) {
+  return { type: EDIT_EXAM_SELECT_EXAM, selectedExam };
+}
+
+function editExamReset() {
+  return { type: EDIT_EXAM_RESET };
+}
+
+function editExamChangePart(examPart) {
+  return {
+    type: EDIT_EXAM_CHANGE_PART,
+    examPart,
+  };
+}
+
+function editExamTitle(title) {
+  return {
+    type: EDIT_EXAM_TITLE,
+    title,
+  };
+}
+
+function editExamQuestions(questions) {
+  return {
+    type: EDIT_EXAM_QUESTIONS,
+    questions,
+  };
+}
+
+function editExamStudents(students) {
+  return {
+    type: EDIT_EXAM_STUDENTS,
+    students,
+  };
+}
+
+function editExam(exam, examPartsBeingEdited) {
+  return {
+    type: EDIT_EXAM,
+    exam,
+    examPartsBeingEdited,
+  };
+}
+
+function editExamStart() {
+  return { type: EDIT_EXAM_START };
+}
+
+function editExamFail(error) {
+  return { type: EDIT_EXAM_FAIL, error };
+}
+
+function editExamSuccess() {
+  return { type: EDIT_EXAM_SUCCESS };
 }
 
 export {
@@ -167,4 +235,14 @@ export {
   deleteExamStart,
   deleteExamSuccess,
   deleteExamFail,
+  editExamSelectExam,
+  editExamReset,
+  editExamChangePart,
+  editExamTitle,
+  editExamQuestions,
+  editExamStudents,
+  editExam,
+  editExamStart,
+  editExamFail,
+  editExamSuccess,
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import clonedeep from 'lodash.clonedeep';
 import Button from 'react-bootstrap/Button';
-import ReadOnlyQuestion from '../../CreateAExam/CreateAExamQuestions/ReadOnlyQuestion/ReadOnlyQuestion';
+import ReadOnlyQuestion from '../../WorkOnExam/WorkOnExamQuestions/ReadOnlyQuestion/ReadOnlyQuestion';
 import './ExamExample.css';
 
 const ExamExample = (props) => {

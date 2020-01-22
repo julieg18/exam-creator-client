@@ -5,10 +5,6 @@
   position: relative;
 }
 
-.CreateQuestion select:hover {
-  cursor: pointer;
-}
-
 @media (max-width: 500px) {
   .CreateQuestion {
     width: 100%;

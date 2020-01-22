@@ -1,18 +1,18 @@
 import React from 'react';
 import Alert from 'react-bootstrap/Alert';
-import ReadOnlyQuestion from '../CreateAExamQuestions/ReadOnlyQuestion/ReadOnlyQuestion';
-import './CreateAExamFinish.css';
+import ReadOnlyQuestion from '../WorkOnExamQuestions/ReadOnlyQuestion/ReadOnlyQuestion';
+import './WorkOnExamFinish.css';
 
 const CreateAExamFinish = (props) => {
   const doesExamHaveNoQuestions = props.exam.questions.length === 0;
   const doesExamHaveNoStudents = props.exam.students.length === 0;
   let errorMessages = {
     noStudents:
-      "You haven't given your exam any any students. You can save your exam but nobody will be able to take the exam until you add at least one student.",
+      "Your exam doesn't contain any students. You can save your exam but nobody will be able to take the exam until you add at least one student.",
     noQuestions:
-      "You haven't given your exam any any questions. You can save your exam but nobody will be able to take the exam until you add at least one question",
+      "Your exam doesn't contain any questions. You can save your exam but nobody will be able to take the exam until you add at least one question",
     noStudentsOrQuestions:
-      "You haven't given your exam any students or questions. You can save your exam but nobody will be able to take the exam until you add at least one student and question.",
+      "Your exam doesn't contain any students or questions. You can save your exam but nobody will be able to take the exam until you add at least one student and question.",
   };
   let errorMessageKey = '';
   if (doesExamHaveNoQuestions && doesExamHaveNoStudents) {
@@ -23,14 +23,14 @@ const CreateAExamFinish = (props) => {
     errorMessageKey = 'noStudents';
   }
   return (
-    <div className="CreateAExamFinish">
+    <div className="WorkOnExamFinish">
       <h1>Save Your Exam</h1>
       {errorMessageKey ? (
         <Alert variant="info">{errorMessages[errorMessageKey]}</Alert>
       ) : (
         ''
       )}
-      <p>Here is your exam so far:</p>
+      <p>{props.text}</p>
       <div className="examExample">
         <div className="scrollOnOverflow">
           <h1>{props.exam.title}</h1>

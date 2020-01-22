@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import clonedeep from 'lodash.clonedeep';
-import CreateAExamTitle from './CreateAExamTitle/CreateAExamTitle';
 import CreateAExamStart from './CreateAExamStart/CreateAExamStart';
-import CreateAExamStudents from './CreateAExamStudents/CreateAExamStudents';
-import CreateAExamQuestions from './CreateAExamQuestions/CreateAExamQuestions';
+import WorkOnExamTitle from '../WorkOnExam/WorkOnExamTitle/WorkOnExamTitle';
+import WorkOnExamStudents from '../WorkOnExam/WorkOnExamStudents/WorkOnExamStudents';
+import WorkOnExamQuestions from '../WorkOnExam/WorkOnExamQuestions/WorkOnExamQuestions';
 import CreateAExamControls from './CreateAExamControls/CreateAExamControls';
-import CreateAExamFinish from './CreateAExamFinish/CreateAExamFinish';
+import WorkOnExamFinish from '../WorkOnExam/WorkOnExamFinish/WorkOnExamFinish';
 import {
   createExamChangePart,
   createExamReset,
@@ -86,35 +86,43 @@ class CreateAExam extends React.Component {
     switch (this.props.examPart) {
       case 'title':
         examPartComponent = (
-          <CreateAExamTitle
+          <WorkOnExamTitle
             examTitle={title}
-            createExamTitle={(title) => this.props.createExamTitle(title)}
+            completeExamTitle={(title) => this.props.createExamTitle(title)}
             changeNextBtn={this.nextBtnHandler}
+            heading="What is your exam's title?"
           />
         );
         break;
       case 'questions':
         examPartComponent = (
-          <CreateAExamQuestions
+          <WorkOnExamQuestions
             examQuestions={questions}
-            createExamQuestions={(questions) =>
+            completeExamQuestions={(questions) =>
               this.props.createExamQuestions(questions)
             }
+            heading="Create Questions For Your Exam"
           />
         );
         break;
       case 'students':
         examPartComponent = (
-          <CreateAExamStudents
+          <WorkOnExamStudents
             examStudents={students}
-            createExamStudents={(students) =>
+            completeExamStudents={(students) =>
               this.props.createExamStudents(students)
             }
+            heading="Add Students To Your Exam"
           />
         );
         break;
       case 'finish':
-        examPartComponent = <CreateAExamFinish exam={this.props.exam} />;
+        examPartComponent = (
+          <WorkOnExamFinish
+            exam={this.props.exam}
+            text="Here is your exam so far:"
+          />
+        );
         break;
       default:
         examPartComponent = (
@@ -149,12 +157,12 @@ class CreateAExam extends React.Component {
 function mapStateToProps(state) {
   const {
     auth: { isUserLoggedIn },
-    exam: { exam, currentExamPart, loading },
+    exam: { examBeingCreated, currentExamBeingCreatedPart, loading },
   } = state;
   return {
     isUserLoggedIn,
-    examPart: currentExamPart,
-    exam,
+    examPart: currentExamBeingCreatedPart,
+    exam: examBeingCreated,
     loading,
   };
 }

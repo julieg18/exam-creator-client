@@ -5,14 +5,15 @@ import Tabs from 'react-bootstrap/Tabs';
 import CreateStudent from './CreateStudent/CreateStudent';
 import EditStudent from './EditStudent/EditStudent';
 import StudentsSoFar from './StudentsSoFar/StudentsSoFar';
-import './CreateAExamStudents.css';
+import './WorkOnExamStudents.css';
 
-class CreateAExamStudents extends React.Component {
+class WorkOnExamStudents extends React.Component {
   state = {
     students: this.props.examStudents,
     studentToBeEdited: {},
     isWindowMobileSize: false,
     currentActiveTab: 'workOnStudent',
+    hasStudentsChanged: false,
   };
 
   componentDidMount() {
@@ -21,7 +22,10 @@ class CreateAExamStudents extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.createExamStudents(this.state.students);
+    this.props.completeExamStudents(
+      this.state.students,
+      this.state.hasStudentsChanged,
+    );
     window.removeEventListener('resize', this.updateIsWindowMobileSize);
   }
 
@@ -48,6 +52,7 @@ class CreateAExamStudents extends React.Component {
     });
     this.setState({
       students: editedStudents,
+      hasStudentsChanged: true,
       studentToBeEdited: {},
     });
   };
@@ -55,7 +60,7 @@ class CreateAExamStudents extends React.Component {
   addStudentHandler = (student) => {
     const students = clonedeep(this.state.students);
     students.push(student);
-    this.setState({ students });
+    this.setState({ students, hasStudentsChanged: true });
   };
 
   deleteStudentHandler = (studentId) => {
@@ -67,10 +72,12 @@ class CreateAExamStudents extends React.Component {
       this.setState({
         questions: editedStudents,
         studentToBeEdited: {},
+        hasStudentsChanged: true,
       });
     } else {
       this.setState({
         students: editedStudents,
+        hasStudentsChanged: true,
       });
     }
   };
@@ -82,8 +89,8 @@ class CreateAExamStudents extends React.Component {
   };
 
   render() {
-    let createExamStudentsMain = (
-      <div className="CreateExamStudentsMain">
+    let workOnExamStudentsMain = (
+      <div className="WorkOnExamStudentsMain">
         <StudentsSoFar
           editStudentStart={this.editStudentStartHandler}
           students={this.state.students}
@@ -101,8 +108,8 @@ class CreateAExamStudents extends React.Component {
       </div>
     );
     if (window.innerWidth <= 500) {
-      createExamStudentsMain = (
-        <div className="MobileCreateExamStudentsMain">
+      workOnExamStudentsMain = (
+        <div className="MobileWorkOnExamStudentsMain">
           <Tabs
             activeKey={this.state.currentActiveTab}
             onSelect={this.changeTabHandler}
@@ -138,16 +145,16 @@ class CreateAExamStudents extends React.Component {
       );
     }
     return (
-      <div className="CreateAExamStudents">
-        <h1>Add Students To Your Exam</h1>
+      <div className="WorkOnExamStudents">
+        <h1>{this.props.heading}</h1>
         <p>
           Each person that is given the link to your exam will need to choose
           his or her name from your student list.
         </p>
-        {createExamStudentsMain}
+        {workOnExamStudentsMain}
       </div>
     );
   }
 }
 
-export default CreateAExamStudents;
+export default WorkOnExamStudents;

@@ -49,6 +49,9 @@ class NavigationBar extends React.Component {
         >
           Create A Exam
         </Nav.Link>
+        <Nav.Link as={Link} to="/edit-exam" active={pathname === '/edit-exam'}>
+          Edit A Exam
+        </Nav.Link>
         <Nav.Link as={Link} to="/exams" active={pathname === '/exams'}>
           Exams
         </Nav.Link>
@@ -95,6 +98,13 @@ class NavigationBar extends React.Component {
             active={pathname === '/create-exam'}
           >
             Create A Exam
+          </Dropdown.Item>
+          <Dropdown.Item
+            as={Link}
+            to="/edit-exam"
+            active={pathname === '/edit-exam'}
+          >
+            Edit A Exam
           </Dropdown.Item>
           <Dropdown.Item as={Link} to="/exams" active={pathname === '/exams'}>
             Exams
