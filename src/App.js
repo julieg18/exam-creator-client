@@ -21,6 +21,7 @@ class App extends React.Component {
         <Route path="/auth" component={Signup} />
         <Route path="/login" component={Login} />
         <Route path="/create-exam" component={CreateAExam} />
+        <Redirect from="*" to="/create-exam" />
       </Switch>
     );
     if (this.props.isUserLoggedIn) {
@@ -31,6 +32,7 @@ class App extends React.Component {
           <Route path="/exams" component={Exams} />
           <Route path="/create-exam" component={CreateAExam} />
           <Route path="/edit-exam" component={EditAExam} />
+          <Redirect from="*" to="/create-exam" />
         </Switch>
       );
     }
