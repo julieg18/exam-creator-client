@@ -1,0 +1,24 @@
+.ExamForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ExamForm form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ExamForm .form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ExamForm .questionOptions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 1rem;
+}

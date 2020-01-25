@@ -1,0 +1,10 @@
+.takeExamSpinner .spinner-border {
+  width: 5rem;
+  height: 5rem;
+  margin-top: 50px;
+  font-size: 2rem;
+}
+
+.TakeExam .alert-info {
+  margin: 0.5rem;
+}
