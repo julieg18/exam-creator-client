@@ -132,16 +132,18 @@ class Exams extends React.Component {
           </div>
         ) : this.props.userExams.length > 0 ? (
           <>
-            <DropdownButton variant="info" title="Select A Exam">
-              {sortedUserExams.map((exam) => (
-                <Dropdown.Item
-                  key={exam._id}
-                  onClick={() => this.changeExamSelected(exam._id)}
-                >
-                  {exam.title}
-                </Dropdown.Item>
-              ))}
-            </DropdownButton>
+            <div className="examsDropdownBtn">
+              <DropdownButton variant="info" title="Select A Exam">
+                {sortedUserExams.map((exam) => (
+                  <Dropdown.Item
+                    key={exam._id}
+                    onClick={() => this.changeExamSelected(exam._id)}
+                  >
+                    {exam.title}
+                  </Dropdown.Item>
+                ))}
+              </DropdownButton>
+            </div>
             <ExamExample
               exam={
                 this.state.examSelected._id

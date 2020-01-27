@@ -1,0 +1,58 @@
+.ExamStudents .studentListTitle {
+  font-weight: bold;
+}
+
+.studentsList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ExamStudents .list-group {
+  width: 500px;
+}
+
+.ExamStudents .list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ExamStudents .studentName {
+  margin: 0;
+  padding-right: 1rem;
+}
+
+.ExamStudents .dropdown-menu {
+  text-align: center;
+  padding-right: 3px;
+}
+
+.ExamStudents .examResults {
+  display: flex;
+}
+
+.ExamStudents .incorrectQuestions,
+.ExamStudents .correctQuestions {
+  text-align: center;
+}
+
+.ExamStudents .incorrectQuestions p,
+.ExamStudents .correctQuestions p {
+  margin-bottom: 0;
+}
+
+.ExamStudents ul {
+  margin: 0;
+  padding: 0;
+}
+
+.ExamStudents li {
+  display: block;
+}
+
+@media (max-width: 500px) {
+  .ExamStudents .list-group {
+    width: initial;
+  }
+}

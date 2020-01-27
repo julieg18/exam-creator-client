@@ -2,11 +2,11 @@ import React from 'react';
 import clonedeep from 'lodash.clonedeep';
 import Button from 'react-bootstrap/Button';
 import ReadOnlyQuestion from '../../WorkOnExam/WorkOnExamQuestions/ReadOnlyQuestion/ReadOnlyQuestion';
+import ExamsStudents from '../ExamsStudents/ExamsStudents';
 import './ExamExample.css';
 
 const ExamExample = (props) => {
   const doesExamHaveNoQuestions = props.exam.questions.length === 0;
-  const doesExamHaveNoStudents = props.exam.students.length === 0;
   let examQuestions = clonedeep(props.exam.questions);
 
   function addAnswerToQuestionOptions(question) {
@@ -68,17 +68,10 @@ const ExamExample = (props) => {
         })}
       </div>
       <hr />
-      <p className="studentListTitle">Student List</p>
-      <ul
-        className={`studentsList ${
-          doesExamHaveNoStudents ? 'noStudentsList' : ''
-        }`}
-      >
-        {doesExamHaveNoStudents ? <p>This exam contains no students.</p> : ''}
-        {props.exam.students.map((student) => {
-          return <li key={student._id}>{student.name}</li>;
-        })}
-      </ul>
+      <ExamsStudents
+        questions={props.exam.questions}
+        students={props.exam.students}
+      />
     </div>
   );
 };

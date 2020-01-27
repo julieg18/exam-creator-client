@@ -23,8 +23,8 @@
   font-size: 2rem;
 }
 
-.Exams .dropdown-toggle,
-.Exams .dropdown-menu {
+.examsDropdownBtn .dropdown-toggle,
+.examsDropdownBtn .dropdown-menu {
   width: 500px;
 }
 
@@ -60,8 +60,8 @@
 }
 
 @media (max-width: 500px) {
-  .Exams .dropdown-toggle,
-  .Exams .dropdown-menu {
+  .examsDropdownBtn .dropdown-toggle,
+  .examsDropdownBtn .dropdown-menu {
     width: 75vw;
   }
 }
