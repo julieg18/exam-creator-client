@@ -69,7 +69,7 @@ const ExamsStudents = (props) => {
                         <p>Incorrect Questions</p>
                         <ul>
                           {examResults.incorrectQuestionNumbers.map((num) => (
-                            <li>{num}</li>
+                            <li key={num}>{num}</li>
                           ))}
                         </ul>
                       </div>
@@ -77,7 +77,7 @@ const ExamsStudents = (props) => {
                         <p>Correct Questions</p>
                         <ul>
                           {examResults.correctQuestionNumbers.map((num) => (
-                            <li>{num}</li>
+                            <li key={num}>{num}</li>
                           ))}
                         </ul>
                       </div>
