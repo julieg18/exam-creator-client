@@ -65,18 +65,18 @@ const ExamsStudents = (props) => {
                   >
                     <strong>Exam Results:</strong>
                     <div className="examResults">
-                      <div className="incorrectQuestions">
-                        <p>Incorrect Questions</p>
-                        <ul>
-                          {examResults.incorrectQuestionNumbers.map((num) => (
-                            <li key={num}>{num}</li>
-                          ))}
-                        </ul>
-                      </div>
                       <div className="correctQuestions">
                         <p>Correct Questions</p>
                         <ul>
                           {examResults.correctQuestionNumbers.map((num) => (
+                            <li key={num}>{num}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="incorrectQuestions">
+                        <p>Incorrect Questions</p>
+                        <ul>
+                          {examResults.incorrectQuestionNumbers.map((num) => (
                             <li key={num}>{num}</li>
                           ))}
                         </ul>

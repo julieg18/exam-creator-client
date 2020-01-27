@@ -22,3 +22,8 @@
   align-items: flex-start;
   padding-left: 1rem;
 }
+
+.ExamForm span,
+.ExamForm .LoadingButton {
+  align-self: center;
+}
