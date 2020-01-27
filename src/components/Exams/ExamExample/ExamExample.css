@@ -11,7 +11,7 @@
   flex-wrap: wrap;
   align-content: flex-start;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .ExamExample .ReadOnlyQuestion {
@@ -47,10 +47,4 @@
 .ExamExample .questionOptions,
 .ExamExample .trueOrFalseOptions {
   padding-left: 20px;
-}
-
-@media (max-width: 576px) {
-  .ExamExample .examQuestions {
-    justify-content: flex-start;
-  }
 }
