@@ -37,7 +37,7 @@ const ExamExample = (props) => {
   return (
     <div className="ExamExample">
       <div className="container">
-        <h1>{props.exam.title}</h1>
+        <strong>{props.exam.title}</strong>
         <Button
           onClick={() => props.editExamFunc(props.exam._id)}
           size="sm"
