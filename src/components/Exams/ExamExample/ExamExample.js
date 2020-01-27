@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clonedeep from 'lodash.clonedeep';
 import Button from 'react-bootstrap/Button';
 import ReadOnlyQuestion from '../../WorkOnExam/WorkOnExamQuestions/ReadOnlyQuestion/ReadOnlyQuestion';
@@ -6,6 +6,7 @@ import ExamsStudents from '../ExamsStudents/ExamsStudents';
 import './ExamExample.css';
 
 const ExamExample = (props) => {
+  const [isExamLinkCopied, setIsExamLinkCopied] = useState(false);
   const doesExamHaveNoQuestions = props.exam.questions.length === 0;
   let examQuestions = clonedeep(props.exam.questions);
 
@@ -22,9 +23,24 @@ const ExamExample = (props) => {
     return question;
   }
 
+  function copyExamLinkToClipboard(examId) {
+    const examLink = `http://localhost:3000/take-exam/${examId}`;
+    const el = document.createElement('textarea');
+    el.value = examLink;
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    setIsExamLinkCopied(true);
+  }
+
   examQuestions = examQuestions.map((question) => {
     return addAnswerToQuestionOptions(question);
   });
+
   examQuestions = examQuestions.map((question) => {
     if (question.type === 'true_false') {
       question.type = 'trueOrFalse';
@@ -38,6 +54,14 @@ const ExamExample = (props) => {
     <div className="ExamExample">
       <div className="container">
         <strong>{props.exam.title}</strong>
+        <Button
+          onClick={() => copyExamLinkToClipboard(props.exam._id)}
+          size="sm"
+          variant="info"
+          className="copyExamLinkBtn"
+        >
+          {isExamLinkCopied ? 'Copied!' : 'Copy Link To Exam'}
+        </Button>
         <Button
           onClick={() => props.editExamFunc(props.exam._id)}
           size="sm"

@@ -150,6 +150,7 @@ class Exams extends React.Component {
                   ? this.state.examSelected
                   : sortedUserExams[0]
               }
+              key={this.state.examSelected._id || sortedUserExams[0]._id}
               deleteExamFunc={this.showModal}
               editExamFunc={this.editExamStartHandler}
             />

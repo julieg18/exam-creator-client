@@ -27,6 +27,7 @@
   max-width: none;
 }
 
+.ExamExample .copyExamLinkBtn,
 .ExamExample .editExamBtn {
   margin-right: 10px;
 }
