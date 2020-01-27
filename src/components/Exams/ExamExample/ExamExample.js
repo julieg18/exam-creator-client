@@ -59,6 +59,10 @@ const ExamExample = (props) => {
           size="sm"
           variant="info"
           className="copyExamLinkBtn"
+          disabled={
+            props.exam.students.length === 0 ||
+            props.exam.questions.length === 0
+          }
         >
           {isExamLinkCopied ? 'Copied!' : 'Copy Link To Exam'}
         </Button>
