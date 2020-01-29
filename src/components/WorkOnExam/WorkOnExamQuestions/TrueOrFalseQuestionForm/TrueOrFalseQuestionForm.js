@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import './TrueOrFalseQuestionForm.css';
 
 const TrueOrFalseQuestionForm = (props) => {
-  function changeAnswerHandler(e) {
+  function handleAnswerChange(e) {
     const value = e.target.value;
     const answer = value === 'true';
     props.onChangeAnswer(answer);
@@ -21,7 +21,7 @@ const TrueOrFalseQuestionForm = (props) => {
             inline
             label="true"
             checked={props.questionAnswer === true}
-            onChange={changeAnswerHandler}
+            onChange={handleAnswerChange}
           />
           <Form.Check
             value="false"
@@ -30,7 +30,7 @@ const TrueOrFalseQuestionForm = (props) => {
             inline
             label="false"
             checked={props.questionAnswer === false}
-            onChange={changeAnswerHandler}
+            onChange={handleAnswerChange}
           />
         </div>
       </Form.Group>

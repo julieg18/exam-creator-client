@@ -54,7 +54,10 @@ const ExamForm = (props) => {
           </Dropdown.Item>
         ))}
       </DropdownButton>
-      <Form onChange={props.handleFormChange} onSubmit={props.completeExam}>
+      <Form
+        onChange={props.handleFormChange}
+        onSubmit={props.handleCompletingExam}
+      >
         {props.exam.questions.map((question, i) => (
           <Question index={i + 1} key={question._id} question={question} />
         ))}

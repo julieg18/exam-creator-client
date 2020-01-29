@@ -142,7 +142,7 @@ class CreateQuestion extends React.Component {
     }
   };
 
-  onCreateMultiOptionQuestionHandler = (e) => {
+  handleCreatingMultiOptionQuestion = (e) => {
     e.preventDefault();
     const question = {
       name: this.state.questionName,
@@ -195,7 +195,7 @@ class CreateQuestion extends React.Component {
     }
   };
 
-  onCreateTrueOrFalseQuestionHandler = (e) => {
+  handleCreatingTrueOrFalseQuestion = (e) => {
     e.preventDefault();
     const question = {
       name: this.state.questionName,
@@ -283,8 +283,8 @@ class CreateQuestion extends React.Component {
           <Form
             onSubmit={
               this.state.questionType === 'trueOrFalse'
-                ? this.onCreateTrueOrFalseQuestionHandler
-                : this.onCreateMultiOptionQuestionHandler
+                ? this.handleCreatingTrueOrFalseQuestion
+                : this.handleCreatingMultiOptionQuestion
             }
           >
             <Form.Group>

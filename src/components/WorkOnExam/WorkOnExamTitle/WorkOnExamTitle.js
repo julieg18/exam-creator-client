@@ -8,7 +8,7 @@ class WorkOnExamTitle extends React.Component {
     hasTitleChanged: false,
   };
 
-  changeTitleHandler = (e) => {
+  handleTitleChange = (e) => {
     this.setState({
       title: e.target.value,
       hasTitleChanged: true,
@@ -27,7 +27,7 @@ class WorkOnExamTitle extends React.Component {
         <Form.Group controlId="title">
           <Form.Control
             value={this.state.title}
-            onChange={this.changeTitleHandler}
+            onChange={this.handleTitleChange}
             type="text"
             placeholder="Title"
           />

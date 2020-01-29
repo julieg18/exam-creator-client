@@ -126,7 +126,7 @@ class EditQuestion extends React.Component {
     });
   };
 
-  onCompleteMultiOptionQuestionHandler = (e) => {
+  handleCompletingMultiOptionQuestion = (e) => {
     e.preventDefault();
     const question = {
       id: this.props.question.id,
@@ -161,7 +161,7 @@ class EditQuestion extends React.Component {
     }
   };
 
-  onCompleteTrueOrFalseQuestionHandler = (e) => {
+  handleCompletingTrueOrFalseQuestion = (e) => {
     e.preventDefault();
     const question = {
       id: this.props.question.id,
@@ -242,8 +242,8 @@ class EditQuestion extends React.Component {
           <Form
             onSubmit={
               this.state.questionType === 'trueOrFalse'
-                ? this.onCompleteTrueOrFalseQuestionHandler
-                : this.onCompleteMultiOptionQuestionHandler
+                ? this.handleCompletingTrueOrFalseQuestion
+                : this.handleCompletingMultiOptionQuestion
             }
           >
             <Form.Group>

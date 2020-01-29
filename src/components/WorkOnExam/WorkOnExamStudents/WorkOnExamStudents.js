@@ -36,11 +36,11 @@ class WorkOnExamStudents extends React.Component {
     }
   };
 
-  changeTabHandler = (tab) => {
+  changeTab = (tab) => {
     this.setState({ currentActiveTab: tab });
   };
 
-  editStudentHandler = (student) => {
+  editStudent = (student) => {
     const students = clonedeep(this.state.students);
     const editedStudent = clonedeep(student);
     const editedStudents = students.map((student) => {
@@ -57,13 +57,13 @@ class WorkOnExamStudents extends React.Component {
     });
   };
 
-  addStudentHandler = (student) => {
+  addStudent = (student) => {
     const students = clonedeep(this.state.students);
     students.push(student);
     this.setState({ students, hasStudentsChanged: true });
   };
 
-  deleteStudentHandler = (studentId) => {
+  deleteStudent = (studentId) => {
     const students = clonedeep(this.state.students);
     const editedStudents = students.filter(
       (student) => student.id !== studentId,
@@ -82,7 +82,7 @@ class WorkOnExamStudents extends React.Component {
     }
   };
 
-  editStudentStartHandler = (studentToBeEdited) => {
+  startEditingStudent = (studentToBeEdited) => {
     this.setState({
       studentToBeEdited,
     });
@@ -92,18 +92,18 @@ class WorkOnExamStudents extends React.Component {
     let workOnExamStudentsMain = (
       <div className="WorkOnExamStudentsMain">
         <StudentsSoFar
-          editStudentStart={this.editStudentStartHandler}
+          editStudentStart={this.startEditingStudent}
           students={this.state.students}
-          deleteStudent={this.deleteStudentHandler}
+          deleteStudent={this.deleteStudent}
         />
         {this.state.studentToBeEdited.id ? (
           <EditStudent
             student={this.state.studentToBeEdited}
-            editStudent={this.editStudentHandler}
+            editStudent={this.editStudent}
             key={this.state.studentToBeEdited.id}
           />
         ) : (
-          <CreateStudent onCreateStudent={this.addStudentHandler} />
+          <CreateStudent onCreateStudent={this.addStudent} />
         )}
       </div>
     );
@@ -112,7 +112,7 @@ class WorkOnExamStudents extends React.Component {
         <div className="MobileWorkOnExamStudentsMain">
           <Tabs
             activeKey={this.state.currentActiveTab}
-            onSelect={this.changeTabHandler}
+            onSelect={this.changeTab}
           >
             <Tab
               eventKey="workOnStudent"
@@ -125,19 +125,19 @@ class WorkOnExamStudents extends React.Component {
               {this.state.studentToBeEdited.id ? (
                 <EditStudent
                   student={this.state.studentToBeEdited}
-                  editStudent={this.editStudentHandler}
+                  editStudent={this.editStudent}
                   key={this.state.studentToBeEdited.id}
                 />
               ) : (
-                <CreateStudent onCreateStudent={this.addStudentHandler} />
+                <CreateStudent onCreateStudent={this.addStudent} />
               )}
             </Tab>
             <Tab eventKey="students" title="Students So Far">
               <StudentsSoFar
-                editStudentStart={this.editStudentStartHandler}
+                editStudentStart={this.startEditingStudent}
                 students={this.state.students}
-                deleteStudent={this.deleteStudentHandler}
-                changeTab={this.changeTabHandler}
+                deleteStudent={this.deleteStudent}
+                changeTab={this.changeTab}
               />
             </Tab>
           </Tabs>

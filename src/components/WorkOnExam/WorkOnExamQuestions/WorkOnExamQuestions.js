@@ -36,17 +36,17 @@ class WorkOnExamQuestions extends React.Component {
     }
   };
 
-  changeTabHandler = (tab) => {
+  changeTab = (tab) => {
     this.setState({ currentActiveTab: tab });
   };
 
-  editQuestionStartHandler = (questionToBeEdited) => {
+  startEditingQuestion = (questionToBeEdited) => {
     this.setState({
       questionToBeEdited,
     });
   };
 
-  editQuestionHandler = (question) => {
+  editQuestion = (question) => {
     const questions = clonedeep(this.state.questions);
     const editedQuestion = clonedeep(question);
     const editedQuestions = questions.map((question) => {
@@ -63,7 +63,7 @@ class WorkOnExamQuestions extends React.Component {
     });
   };
 
-  addQuestionHandler = (question) => {
+  addQuestion = (question) => {
     const questions = clonedeep(this.state.questions);
     questions.push(question);
     this.setState({
@@ -72,7 +72,7 @@ class WorkOnExamQuestions extends React.Component {
     });
   };
 
-  deleteQuestionHandler = (questionId) => {
+  deleteQuestion = (questionId) => {
     const questions = clonedeep(this.state.questions);
     const editedQuestions = questions.filter(
       (question) => question.id !== questionId,
@@ -94,18 +94,18 @@ class WorkOnExamQuestions extends React.Component {
     let workOnExamQuestionsMain = (
       <div className="WorkOnExamQuestionsMain">
         <QuestionsSoFar
-          editQuestionStart={this.editQuestionStartHandler}
+          editQuestionStart={this.startEditingQuestion}
           questions={this.state.questions}
-          deleteQuestion={this.deleteQuestionHandler}
+          deleteQuestion={this.deleteQuestion}
         />
         {this.state.questionToBeEdited.id ? (
           <EditQuestion
             question={this.state.questionToBeEdited}
-            editQuestion={this.editQuestionHandler}
+            editQuestion={this.editQuestion}
             key={this.state.questionToBeEdited.id}
           />
         ) : (
-          <CreateQuestion onCreateQuestion={this.addQuestionHandler} />
+          <CreateQuestion onCreateQuestion={this.addQuestion} />
         )}
       </div>
     );
@@ -114,7 +114,7 @@ class WorkOnExamQuestions extends React.Component {
         <div className="MobileWorkOnExamQuestionsMain">
           <Tabs
             activeKey={this.state.currentActiveTab}
-            onSelect={this.changeTabHandler}
+            onSelect={this.changeTab}
           >
             <Tab
               eventKey="workOnQuestion"
@@ -127,19 +127,19 @@ class WorkOnExamQuestions extends React.Component {
               {this.state.questionToBeEdited.id ? (
                 <EditQuestion
                   question={this.state.questionToBeEdited}
-                  editQuestion={this.editQuestionHandler}
+                  editQuestion={this.editQuestion}
                   key={this.state.questionToBeEdited.id}
                 />
               ) : (
-                <CreateQuestion onCreateQuestion={this.addQuestionHandler} />
+                <CreateQuestion onCreateQuestion={this.addQuestion} />
               )}
             </Tab>
             <Tab eventKey="questions" title="Questions So Far">
               <QuestionsSoFar
-                editQuestionStart={this.editQuestionStartHandler}
+                editQuestionStart={this.startEditingQuestion}
                 questions={this.state.questions}
-                deleteQuestion={this.deleteQuestionHandler}
-                changeTab={this.changeTabHandler}
+                deleteQuestion={this.deleteQuestion}
+                changeTab={this.changeTab}
               />
             </Tab>
           </Tabs>

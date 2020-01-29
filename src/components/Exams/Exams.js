@@ -27,7 +27,19 @@ class Exams extends React.Component {
     this.props.getUserExams();
   }
 
-  editExamStartHandler = () => {
+  hideModal = () => {
+    this.setState({
+      showModal: false,
+    });
+  };
+
+  showModal = () => {
+    this.setState({
+      showModal: true,
+    });
+  };
+
+  handleStartOfEditExam = () => {
     const examSelectedId = this.state.examSelected._id
       ? this.state.examSelected._id
       : clonedeep(this.props.userExams).sort((examA, examB) =>
@@ -62,19 +74,7 @@ class Exams extends React.Component {
     this.setState({ toEditExam: true });
   };
 
-  hideModal = () => {
-    this.setState({
-      showModal: false,
-    });
-  };
-
-  showModal = () => {
-    this.setState({
-      showModal: true,
-    });
-  };
-
-  deleteExam = () => {
+  handleExamDeletion = () => {
     this.hideModal();
     const examSelectedId = this.state.examSelected._id
       ? this.state.examSelected._id
@@ -92,7 +92,7 @@ class Exams extends React.Component {
     this.setState({ examSelected });
   };
 
-  changeExamSelected = (examId) => {
+  handleExamSelection = (examId) => {
     const examSelected = this.props.userExams.find(
       (exam) => exam._id === examId,
     );
@@ -117,14 +117,14 @@ class Exams extends React.Component {
               <Button variant="info" onClick={this.hideModal}>
                 Cancel
               </Button>
-              <Button variant="danger" onClick={this.deleteExam}>
+              <Button variant="danger" onClick={this.handleExamDeletion}>
                 Delete Exam
               </Button>
             </div>
           </Modal.Body>
         </Modal>
         <h1>Your Exams</h1>
-        {this.props.loading ? (
+        {this.props.getUserExamsLoading || this.props.deleteExamLoading ? (
           <div className="spinner">
             <Spinner animation="border" variant="info">
               <span className="sr-only">Loading...</span>
@@ -137,7 +137,7 @@ class Exams extends React.Component {
                 {sortedUserExams.map((exam) => (
                   <Dropdown.Item
                     key={exam._id}
-                    onClick={() => this.changeExamSelected(exam._id)}
+                    onClick={() => this.handleExamSelection(exam._id)}
                   >
                     {exam.title}
                   </Dropdown.Item>
@@ -152,7 +152,7 @@ class Exams extends React.Component {
               }
               key={this.state.examSelected._id || sortedUserExams[0]._id}
               deleteExamFunc={this.showModal}
-              editExamFunc={this.editExamStartHandler}
+              editExamFunc={this.handleStartOfEditExam}
             />
           </>
         ) : (
@@ -168,11 +168,12 @@ class Exams extends React.Component {
 
 function mapStateToProps(state) {
   const {
-    exam: { userExams, loading },
+    exam: { userExams, getUserExamsLoading, deleteExamLoading },
   } = state;
   return {
     userExams,
-    loading,
+    getUserExamsLoading,
+    deleteExamLoading,
   };
 }
 

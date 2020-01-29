@@ -30,10 +30,6 @@ class NavigationBar extends React.Component {
     }
   };
 
-  logoutHandler = () => {
-    this.props.onLogout();
-  };
-
   render() {
     const {
       isUserLoggedIn,
@@ -58,7 +54,7 @@ class NavigationBar extends React.Component {
         <LoadingButton
           variant="outline-info"
           type="button"
-          onClickFunc={this.logoutHandler}
+          onClickFunc={() => this.props.onLogout()}
           loading={this.props.loading}
           size="md"
           classes=""
@@ -110,7 +106,9 @@ class NavigationBar extends React.Component {
             Exams
           </Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item onClick={this.logoutHandler}>Logout</Dropdown.Item>
+          <Dropdown.Item onClick={() => this.props.onLogout}>
+            Logout
+          </Dropdown.Item>
         </DropdownButton>
       );
 

@@ -43,7 +43,7 @@ const TakeExam = (props) => {
     getExam(examId);
   }, [examId]);
 
-  function handleStudentChange(student) {
+  function changeStudent(student) {
     setSelectedStudent(student);
   }
 
@@ -89,7 +89,7 @@ const TakeExam = (props) => {
     }
   }
 
-  function completeExam(e) {
+  function handleCompletingExam(e) {
     e.preventDefault();
     let questionsCorrect = [];
     let questionsIncorrect = [];
@@ -143,8 +143,8 @@ const TakeExam = (props) => {
         areQuestionsChecked={areQuestionsChecked}
         selectedStudent={selectedStudent}
         exam={exam}
-        handleStudentChange={handleStudentChange}
-        completeExam={completeExam}
+        handleStudentChange={changeStudent}
+        handleCompletingExam={handleCompletingExam}
         handleFormChange={handleFormChange}
         saveExamResultsLoading={saveExamResultsLoading}
       />

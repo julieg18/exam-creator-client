@@ -22,11 +22,11 @@ class CreateAExam extends React.Component {
     disableNextBtn: /^\s*$/.test(this.props.exam.title),
   };
 
-  nextBtnHandler = (disableNextBtn) => {
+  setDisableNextButton = (disableNextBtn) => {
     this.setState({ disableNextBtn });
   };
 
-  nextExamPartHandler = () => {
+  goToNextExamPart = () => {
     switch (this.props.examPart) {
       case 'start':
         this.props.createExamChangePart('title');
@@ -45,7 +45,7 @@ class CreateAExam extends React.Component {
     }
   };
 
-  backExamPartHandler = () => {
+  goBackOneExamPart = () => {
     switch (this.props.examPart) {
       case 'questions':
         this.props.createExamChangePart('title');
@@ -60,11 +60,7 @@ class CreateAExam extends React.Component {
     }
   };
 
-  resetCreateExamHandler = () => {
-    this.props.createExamReset();
-  };
-
-  createExamHandler = () => {
+  createExam = () => {
     const createdExam = clonedeep(this.props.exam);
     createdExam.questions.map((question) => {
       if (question.type === 'trueOrFalse') {
@@ -80,7 +76,7 @@ class CreateAExam extends React.Component {
     let examPartComponent = (
       <CreateAExamStart
         isUserLoggedIn={this.props.isUserLoggedIn}
-        nextExamPart={this.nextExamPartHandler}
+        nextExamPart={this.goToNextExamPart}
       />
     );
     switch (this.props.examPart) {
@@ -89,7 +85,7 @@ class CreateAExam extends React.Component {
           <WorkOnExamTitle
             examTitle={title}
             completeExamTitle={(title) => this.props.createExamTitle(title)}
-            changeNextBtn={this.nextBtnHandler}
+            changeNextBtn={this.setDisableNextButton}
             heading="What is your exam's title?"
           />
         );
@@ -128,7 +124,7 @@ class CreateAExam extends React.Component {
         examPartComponent = (
           <CreateAExamStart
             isUserLoggedIn={this.props.isUserLoggedIn}
-            nextExamPart={this.nextExamPartHandler}
+            nextExamPart={this.goToNextExamPart}
           />
         );
     }
@@ -138,11 +134,11 @@ class CreateAExam extends React.Component {
         {this.props.examPart !== 'start' ? (
           <CreateAExamControls
             examPart={this.props.examPart}
-            forwardFunction={this.nextExamPartHandler}
-            backwardFunction={this.backExamPartHandler}
-            resetFunction={this.resetCreateExamHandler}
+            forwardFunction={this.goToNextExamPart}
+            backwardFunction={this.goBackOneExamPart}
+            resetFunction={() => this.props.createExamReset()}
             disableNextBtn={this.state.disableNextBtn}
-            finishFunction={this.createExamHandler}
+            finishFunction={this.createExam}
             isUserLoggedIn={this.props.isUserLoggedIn}
             loading={this.props.loading}
           />
@@ -157,13 +153,13 @@ class CreateAExam extends React.Component {
 function mapStateToProps(state) {
   const {
     auth: { isUserLoggedIn },
-    exam: { examBeingCreated, currentExamBeingCreatedPart, loading },
+    exam: { examBeingCreated, currentExamBeingCreatedPart, createExamLoading },
   } = state;
   return {
     isUserLoggedIn,
     examPart: currentExamBeingCreatedPart,
     exam: examBeingCreated,
-    loading,
+    loading: createExamLoading,
   };
 }
 

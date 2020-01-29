@@ -23,11 +23,11 @@ class EditAExam extends React.Component {
     disableNextBtn: /^\s*$/.test(this.props.exam.title),
   };
 
-  nextBtnHandler = (disableNextBtn) => {
+  setDisableNextButton = (disableNextBtn) => {
     this.setState({ disableNextBtn });
   };
 
-  nextExamPartHandler = () => {
+  goToNextExamPart = () => {
     switch (this.props.examPart) {
       case 'start':
         this.props.editExamChangePart('title');
@@ -46,7 +46,7 @@ class EditAExam extends React.Component {
     }
   };
 
-  backExamPartHandler = () => {
+  goBackOneExamPart = () => {
     switch (this.props.examPart) {
       case 'questions':
         this.props.editExamChangePart('title');
@@ -61,7 +61,7 @@ class EditAExam extends React.Component {
     }
   };
 
-  selectExamHandler = (exam) => {
+  selectExam = (exam) => {
     let selectedExam = clonedeep(exam);
     selectedExam.questions = selectedExam.questions.map((question) => {
       question.id = question._id;
@@ -86,25 +86,25 @@ class EditAExam extends React.Component {
     this.props.editExamSelectExam(selectedExam);
   };
 
-  updateTitleHandler = (title, hasTitleChanged) => {
+  updateTitle = (title, hasTitleChanged) => {
     if (hasTitleChanged) {
       this.props.editExamTitle(title);
     }
   };
 
-  updateQuestionsHandler = (questions, hasQuestionsChanged) => {
+  updateQuestions = (questions, hasQuestionsChanged) => {
     if (hasQuestionsChanged) {
       this.props.editExamQuestions(questions);
     }
   };
 
-  updateStudentsHandler = (students, hasStudentsChanged) => {
+  updateStudents = (students, hasStudentsChanged) => {
     if (hasStudentsChanged) {
       this.props.editExamStudents(students);
     }
   };
 
-  saveExamHandler = () => {
+  saveExam = () => {
     this.props.editExam(this.props.exam, this.props.examPartsBeingEdited);
   };
 
@@ -130,8 +130,8 @@ class EditAExam extends React.Component {
     let examPartComponent = (
       <EditAExamStart
         isUserLoggedIn={this.props.isUserLoggedIn}
-        nextExamPart={this.nextExamPartHandler}
-        selectExam={this.selectExamHandler}
+        nextExamPart={this.goToNextExamPart}
+        selectExam={this.selectExam}
       />
     );
 
@@ -140,8 +140,8 @@ class EditAExam extends React.Component {
         examPartComponent = (
           <WorkOnExamTitle
             examTitle={title}
-            completeExamTitle={this.updateTitleHandler}
-            changeNextBtn={this.nextBtnHandler}
+            completeExamTitle={this.updateTitle}
+            changeNextBtn={this.setDisableNextButton}
             heading="Edit Your Exam Title"
           />
         );
@@ -150,7 +150,7 @@ class EditAExam extends React.Component {
         examPartComponent = (
           <WorkOnExamQuestions
             examQuestions={questions}
-            completeExamQuestions={this.updateQuestionsHandler}
+            completeExamQuestions={this.updateQuestions}
             heading="Edit Your Exam Questions"
           />
         );
@@ -159,7 +159,7 @@ class EditAExam extends React.Component {
         examPartComponent = (
           <WorkOnExamStudents
             examStudents={students}
-            completeExamStudents={this.updateStudentsHandler}
+            completeExamStudents={this.updateStudents}
             heading="Edit Your Exam Students"
           />
         );
@@ -176,8 +176,8 @@ class EditAExam extends React.Component {
         examPartComponent = (
           <EditAExamStart
             isUserLoggedIn={this.props.isUserLoggedIn}
-            selectExam={this.selectExamHandler}
-            nextExamPart={this.nextExamPartHandler}
+            selectExam={this.selectExam}
+            nextExamPart={this.goToNextExamPart}
           />
         );
     }
@@ -187,10 +187,10 @@ class EditAExam extends React.Component {
         {this.props.examPart !== 'start' ? (
           <EditAExamControls
             examPart={this.props.examPart}
-            forwardFunction={this.nextExamPartHandler}
-            backwardFunction={this.backExamPartHandler}
+            forwardFunction={this.goToNextExamPart}
+            backwardFunction={this.goBackOneExamPart}
             disableNextBtn={this.state.disableNextBtn}
-            finishFunction={this.saveExamHandler}
+            finishFunction={this.saveExam}
             goToFinishExamPart={() => this.props.editExamChangePart('finish')}
             resetFunction={() => this.props.editExamReset()}
             loading={this.props.loading}
@@ -209,7 +209,7 @@ function mapStateToProps(state) {
       examToBeEdited,
       examPartsBeingEdited,
       currentExamBeingEditedPart,
-      loading,
+      editExamLoading,
     },
     auth: { isUserLoggedIn },
   } = state;
@@ -218,7 +218,7 @@ function mapStateToProps(state) {
     exam: examToBeEdited,
     examPart: currentExamBeingEditedPart,
     examPartsBeingEdited,
-    loading,
+    loading: editExamLoading,
   };
 }
 

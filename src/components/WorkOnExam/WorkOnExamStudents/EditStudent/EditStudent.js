@@ -14,7 +14,7 @@ class EditStudent extends React.Component {
     this.setState({ studentName: e.target.value });
   };
 
-  onEditStudentHandler = () => {
+  handleEditingStudent = () => {
     const student = {
       name: this.state.studentName,
       id: this.props.student.id,
@@ -51,7 +51,7 @@ class EditStudent extends React.Component {
               type="text"
             ></Form.Control>
           </Form.Group>
-          <Button onClick={this.onEditStudentHandler} variant="info">
+          <Button onClick={this.handleEditingStudent} variant="info">
             Edit Student
           </Button>
         </div>

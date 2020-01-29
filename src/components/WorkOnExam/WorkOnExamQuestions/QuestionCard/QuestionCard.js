@@ -10,6 +10,7 @@ const QuestionCard = (props) => {
     eventKey,
     question: { name },
   } = props;
+
   return (
     <div className="QuestionCard">
       <Card>

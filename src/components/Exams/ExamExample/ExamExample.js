@@ -23,7 +23,7 @@ const ExamExample = (props) => {
     return question;
   }
 
-  function copyExamLinkToClipboard(examId) {
+  function handleCopyExamLinkButtonClick(examId) {
     const examLink = `http://localhost:3000/take-exam/${examId}`;
     const el = document.createElement('textarea');
     el.value = examLink;
@@ -55,7 +55,7 @@ const ExamExample = (props) => {
       <div className="container">
         <strong>{props.exam.title}</strong>
         <Button
-          onClick={() => copyExamLinkToClipboard(props.exam._id)}
+          onClick={() => handleCopyExamLinkButtonClick(props.exam._id)}
           size="sm"
           variant="info"
           className="copyExamLinkBtn"

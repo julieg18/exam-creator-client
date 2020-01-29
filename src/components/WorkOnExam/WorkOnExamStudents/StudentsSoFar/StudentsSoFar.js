@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import './StudentsSoFar.css';
 
 const StudentsSoFar = (props) => {
-  function changeTabHandler() {
+  function handleTabChange() {
     if (window.innerWidth <= 500) {
       props.changeTab('workOnStudent');
     }
@@ -26,7 +26,7 @@ const StudentsSoFar = (props) => {
                   <Card.Body>
                     <Button
                       onClick={() => {
-                        changeTabHandler();
+                        handleTabChange();
                         props.editStudentStart(student);
                       }}
                       variant="info"

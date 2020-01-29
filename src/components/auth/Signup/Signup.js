@@ -12,7 +12,7 @@ class Signup extends React.Component {
     this.props.onClearError();
   }
 
-  submitHandler = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const user = {
       username: e.target[0].value,
@@ -35,7 +35,7 @@ class Signup extends React.Component {
         )}
         <h1>Signup</h1>
         <Link to="/login">Already have an account?</Link>
-        <Form onSubmit={this.submitHandler}>
+        <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId="username">
             <Form.Label>Username:</Form.Label>
             <Form.Control type="username" placeholder="Username" />

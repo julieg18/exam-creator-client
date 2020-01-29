@@ -42,7 +42,10 @@ const initialState = {
   },
   currentExamBeingCreatedPart: 'start',
   currentExamBeingEditedPart: 'start',
-  loading: false,
+  createExamLoading: false,
+  getExamLoading: false,
+  getUserExamsLoading: false,
+  editExamLoading: false,
   error: '',
   retrievedExam: {},
   userExams: [],
@@ -79,7 +82,7 @@ function createExamStudents(newState, action) {
 }
 
 function createExamStart(newState) {
-  newState.loading = true;
+  newState.createExamLoading = true;
   return newState;
 }
 
@@ -90,56 +93,56 @@ function createExamSuccess(newState) {
     students: [],
   };
   newState.currentExamBeingCreatedPart = 'start';
-  newState.loading = false;
+  newState.createExamLoading = false;
   return newState;
 }
 
 function createExamFail(newState, action) {
-  newState.loading = false;
+  newState.createExamLoading = false;
   newState.error = action.error;
   return newState;
 }
 
 function getExamStart(newState) {
-  newState.loading = true;
+  newState.getExamLoading = true;
   return newState;
 }
 
 function getExamSuccess(newState, action) {
-  newState.loading = false;
+  newState.getExamLoading = false;
   newState.retrievedExam = action.exam;
   return newState;
 }
 
 function getExamFail(newState) {
-  newState.loading = false;
+  newState.getExamLoading = false;
   return newState;
 }
 
 function getUserExamsStart(newState) {
-  newState.loading = true;
+  newState.getUserExamsLoading = true;
   return newState;
 }
 
 function getUserExamsSuccess(newState, action) {
-  newState.loading = false;
+  newState.getUserExamsLoading = false;
   newState.userExams = action.exams;
   return newState;
 }
 
 function getUserExamsFail(newState, action) {
-  newState.loading = false;
+  newState.getUserExamsLoading = false;
   newState.error = action.error;
   return newState;
 }
 
 function deleteExamStart(newState) {
-  newState.loading = true;
+  newState.deleteExamLoading = true;
   return newState;
 }
 
 function deleteExamSuccess(newState, action) {
-  newState.loading = false;
+  newState.deleteExamLoading = false;
   newState.userExams = newState.userExams.filter(
     (exam) => exam._id !== action.deletedExamId,
   );
@@ -147,7 +150,7 @@ function deleteExamSuccess(newState, action) {
 }
 
 function deleteExamFail(newState, action) {
-  newState.loading = false;
+  newState.deleteExamLoading = false;
   newState.error = action.error;
   return newState;
 }
@@ -189,7 +192,7 @@ function editExamStudents(newState, action) {
 }
 
 function editExamStart(newState) {
-  newState.loading = true;
+  newState.editExamLoading = true;
   return newState;
 }
 
@@ -201,12 +204,12 @@ function editExamSuccess(newState) {
     students: [],
   };
   newState.currentExamBeingEditedPart = 'start';
-  newState.loading = false;
+  newState.editExamLoading = false;
   return newState;
 }
 
 function editExamFail(newState, action) {
-  newState.loading = false;
+  newState.editExamLoading = false;
   newState.error = action.error;
   return newState;
 }

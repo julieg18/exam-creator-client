@@ -12,7 +12,7 @@ class Login extends React.Component {
     this.props.onClearError();
   }
 
-  submitHandler = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const user = {
       email: e.target[0].value,
@@ -34,7 +34,7 @@ class Login extends React.Component {
         )}
         <h1>Login</h1>
         <Link to="/auth">Haven't made an account?</Link>
-        <Form onSubmit={this.submitHandler}>
+        <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId="email">
             <Form.Label>Email:</Form.Label>
             <Form.Control type="email" placeholder="Email" />

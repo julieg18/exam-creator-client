@@ -23,7 +23,7 @@ class EditAExamStart extends React.Component {
     this.setState({ selectedExam });
   };
 
-  handleSelectExam = () => {
+  handleExamSelection = () => {
     const selectedExam = this.state.selectedExam._id
       ? this.state.selectedExam
       : clonedeep(this.props.userExams).sort((examA, examB) =>
@@ -37,7 +37,6 @@ class EditAExamStart extends React.Component {
     const sortedUserExams = clonedeep(
       this.props.userExams,
     ).sort((examA, examB) => (examA.title > examB.title ? 1 : -1));
-
     return (
       <div className="EditAExamStart">
         <div className="h1">Edit A Exam</div>
@@ -59,7 +58,7 @@ class EditAExamStart extends React.Component {
                 ))}
               </Form.Control>
             </Form.Group>
-            <Button onClick={this.handleSelectExam} size="lg" variant="info">
+            <Button onClick={this.handleExamSelection} size="lg" variant="info">
               Start
             </Button>
           </>
@@ -76,11 +75,11 @@ class EditAExamStart extends React.Component {
 
 function mapStateToProps(state) {
   const {
-    exam: { userExams, loading },
+    exam: { userExams, getUserExamsLoading },
   } = state;
   return {
     userExams,
-    loading,
+    loading: getUserExamsLoading,
   };
 }
 

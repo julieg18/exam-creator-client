@@ -15,7 +15,7 @@ class CreateStudent extends React.Component {
     this.setState({ studentName: e.target.value });
   };
 
-  onCreateStudentHandler = () => {
+  handleCreatingStudent = () => {
     const student = {
       name: this.state.studentName,
       id: shortid.generate(),
@@ -56,7 +56,7 @@ class CreateStudent extends React.Component {
               type="text"
             ></Form.Control>
           </Form.Group>
-          <Button onClick={this.onCreateStudentHandler} variant="info">
+          <Button onClick={this.handleCreatingStudent} variant="info">
             Create Student
           </Button>
         </div>

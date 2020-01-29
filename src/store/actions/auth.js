@@ -10,14 +10,6 @@ import {
   AUTH_LOGIN_START,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_FAIL,
-  AUTH_GET_USER,
-  AUTH_GET_USER_START,
-  AUTH_GET_USER_SUCCESS,
-  AUTH_GET_USER_FAIL,
-  AUTH_GET_USER_EXAMS,
-  AUTH_GET_USER_EXAMS_START,
-  AUTH_GET_USER_EXAMS_SUCCESS,
-  AUTH_GET_USER_EXAMS_FAIL,
   AUTH_LOGOUT,
   AUTH_LOGOUT_START,
   AUTH_LOGOUT_SUCCESS,
@@ -99,58 +91,6 @@ function authLoginFail(error) {
   };
 }
 
-function authGetUser() {
-  return {
-    type: AUTH_GET_USER,
-  };
-}
-
-function authGetUserStart() {
-  return {
-    type: AUTH_GET_USER_START,
-  };
-}
-
-function authGetUserSuccess(user) {
-  return {
-    type: AUTH_GET_USER_SUCCESS,
-    user,
-  };
-}
-
-function authGetUserFail(error) {
-  return {
-    type: AUTH_GET_USER_FAIL,
-    error,
-  };
-}
-
-function authGetUserExams() {
-  return {
-    type: AUTH_GET_USER_EXAMS,
-  };
-}
-
-function authGetUserExamsStart() {
-  return {
-    type: AUTH_GET_USER_EXAMS_START,
-  };
-}
-
-function authGetUserExamsSuccess(exams) {
-  return {
-    type: AUTH_GET_USER_EXAMS_SUCCESS,
-    exams,
-  };
-}
-
-function authGetUserExamsFail(error) {
-  return {
-    type: AUTH_GET_USER_EXAMS_FAIL,
-    error,
-  };
-}
-
 function authLogout() {
   return {
     type: AUTH_LOGOUT,
@@ -194,14 +134,6 @@ export {
   authLoginStart,
   authLoginSuccess,
   authLoginFail,
-  authGetUser,
-  authGetUserStart,
-  authGetUserSuccess,
-  authGetUserFail,
-  authGetUserExams,
-  authGetUserExamsStart,
-  authGetUserExamsSuccess,
-  authGetUserExamsFail,
   authLogout,
   authLogoutStart,
   authLogoutSuccess,

@@ -5,7 +5,7 @@ import QuestionCard from '../QuestionCard/QuestionCard';
 import './QuestionsSoFar.css';
 
 const QuestionsSoFar = (props) => {
-  function changeTabHandler() {
+  function handleTabChange() {
     if (window.innerWidth <= 500) {
       props.changeTab('workOnQuestion');
     }
@@ -23,7 +23,7 @@ const QuestionsSoFar = (props) => {
                 eventKey={index}
                 question={question}
                 editQuestion={() => {
-                  changeTabHandler();
+                  handleTabChange();
                   props.editQuestionStart(question);
                 }}
                 deleteQuestion={() => {
