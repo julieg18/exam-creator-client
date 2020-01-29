@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/exam-creator/static/css/main.f1c7c5cc.chunk.css",
-    "main.js": "/exam-creator/static/js/main.ee2eb9e9.chunk.js",
-    "main.js.map": "/exam-creator/static/js/main.ee2eb9e9.chunk.js.map",
+    "main.js": "/exam-creator/static/js/main.55f357ed.chunk.js",
+    "main.js.map": "/exam-creator/static/js/main.55f357ed.chunk.js.map",
     "runtime-main.js": "/exam-creator/static/js/runtime-main.832c1d25.js",
     "runtime-main.js.map": "/exam-creator/static/js/runtime-main.832c1d25.js.map",
     "static/js/2.77107798.chunk.js": "/exam-creator/static/js/2.77107798.chunk.js",
     "static/js/2.77107798.chunk.js.map": "/exam-creator/static/js/2.77107798.chunk.js.map",
     "index.html": "/exam-creator/index.html",
-    "precache-manifest.d72e40c1585ca59e5689cb2ca2e99b3c.js": "/exam-creator/precache-manifest.d72e40c1585ca59e5689cb2ca2e99b3c.js",
+    "precache-manifest.f34f13f1d1242bb359d08d3095f278be.js": "/exam-creator/precache-manifest.f34f13f1d1242bb359d08d3095f278be.js",
     "service-worker.js": "/exam-creator/service-worker.js",
     "static/css/main.f1c7c5cc.chunk.css.map": "/exam-creator/static/css/main.f1c7c5cc.chunk.css.map"
   },
@@ -16,6 +16,6 @@
     "static/js/runtime-main.832c1d25.js",
     "static/js/2.77107798.chunk.js",
     "static/css/main.f1c7c5cc.chunk.css",
-    "static/js/main.ee2eb9e9.chunk.js"
+    "static/js/main.55f357ed.chunk.js"
   ]
 }
