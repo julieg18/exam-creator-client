@@ -24,7 +24,7 @@ const ExamExample = (props) => {
   }
 
   function handleCopyExamLinkButtonClick(examId) {
-    const examLink = `http://localhost:3000/take-exam/${examId}`;
+    const examLink = `${window.location.protocol}//${window.location.host}/#/take-exam/${examId}`;
     const el = document.createElement('textarea');
     el.value = examLink;
     el.setAttribute('readonly', '');

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
@@ -29,9 +29,9 @@ sagaMiddleware.run(watchExam);
 
 const appWrapper = (
   <Provider store={store}>
-    <BrowserRouter basename="/">
+    <HashRouter basename="/">
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </Provider>
 );
 
